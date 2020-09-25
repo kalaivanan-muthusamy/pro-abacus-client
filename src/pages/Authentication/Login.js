@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 import { Row, Col, CardBody, Card, Alert, Container } from "reactstrap";
 
 // Redux
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useHistory } from "react-router-dom";
 
 // availity-reactstrap-validation
 import { AvForm, AvField } from "availity-reactstrap-validation";
@@ -14,25 +14,52 @@ import { loginUser, apiError } from "../../store/actions";
 
 // import images
 import logo from "../../assets/images/logo.png";
+import { postRequest, getErrorMsg } from "./../../helpers/apiRequest";
 
 const Login = (props) => {
-  // handleValidSubmit
-  function handleValidSubmit(event, values) {
-    props.loginUser(values, props.history);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [successMsg, setSuccessMsg] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const notificationRef = useRef(null);
+  const history = useHistory();
+
+  async function handleValidSubmit(event, values) {
+    const role = window.location.pathname.split("/").pop().toUpperCase();
+    try {
+      setLoading(true);
+      const { error, res } = await postRequest("auth", {
+        email: values.email,
+        password: values.password,
+        role,
+      });
+      if (error) {
+        setLoading(false);
+        return setErrorMsg(getErrorMsg(error, "Unable to login at the moment"));
+      }
+      // setSuccessMsg("Login successful");
+      localStorage.setItem("role", role);
+      localStorage.setItem("name", res?.name);
+      localStorage.setItem("email", res?.email);
+      localStorage.setItem("accessToken", res?.accessToken);
+      history.push("/dashboard");
+    } catch (err) {
+      setLoading(false);
+      setErrorMsg("Unable to login at the moment");
+    }
   }
 
   return (
     <React.Fragment>
-      <div className="home-btn d-none d-sm-block">
-        <Link to="/" className="text-dark">
-          <i className="fas fa-home h2"></i>
-        </Link>
-      </div>
       <div className="account-pages my-5 pt-sm-5">
         <Container>
           <Row className="justify-content-center">
             <Col md={8} lg={6} xl={5}>
               <Card className="overflow-hidden">
+                {loading && (
+                  <div className="spinner-overlay">
+                    <div className="spinner" />
+                  </div>
+                )}
                 <div className="bg-soft-primary">
                   <Row>
                     <Col>
@@ -90,6 +117,13 @@ const Login = (props) => {
                           required
                           placeholder="Enter password"
                         />
+                      </div>
+
+                      <div tabIndex="-1" ref={notificationRef}>
+                        {successMsg && (
+                          <Alert color="success">{successMsg}</Alert>
+                        )}
+                        {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
                       </div>
 
                       <div className="mt-3">

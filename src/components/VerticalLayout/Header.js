@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
@@ -21,8 +21,13 @@ import {
   changeSidebarType,
 } from "../../store/actions";
 
+import JoinClassModal from "./JoinClassModel";
+import { ROLES } from "../../contants";
+
 const Header = (props) => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const [showJoinClassModel, setShowJoinClassModel] = useState(false);
+  const role = localStorage.getItem("role");
 
   function tToggle() {
     props.toggleLeftmenu(!props.leftMenu);
@@ -32,6 +37,11 @@ const Header = (props) => {
       props.changeSidebarType("default", isMobile);
     }
   }
+
+  function onJoinClassBtnClick() {
+    setShowJoinClassModel(true);
+  }
+
   return (
     <React.Fragment>
       <header id="page-topbar">
@@ -67,29 +77,35 @@ const Header = (props) => {
             >
               <i className="fa fa-fw fa-bars"></i>
             </button>
-            <Button color="light" outline className="waves-effect">
-              Join Your Class
-            </Button>
-            <button
-              type="button"
-              className="btn btn-sm px-3 font-size-12 header-item waves-effect"
-            >
-              ACL Result
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm px-3 font-size-12 header-item waves-effect"
-            >
-              Weekly Assessment Results
-            </button>
+            {localStorage.getItem("role") === "STUDENT" && (
+              <Button
+                onClick={onJoinClassBtnClick}
+                color="light"
+                outline
+                className="waves-effect"
+              >
+                Join Your Class
+              </Button>
+            )}
+            <Link to="/acl-results" className="pl-3 text-muted font-size-12">
+              ACL Results
+            </Link>
+            <Link to="/wcl-results" className="pl-3 text-muted font-size-12">
+              WCL Results
+            </Link>
           </div>
           <div className="d-flex justify-content-center align-items-center">
-            <Button color="warning" outline className="waves-effect">
-              Payment
-            </Button>
+            {role !== ROLES.ADMIN && (
+              <Button color="warning" outline className="waves-effect">
+                Payment
+              </Button>
+            )}
             <ProfileMenu />
           </div>
         </div>
+        {showJoinClassModel && (
+          <JoinClassModal onClose={() => setShowJoinClassModel(false)} />
+        )}
       </header>
     </React.Fragment>
   );

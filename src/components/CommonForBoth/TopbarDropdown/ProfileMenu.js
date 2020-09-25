@@ -22,9 +22,8 @@ const ProfileMenu = (props) => {
   const [userName, setUserName] = useState("Admin");
 
   useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"));
-      setUserName(obj.username);
+    if (localStorage.getItem("name")) {
+      setUserName(localStorage.getItem("name"));
     }
   }, [props.success]);
 

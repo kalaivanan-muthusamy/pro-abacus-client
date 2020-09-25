@@ -1,0 +1,86 @@
+.exam-container {
+  .question-container {
+    margin-top: 40px;
+    font-size: 24px;
+
+    .ADDITION_AND_SUBTRACTION {
+      display: inline-flex;
+      flex-direction: column;
+      text-align: right;
+      font-family: "Roboto Mono", monospace;
+
+      .number {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+
+    .MULTIPLICATION,
+    .DIVISION {
+      display: inline-flex;
+
+      .number {
+        padding: 0 10px;
+      }
+    }
+  }
+
+  .question-selection {
+    margin: 20px 0;
+    max-height: 300px;
+    overflow-y: auto;
+
+    span {
+      display: inline-block;
+      height: 40px;
+      width: 40px;
+      border-radius: 40px;
+      background: #32394e;
+      color: #a6b0cf;
+      margin: 5px;
+      text-align: center;
+      line-height: 40px;
+
+      &.active {
+        background-color: #556ee6 !important;
+      }
+
+      &.completed {
+        background-color: #222736;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      &.success {
+        background-color: #34c38f;
+        color: #fff;
+      }
+
+      &.skipped {
+        background-color: #f1b44c;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      &.incorrect {
+        background-color: #f46a6a;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.exam-summary-row {
+  div {
+    padding: 5px 10px;
+  }
+}
+
+.exam-start-timer {
+  font-size: 26px;
+  padding-top: 10px;
+  font-family: "Roboto Mono", monospace;
+}

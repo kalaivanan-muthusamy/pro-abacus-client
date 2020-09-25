@@ -7,12 +7,7 @@ const Footer = (props) => {
       <footer className="footer">
         <Container fluid={true}>
           <Row>
-            <Col md={6}>{new Date().getFullYear()} © Pro Abacus.</Col>
-            <Col md={6}>
-              <div className="text-sm-right d-none d-sm-block">
-                Developed by https://kalaivanan.dev
-              </div>
-            </Col>
+            <Col>{new Date().getFullYear()} © Pro Abacus.</Col>
           </Row>
         </Container>
       </footer>

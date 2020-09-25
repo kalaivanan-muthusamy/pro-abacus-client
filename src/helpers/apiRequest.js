@@ -3,7 +3,7 @@ export const API_BASE_URL = process.env.REACT_APP_APIEndpoint;
 
 const getHeaders = () => {
   return {
-    // Authorization: localStorage.getItem("access_token") || "",
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   };
 };
 
@@ -45,12 +45,11 @@ const request = async (method, url, data = null, options = {}) => {
 
     return {
       error: null,
-      fail: !(apiResponse.data.status && apiResponse.data),
       res: apiResponse.data,
     };
   } catch (error) {
     /**
-     * If error code is 401, clear the session storage (if any) and redirect to the login page
+     * If error code is 401, clear the local storage (if any) and redirect to the login page
      * to get the updated token
      */
     const statusCode = (error.response && error.response.status) || null;
@@ -61,8 +60,14 @@ const request = async (method, url, data = null, options = {}) => {
 
     return {
       res: null,
-      fail: false,
       error,
     };
   }
 };
+
+export function getErrorMsg(errorObj, defaultMsg) {
+  const message = errorObj?.response?.data?.message;
+  if (!message) return defaultMsg;
+  if (Array.isArray(message)) return message[0];
+  return message;
+}

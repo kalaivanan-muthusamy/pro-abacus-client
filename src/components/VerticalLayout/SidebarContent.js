@@ -7,9 +7,12 @@ import { Link } from "react-router-dom";
 
 //i18n
 import { withNamespaces } from "react-i18next";
+import { ROLES } from "../../contants";
 
 const SidebarContent = (props) => {
   // Use ComponentDidMount and ComponentDidUpdate method symultaniously
+  const role = localStorage.getItem("role");
+
   useEffect(() => {
     var pathName = props.location.pathname;
 
@@ -69,30 +72,62 @@ const SidebarContent = (props) => {
               <span>{props.t("Dashboards")}</span>
             </Link>
           </li>
-          <li>
-            <Link to="/my-performance" className="waves-effect">
-              <i className="bx bx-meteor"></i>
-              <span>{props.t("My Performance")}</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/practice" className="waves-effect">
-              <i className="bx bx-outline"></i>
-              <span>{props.t("Practice")}</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/assessment" className="waves-effect">
-              <i className="bx bx-message-alt-detail"></i>
-              <span>{props.t("Assessment")}</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/self-test" className="waves-effect">
-              <i className="bx bx-message-alt-check"></i>
-              <span>{props.t("Self Test")}</span>
-            </Link>
-          </li>
+          {(role === ROLES.TEACHER || role === ROLES.STUDENT) && (
+            <React.Fragment>
+              <li>
+                <Link to="/my-performance" className="waves-effect">
+                  <i className="bx bx-meteor"></i>
+                  <span>{props.t("My Performance")}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/practice" className="waves-effect">
+                  <i className="bx bx-outline"></i>
+                  <span>{props.t("Practice")}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/self-test" className="waves-effect">
+                  <i className="bx bx-message-alt-check"></i>
+                  <span>{props.t("Self Test")}</span>
+                </Link>
+              </li>
+            </React.Fragment>
+          )}
+          {role === ROLES.TEACHER && (
+            <React.Fragment>
+              <li>
+                <Link to="/assessment" className="waves-effect">
+                  <i className="bx bx-message-alt-detail"></i>
+                  <span>{props.t("Assessment")}</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/batches" className="waves-effect">
+                  <i className="bx bxs-user-detail"></i>
+                  <span>{props.t("Batches")}</span>
+                </Link>
+              </li>
+            </React.Fragment>
+          )}
+          {role === ROLES.ADMIN && (
+            <React.Fragment>
+              <li>
+                <Link to="/levels" className="waves-effect">
+                  <i className="bx bx-message-alt-detail"></i>
+                  <span>{props.t("Levels")}</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/wcl" className="waves-effect">
+                  <i className="bx bxs-user-detail"></i>
+                  <span>{props.t("WCL")}</span>
+                </Link>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </React.Fragment>

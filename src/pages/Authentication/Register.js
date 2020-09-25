@@ -1,45 +1,75 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col, CardBody, Card, Alert, Container } from "reactstrap";
 
 // availity-reactstrap-validation
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
-// action
-import {
-  registerUser,
-  apiError,
-  registerUserFailed,
-} from "../../store/actions";
-
-// Redux
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 // import images
 import logoImg from "../../assets/images/logo.png";
+import { postRequest } from "./../../helpers/apiRequest";
+import { useRef } from "react";
 
 const Register = (props) => {
-  // handleValidSubmit
-  function handleValidSubmit(event, values) {
-    props.registerUser(values);
-  }
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [successMsg, setSuccessMsg] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState("STUDENT");
+  const notificationRef = useRef(null);
 
-  useEffect(() => {
-    props.registerUserFailed("");
-  });
+  async function handleValidSubmit(event, values) {
+    console.log(values);
+    try {
+      setLoading(true);
+      setSuccessMsg(null);
+      setErrorMsg(null);
+      let error;
+      delete values.role;
+      if (role === "STUDENT") {
+        const { error: studentRegisterErr } = await postRequest(
+          "students",
+          values
+        );
+        error = studentRegisterErr;
+      } else {
+        const { error: teacherRegisterErr } = await postRequest(
+          "teachers",
+          values
+        );
+        error = teacherRegisterErr;
+      }
+      if (error) {
+        setLoading(false);
+        setErrorMsg(
+          "Unable to register at the moment!. Kindly try again later"
+        );
+        notificationRef?.current?.focus();
+        return;
+      }
+      setSuccessMsg(
+        <span>
+          Registration successful. Kindly proceed{" "}
+          <Link to={`/login/${role?.toLowerCase()}`}>Click here</Link> to login
+        </span>
+      );
+      notificationRef?.current?.focus();
+    } catch (err) {}
+    setLoading(false);
+  }
 
   return (
     <React.Fragment>
-      <div className="home-btn d-none d-sm-block">
-        <Link to="/" className="text-dark">
-          <i className="fas fa-home h2"></i>
-        </Link>
-      </div>
       <div className="account-pages my-5 pt-sm-5">
         <Container>
           <Row className="justify-content-center">
             <Col md={8} lg={6} xl={5}>
               <Card className="overflow-hidden">
+                {loading && (
+                  <div className="spinner-overlay">
+                    <div className="spinner" />
+                  </div>
+                )}
                 <div className="bg-soft-primary">
                   <Row>
                     <Col>
@@ -72,14 +102,38 @@ const Register = (props) => {
                         handleValidSubmit(e, v);
                       }}
                     >
-                      {props.user && props.user ? (
-                        <Alert color="success">
-                          Register User Successfully
-                        </Alert>
-                      ) : null}
-                      {props.registrationError && props.registrationError ? (
-                        <Alert color="danger">{props.registrationError}</Alert>
-                      ) : null}
+                      <div tabIndex="-1" ref={notificationRef}>
+                        {successMsg && (
+                          <Alert color="success">{successMsg}</Alert>
+                        )}
+                        {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
+                      </div>
+
+                      <div className="form-group">
+                        <AvField
+                          name="role"
+                          label="Role"
+                          className="form-control"
+                          type="select"
+                          onChange={(e) => setRole(e.target.value)}
+                          required
+                          defaultValue="STUDENT"
+                        >
+                          <option value="STUDENT">Student</option>
+                          <option value="TEACHER">Teacher</option>
+                        </AvField>
+                      </div>
+
+                      <div className="form-group">
+                        <AvField
+                          name="name"
+                          label="Name"
+                          className="form-control"
+                          placeholder="Enter Name"
+                          type="text"
+                          required
+                        />
+                      </div>
 
                       <div className="form-group">
                         <AvField
@@ -94,15 +148,6 @@ const Register = (props) => {
 
                       <div className="form-group">
                         <AvField
-                          name="username"
-                          label="Username"
-                          type="text"
-                          required
-                          placeholder="Enter username"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <AvField
                           name="password"
                           label="Password"
                           type="password"
@@ -110,6 +155,44 @@ const Register = (props) => {
                           placeholder="Enter Password"
                         />
                       </div>
+
+                      <div className="form-group">
+                        <AvField
+                          defaultValue="Male"
+                          required
+                          type="select"
+                          name="gender"
+                          label="Gender"
+                          selected="Male"
+                        >
+                          <option>Male</option>
+                          <option>Female</option>
+                        </AvField>
+                      </div>
+
+                      <div className="form-group">
+                        <AvField
+                          name="age"
+                          label="Age"
+                          className="form-control"
+                          placeholder="Enter Age"
+                          type="number"
+                          required
+                        />
+                      </div>
+
+                      {role === "TEACHER" && (
+                        <div className="form-group">
+                          <AvField
+                            name="centerName"
+                            label="Center Name"
+                            className="form-control"
+                            placeholder="Center Name"
+                            type="text"
+                            required
+                          />
+                        </div>
+                      )}
 
                       <div className="mt-4">
                         <button
@@ -139,13 +222,4 @@ const Register = (props) => {
   );
 };
 
-const mapStatetoProps = (state) => {
-  const { user, registrationError, loading } = state.Account;
-  return { user, registrationError, loading };
-};
-
-export default connect(mapStatetoProps, {
-  registerUser,
-  apiError,
-  registerUserFailed,
-})(Register);
+export default Register;
