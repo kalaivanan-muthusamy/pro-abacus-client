@@ -210,6 +210,7 @@ function NewLevelModal({ onClose, batchId }) {
       });
       const { error } = await postRequest("levels", {
         name: levelInputs.name,
+        duration: levelInputs.duration,
         splitUps: JSON.stringify(updatedSplitUps),
       });
       if (error) {
@@ -258,6 +259,18 @@ function NewLevelModal({ onClose, batchId }) {
               className="form-control"
               validate={{ required: { value: true } }}
               id="name"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="duration">Duration</Label>
+            <AvField
+              name="duration"
+              placeholder="Duration"
+              type="text"
+              errorMessage="Duration is required"
+              className="form-control"
+              validate={{ required: { value: true } }}
+              id="duration"
             />
           </FormGroup>
           {Object.keys(splitUpCategory).map((key) => {

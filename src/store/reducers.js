@@ -9,7 +9,6 @@ import Account from "./auth/register/reducer";
 import Profile from "./auth/profile/reducer";
 
 const rootReducer = combineReducers({
-  // public
   Layout,
   Login,
   Account,

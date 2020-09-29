@@ -161,17 +161,17 @@ function Levels(props) {
         ...splitUps,
         enabled: {
           [SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION]:
-            res[defaultIndex].splitUps[
+            res[defaultIndex]?.splitUps[
               SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION
             ]?.length > 0 || false,
           [SPLITUP_CATEGORY.MULTIPLICATION]:
-            res[defaultIndex].splitUps[SPLITUP_CATEGORY.MULTIPLICATION]
+            res[defaultIndex]?.splitUps[SPLITUP_CATEGORY.MULTIPLICATION]
               ?.length > 0 || false,
           [SPLITUP_CATEGORY.DIVISION]:
-            res[defaultIndex].splitUps[SPLITUP_CATEGORY.DIVISION]?.length > 0 ||
-            false,
+            res[defaultIndex]?.splitUps[SPLITUP_CATEGORY.DIVISION]?.length >
+              0 || false,
         },
-        ...res[defaultIndex].splitUps,
+        ...res[defaultIndex]?.splitUps,
       });
     } catch (err) {
       setErrorMsg(getErrorMsg(err, "Couldn't get all the levels"));
@@ -240,6 +240,7 @@ function Levels(props) {
       const { error } = await putRequest("levels", {
         levelId: levels[index]._id,
         name: formInputs["name_" + index],
+        duration: formInputs["duration_" + index],
         splitUps: JSON.stringify(updatedSplitUps),
       });
       if (error) {
@@ -282,7 +283,7 @@ function Levels(props) {
   async function onNewLevelModalClose({ refresh }) {
     setShowNewLevelDialog(false);
     if (refresh) {
-      await getAllLevels();
+      await getAllLevels({});
     }
   }
 
@@ -351,6 +352,21 @@ function Levels(props) {
                                       type="text"
                                       value={level?.name}
                                       errorMessage="Level name is required"
+                                      className="form-control"
+                                      validate={{
+                                        required: { value: true },
+                                      }}
+                                    />
+                                  </FormGroup>
+                                  <FormGroup className="mb-4">
+                                    <Label htmlFor="duration">Duration</Label>
+                                    <AvField
+                                      id={"duration_" + index}
+                                      name={"duration_" + index}
+                                      placeholder="Duration"
+                                      type="text"
+                                      value={level?.duration}
+                                      errorMessage="Duration is required"
                                       className="form-control"
                                       validate={{
                                         required: { value: true },

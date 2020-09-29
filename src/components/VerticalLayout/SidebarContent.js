@@ -122,8 +122,15 @@ const SidebarContent = (props) => {
 
               <li>
                 <Link to="/wcl" className="waves-effect">
-                  <i className="bx bxs-user-detail"></i>
+                  <i className="bx bx-shield"></i>
                   <span>{props.t("WCL")}</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/acl" className="waves-effect">
+                  <i className="bx bx-trophy"></i>
+                  <span>{props.t("ACL")}</span>
                 </Link>
               </li>
             </React.Fragment>

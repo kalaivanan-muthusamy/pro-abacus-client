@@ -10,22 +10,22 @@ import {
 import { withNamespaces } from "react-i18next";
 // Redux
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useHistory } from "react-router-dom";
 
-// users
-import user1 from "../../../assets/images/users/avatar-1.jpg";
+import defaultUserImg from "../../../assets/images/user.svg";
+import { getCompleteAssetPath } from "../../../helpers/common";
 
 const ProfileMenu = (props) => {
-  // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false);
-
   const [userName, setUserName] = useState("Admin");
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem("name")) {
       setUserName(localStorage.getItem("name"));
     }
   }, [props.success]);
+
 
   return (
     <React.Fragment>
@@ -41,15 +41,22 @@ const ProfileMenu = (props) => {
         >
           <img
             className="rounded-circle header-profile-user"
-            src={user1}
-            alt="Header Avatar"
+            src={
+              props?.profileDetails?.profileImage
+                ? getCompleteAssetPath(props?.profileDetails?.profileImage)
+                : defaultUserImg
+            }
+            alt="Avatar"
           />
           <span className="d-none d-xl-inline-block ml-2 mr-1">{userName}</span>
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem tag="a" href="#">
-            {" "}
+          <DropdownItem
+            onClick={() => history.push("/profile")}
+            tag="a"
+            href="#"
+          >
             <i className="bx bx-user font-size-16 align-middle mr-1"></i>
             {props.t("Profile")}{" "}
           </DropdownItem>
@@ -64,11 +71,11 @@ const ProfileMenu = (props) => {
   );
 };
 
-const mapStatetoProps = (state) => {
-  const { error, success } = state.Profile;
-  return { error, success };
+const mapStateToProps = (state) => {
+  const { profileDetails } = state.Profile;
+  return { profileDetails };
 };
 
 export default withRouter(
-  connect(mapStatetoProps, {})(withNamespaces()(ProfileMenu))
+  connect(mapStateToProps, {})(withNamespaces()(ProfileMenu))
 );

@@ -16,11 +16,12 @@ import { getErrorMsg } from "../../helpers/apiRequest";
 import { SPLITUP_CATEGORY } from "./../../contants";
 import { postRequest } from "./../../helpers/apiRequest";
 import { useHistory } from "react-router-dom";
+import { shuffleArrayElement } from "../../helpers/common";
 
 function Exam(props) {
   const [loading, setLoading] = useState(true);
   const [pageError, setPageError] = useState(null);
-  const [exam, setExam] = useState(null);
+  const [examDetails, setExamDetails] = useState(null);
   const [questions, setQuestions] = useState(null);
   const [activeQuestionId, setActiveQuestionId] = useState(0);
   const [skippedQuestionIds, setSkippedQuestionIds] = useState([]);
@@ -40,8 +41,8 @@ function Exam(props) {
 
   useEffect(() => {
     // Start the timer
-    if (exam?.duration) {
-      let timerInSeconds = exam?.duration * 60;
+    if (examDetails?.duration) {
+      let timerInSeconds = examDetails?.duration * 60;
       setTimer(timerRef, timerInSeconds);
       const interval = setInterval(() => {
         setTimer(timerRef, timerInSeconds, interval);
@@ -51,7 +52,7 @@ function Exam(props) {
         }
       }, 1000);
     }
-  }, [exam]);
+  }, [examDetails]);
 
   useEffect(() => {
     setTimeStarted(new Date());
@@ -100,11 +101,16 @@ function Exam(props) {
           );
         }
       }
-      setQuestions(res.questions);
-      setActiveQuestionId(res.questions[0]._id);
-      setExam(res);
+      const examDetails = res;
+      const questions = examDetails?.shuffleQuestions
+        ? shuffleArrayElement(res.questions)
+        : res.questions;
+      setQuestions(questions);
+      setActiveQuestionId(questions[0]._id);
+      setExamDetails(examDetails);
       setLoading(false);
     } catch (err) {
+      console.log("ERR", err)
       setLoading(false);
       setPageError("Couldn't start the exam at the moment now");
     }
@@ -136,7 +142,7 @@ function Exam(props) {
         answeredQuestionIds?.length === questions?.length - 1;
       const timeTaken = (new Date().getTime() - timeStarted.getTime()) / 1000;
       postRequest("exams/capture", {
-        examId: exam._id,
+        examId: examDetails._id,
         questionId: activeQuestionId,
         answer: parseInt(value),
         timeTaken,
@@ -229,7 +235,7 @@ function Exam(props) {
       setLoading(true);
       setFinishWarning(false);
       const { error, res } = await postRequest("exams/complete", {
-        examId: exam._id,
+        examId: examDetails._id,
       });
       if (error) {
         setLoading(false);
@@ -240,7 +246,7 @@ function Exam(props) {
           )
         );
       }
-      history.push(`/exam/completed/${exam._id}`);
+      history.push(`/exam/completed/${examDetails._id}`);
     } catch (err) {
       setLoading(false);
       return setPageError(
@@ -366,12 +372,13 @@ function Exam(props) {
                                     >
                                       Submit & Next
                                     </Button>
-                                    {getActiveQuestionNumber() !==
-                                      questions?.length && (
-                                      <Button onClick={onSkip}>
-                                        Skip to Next
-                                      </Button>
-                                    )}
+                                    {examDetails?.skipQuestions &&
+                                      getActiveQuestionNumber() !==
+                                        questions?.length && (
+                                        <Button onClick={onSkip}>
+                                          Skip to Next
+                                        </Button>
+                                      )}
                                   </React.Fragment>
                                 )}
                             </div>
@@ -380,21 +387,23 @@ function Exam(props) {
                         <Col sm="12" md="4" className="mt-4">
                           <div>
                             <h5 className="d-inline">Questions Overview</h5>
-                            <div className="d-inline float-right custom-control custom-checkbox mb-3">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                id="skippedOnly"
-                                onChange={() => setSkippedOnly(!skippedOnly)}
-                                checked={skippedOnly}
-                              />
-                              <label
-                                onClick={() => setSkippedOnly(!skippedOnly)}
-                                className="custom-control-label"
-                              >
-                                Skipped Only
-                              </label>
-                            </div>
+                            {examDetails?.skipQuestions && (
+                              <div className="d-inline float-right custom-control custom-checkbox mb-3">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  id="skippedOnly"
+                                  onChange={() => setSkippedOnly(!skippedOnly)}
+                                  checked={skippedOnly}
+                                />
+                                <label
+                                  onClick={() => setSkippedOnly(!skippedOnly)}
+                                  className="custom-control-label"
+                                >
+                                  Skipped Only
+                                </label>
+                              </div>
+                            )}
                           </div>
                           <div className="question-selection">
                             {questions

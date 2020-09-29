@@ -8,6 +8,7 @@ import {
   changeSidebarType,
   changeTopbarTheme,
   changeLayoutWidth,
+  getProfileDetails,
 } from "../../store/actions";
 
 // Layout Related Components
@@ -62,6 +63,8 @@ class Layout extends Component {
     if (this.props.topbarTheme) {
       this.props.changeTopbarTheme(this.props.topbarTheme);
     }
+
+    this.props.getProfileDetails(localStorage.getItem("role"));
   }
   toggleMenuCallback = () => {
     if (this.props.leftSideBarType === "default") {
@@ -103,15 +106,16 @@ class Layout extends Component {
   }
 }
 
-const mapStatetoProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     ...state.Layout,
   };
 };
-export default connect(mapStatetoProps, {
+export default connect(mapStateToProps, {
   changeLayout,
   changeSidebarTheme,
   changeSidebarType,
   changeTopbarTheme,
   changeLayoutWidth,
+  getProfileDetails,
 })(withRouter(Layout));

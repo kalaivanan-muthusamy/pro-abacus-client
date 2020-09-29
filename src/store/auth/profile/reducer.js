@@ -1,26 +1,19 @@
-import { PROFILE_ERROR,PROFILE_SUCCESS,EDIT_PROFILE } from './actionTypes';
+import {
+  SET_PROFILE_DETAILS,
+} from "./actionTypes";
 
-const initialState = {
-    error: "",
-    success : ""
-}
+const initialState = {};
 
 const profile = (state = initialState, action) => {
-    switch (action.type) {
-        case EDIT_PROFILE:
-            state = { ...state }
-            break;
-        case PROFILE_SUCCESS:
-            state = { ...state, success: action.payload }
-            break;
-        case PROFILE_ERROR:
-            state = { ...state, error: action.payload };
-            break;
-        default:
-            state = { ...state };
-            break;
-    }
-    return state;
-}
+  switch (action.type) {
+    case SET_PROFILE_DETAILS:
+      state = { ...state, profileDetails: action.payload };
+      break;
+    default:
+      state = { ...state };
+      break;
+  }
+  return state;
+};
 
 export default profile;

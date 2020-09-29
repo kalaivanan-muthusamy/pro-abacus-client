@@ -20,6 +20,9 @@ import Assessment from "../pages/Assessments";
 import Batches from "../pages/Batches";
 import Notifications from "../pages/Notifications";
 import Levels from "../pages/Levels";
+import WCL from "../pages/WCL";
+import ACL from "../pages/ACL";
+import Profile from "../pages/Profile";
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -33,11 +36,14 @@ const userRoutes = [
   { path: "/practice", component: Practice },
   { path: "/self-test", component: SelfTest },
   { path: "/assessment", component: Assessment },
+  { path: "/wcl", component: WCL },
+  { path: "/acl", component: ACL },
   { path: "/batches", component: Batches },
   { path: "/acl-results", component: ACLResults },
   { path: "/wcl-results", component: WCLResults },
   { path: "/notifications", component: Notifications },
   { path: "/levels", component: Levels },
+  { path: "/profile", component: Profile },
   { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
 ];
 

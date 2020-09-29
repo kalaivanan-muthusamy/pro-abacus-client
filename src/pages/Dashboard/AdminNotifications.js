@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, Media } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
 import * as moment from "moment";
 import { postRequest } from "./../../helpers/apiRequest";
 import toastr from "toastr";
 import { ucFirst } from "./../../helpers/common";
+import ACLNotifications from "./ACLNotifications";
+import { EXAM_TYPES } from "./../../contants";
 
 function AdminNotifications() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [notifications, setNotifications] = useState(null);
+  const [aclNotification, setACLNotification] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     getAllNotifications();
@@ -27,7 +31,15 @@ function AdminNotifications() {
         setLoading(false);
         return;
       }
-      setNotifications(res);
+      const allNotifications = res;
+      const notifications = allNotifications?.filter(
+        (n) => n.examType !== EXAM_TYPES.ACL
+      );
+      const aclNotification = allNotifications?.filter(
+        (n) => n.examType === EXAM_TYPES.ACL
+      )?.[0];
+      setNotifications(notifications);
+      setACLNotification(aclNotification);
     } catch (err) {
       setErrorMsg(getErrorMsg(err, "Couldn't get the notifications right now"));
     }
@@ -93,6 +105,17 @@ function AdminNotifications() {
     );
   }
 
+  function displayExamAction(notification) {
+    return (
+      <button
+        className="btn btn-secondary btn-sm mt-2"
+        onClick={() => history.push("exam/start/" + notification.examId)}
+      >
+        Start Exam
+      </button>
+    );
+  }
+
   return (
     <React.Fragment>
       <Card>
@@ -120,6 +143,8 @@ function AdminNotifications() {
                     <div>{notification?.message}</div>
                     {notification.type === "BATCH_JOIN_NOTIFICATION" &&
                       displayBatchJoinNotification(notification)}
+                    {notification.type === "EXAM_NOTIFICATION" &&
+                      displayExamAction(notification)}
                   </div>
                   <Media body></Media>
                 </Media>
@@ -144,6 +169,7 @@ function AdminNotifications() {
           )}
         </CardBody>
       </Card>
+      {aclNotification && <ACLNotifications notification={aclNotification} />}
     </React.Fragment>
   );
 }
