@@ -27,6 +27,8 @@ function Profile(props) {
       path = "students";
     } else if (role === ROLES.TEACHER) {
       path = "teachers";
+    } else if (role === ROLES.ADMIN) {
+      path = "admins";
     }
     return path;
   }
@@ -54,8 +56,10 @@ function Profile(props) {
 
       formData.append("name", formInputs?.name);
       formData.append("email", formInputs?.email);
-      formData.append("age", formInputs?.age);
-      formData.append("gender", formInputs?.gender);
+      if (formInputs?.gender)
+        formData.append("gender", formInputs?.gender);
+      if (formInputs?.age)
+        formData.append("age", formInputs?.age);
       if (formInputs?.newPassword)
         formData.append("password", formInputs?.newPassword);
       if (role === ROLES.TEACHER)
@@ -136,26 +140,30 @@ function Profile(props) {
                         value={profileDetails?.email}
                         required
                       />
-                      <AvField
-                        grid={{ xs: 10 }}
-                        defaultValue={profileDetails?.gender}
-                        selected={profileDetails?.gender}
-                        required
-                        type="select"
-                        name="gender"
-                        label="Gender"
-                      >
-                        <option>Male</option>
-                        <option>Female</option>
-                      </AvField>
-                      <AvField
-                        grid={{ xs: 10 }}
-                        label="Age"
-                        name="age"
-                        type="age"
-                        value={profileDetails?.age}
-                        required
-                      />
+                      {role !== ROLES.ADMIN && (
+                        <React.Fragment>
+                          <AvField
+                            grid={{ xs: 10 }}
+                            defaultValue={profileDetails?.gender}
+                            selected={profileDetails?.gender}
+                            required
+                            type="select"
+                            name="gender"
+                            label="Gender"
+                          >
+                            <option>Male</option>
+                            <option>Female</option>
+                          </AvField>
+                          <AvField
+                            grid={{ xs: 10 }}
+                            label="Age"
+                            name="age"
+                            type="age"
+                            value={profileDetails?.age}
+                            required
+                          />
+                        </React.Fragment>
+                      )}
                       <AvField
                         grid={{ xs: 10 }}
                         label="New Password"

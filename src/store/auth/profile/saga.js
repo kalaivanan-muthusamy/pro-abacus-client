@@ -13,6 +13,8 @@ function* getProfileDetails({ payload: role }) {
       path = "students";
     } else if (role === ROLES.TEACHER) {
       path = "teachers";
+    } else if (role === ROLES.ADMIN) {
+      path = "admins";
     }
     const { res } = yield getRequest(path);
     yield put(setProfileDetails(res));

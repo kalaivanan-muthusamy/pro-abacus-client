@@ -85,18 +85,16 @@ const Register = (props) => {
                 </div>
                 <CardBody className="pt-0">
                   <div>
-                    <Link to="/">
-                      <div className="avatar-md profile-user-wid mb-4">
-                        <span className="avatar-title rounded-circle bg-light">
-                          <img
-                            src={logoImg}
-                            alt=""
-                            className="rounded-circle"
-                            height="80"
-                          />
-                        </span>
-                      </div>
-                    </Link>
+                    <div className="avatar-md profile-user-wid mb-4">
+                      <span className="avatar-title rounded-circle bg-light">
+                        <img
+                          src={logoImg}
+                          alt=""
+                          className="rounded-circle"
+                          height="80"
+                        />
+                      </span>
+                    </div>
                   </div>
                   <div className="p-2">
                     <AvForm
@@ -212,7 +210,10 @@ const Register = (props) => {
               <div className="mt-5 text-center">
                 <p>
                   Already have an account ?{" "}
-                  <Link to="/login" className="font-weight-medium text-primary">
+                  <Link
+                    to={`/login/${role.toLowerCase()}`}
+                    className="font-weight-medium text-primary"
+                  >
                     Login
                   </Link>
                 </p>

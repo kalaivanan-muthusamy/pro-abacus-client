@@ -70,18 +70,16 @@ const Login = (props) => {
                 </div>
                 <CardBody className="pt-0">
                   <div>
-                    <Link to="/">
-                      <div className="avatar-md profile-user-wid mb-4">
-                        <span className="avatar-title rounded-circle bg-light">
-                          <img
-                            src={logo}
-                            alt=""
-                            className="rounded-circle"
-                            height="80"
-                          />
-                        </span>
-                      </div>
-                    </Link>
+                    <div className="avatar-md profile-user-wid mb-4">
+                      <span className="avatar-title rounded-circle bg-light">
+                        <img
+                          src={logo}
+                          alt=""
+                          className="rounded-circle"
+                          height="80"
+                        />
+                      </span>
+                    </div>
                   </div>
                   <div className="p-2">
                     <AvForm
