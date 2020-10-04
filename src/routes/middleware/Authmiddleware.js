@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Redirect, withRouter } from "react-router-dom";
 
-const Authmiddleware = ({ component: Component, layout: Layout }) => (
+const Authmiddleware = ({ path, component: Component, layout: Layout }) => (
   <Route
+    path={path}
     render={(props) => {
       // here you can apply condition
       if (!localStorage.getItem("accessToken")) {

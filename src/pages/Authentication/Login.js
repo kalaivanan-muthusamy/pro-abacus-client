@@ -4,7 +4,7 @@ import { Row, Col, CardBody, Card, Alert, Container } from "reactstrap";
 
 // Redux
 import { connect } from "react-redux";
-import { withRouter, Link, useHistory } from "react-router-dom";
+import { withRouter, Link, useHistory, useParams } from "react-router-dom";
 
 // availity-reactstrap-validation
 import { AvForm, AvField } from "availity-reactstrap-validation";
@@ -18,26 +18,24 @@ import { postRequest, getErrorMsg } from "./../../helpers/apiRequest";
 
 const Login = (props) => {
   const [errorMsg, setErrorMsg] = useState(null);
-  const [successMsg, setSuccessMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const notificationRef = useRef(null);
   const history = useHistory();
+  const { role } = useParams();
 
   async function handleValidSubmit(event, values) {
-    const role = window.location.pathname.split("/").pop().toUpperCase();
     try {
       setLoading(true);
       const { error, res } = await postRequest("auth", {
         email: values.email,
         password: values.password,
-        role,
+        role: role.toUpperCase(),
       });
       if (error) {
         setLoading(false);
         return setErrorMsg(getErrorMsg(error, "Unable to login at the moment"));
       }
-      // setSuccessMsg("Login successful");
-      localStorage.setItem("role", role);
+      localStorage.setItem("role", res?.role);
       localStorage.setItem("name", res?.name);
       localStorage.setItem("email", res?.email);
       localStorage.setItem("accessToken", res?.accessToken);
@@ -120,9 +118,6 @@ const Login = (props) => {
                       </div>
 
                       <div tabIndex="-1" ref={notificationRef}>
-                        {successMsg && (
-                          <Alert color="success">{successMsg}</Alert>
-                        )}
                         {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
                       </div>
 
@@ -136,7 +131,10 @@ const Login = (props) => {
                       </div>
 
                       <div className="mt-4 text-center">
-                        <Link to="/forgot-password" className="text-muted">
+                        <Link
+                          to={`/forgot-password/${role}`}
+                          className="text-muted"
+                        >
                           <i className="mdi mdi-lock mr-1"></i> Forgot your
                           password?
                         </Link>
@@ -149,7 +147,7 @@ const Login = (props) => {
                 <p>
                   Don't have an account ?{" "}
                   <Link
-                    to="register"
+                    to="/register"
                     className="font-weight-medium text-primary"
                   >
                     Signup now

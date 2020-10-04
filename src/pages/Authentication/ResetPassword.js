@@ -5,37 +5,43 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import logo from "../../assets/images/logo.png";
 import { getErrorMsg, postRequest } from "../../helpers/apiRequest";
 
-const ForgetPasswordPage = (props) => {
-  const { role } = useParams();
+const ResetPassword = (props) => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const notificationRef = useRef();
+  const { role, email, hash } = useParams();
+
+  function confirmPasswordValidation(value, context) {
+    if (context?.password === context?.confirmPassword) return true;
+    return "Confirm password must be same as new password";
+  }
 
   async function handleValidSubmit(event, values) {
     try {
       setLoading(true);
-      const { error } = await postRequest(`${role}s/forgot-password-request`, {
-        email: values.email,
+      const { error } = await postRequest(`${role}s/reset-password`, {
+        password: values.password,
+        email: decodeURIComponent(email),
+        hash,
       });
       if (error) {
         setLoading(false);
-        setErrorMsg(
-          getErrorMsg(error, "Couldn't initiate forgot password request")
-        );
+        setErrorMsg(getErrorMsg(error, "Couldn't reset the password!"));
         notificationRef?.current?.focus();
       } else {
         setLoading(false);
         setSuccessMsg(
-          "Reset password link has been sent successfully to the email"
+          <span>
+            Password has be reset successfully{" "}
+            <Link to={`/login/${role}`}>Click Here</Link> to Login
+          </span>
         );
         notificationRef?.current?.focus();
       }
     } catch (err) {
       setLoading(false);
-      setErrorMsg(
-        getErrorMsg(err, "Couldn't initiate forgot password request")
-      );
+      setErrorMsg(getErrorMsg(err, "Couldn't reset the password!"));
       notificationRef?.current?.focus();
     }
   }
@@ -61,7 +67,7 @@ const ForgetPasswordPage = (props) => {
                   <Row>
                     <Col>
                       <div className="p-4">
-                        <h5 className="">Forgot Password</h5>
+                        <h5 className="">Reset Password</h5>
                         <p>Start mastering your skill in Abacus</p>
                       </div>
                     </Col>
@@ -69,18 +75,16 @@ const ForgetPasswordPage = (props) => {
                 </div>
                 <CardBody className="pt-0">
                   <div>
-                    <Link to="/">
-                      <div className="avatar-md profile-user-wid mb-4">
-                        <span className="avatar-title rounded-circle bg-light">
-                          <img
-                            src={logo}
-                            alt=""
-                            className="rounded-circle"
-                            height="80"
-                          />
-                        </span>
-                      </div>
-                    </Link>
+                    <div className="avatar-md profile-user-wid mb-4">
+                      <span className="avatar-title rounded-circle bg-light">
+                        <img
+                          src={logo}
+                          alt=""
+                          className="rounded-circle"
+                          height="80"
+                        />
+                      </span>
+                    </div>
                   </div>
                   <div tabIndex="-1" ref={notificationRef}>
                     {successMsg && <Alert color="success">{successMsg}</Alert>}
@@ -93,11 +97,25 @@ const ForgetPasswordPage = (props) => {
                     >
                       <div className="form-group">
                         <AvField
-                          name="email"
-                          label="Email"
+                          name="password"
+                          label="Password"
                           className="form-control"
-                          placeholder="Enter email"
-                          type="email"
+                          placeholder="Enter password"
+                          type="password"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <AvField
+                          name="confirmPassword"
+                          label="Confirm Password"
+                          className="form-control"
+                          placeholder="Enter confirm password"
+                          type="password"
+                          validate={{
+                            myValidation: confirmPasswordValidation,
+                            match: { value: "password" },
+                          }}
                           required
                         />
                       </div>
@@ -134,4 +152,4 @@ const ForgetPasswordPage = (props) => {
   );
 };
 
-export default withRouter(ForgetPasswordPage);
+export default withRouter(ResetPassword);

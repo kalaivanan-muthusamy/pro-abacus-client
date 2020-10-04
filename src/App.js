@@ -15,7 +15,7 @@ import HorizontalLayout from "./components/HorizontalLayout/";
 import NonAuthLayout from "./components/NonAuthLayout";
 
 // Import css/scss
-import 'toastr/build/toastr.min.css'
+import "toastr/build/toastr.min.css";
 import "./assets/scss/theme.scss";
 
 const App = (props) => {
@@ -35,8 +35,13 @@ const App = (props) => {
 
   const Layout = getLayout();
 
-  const NonAuthMiddleware = ({ component: Component, layout: Layout }) => (
+  const NonAuthMiddleware = ({
+    path,
+    component: Component,
+    layout: Layout,
+  }) => (
     <Route
+      path={path}
       render={(props) => {
         return (
           <Layout>

@@ -9,3 +9,14 @@ export function shuffleArrayElement(array) {
 export function getCompleteAssetPath(relativePath) {
   return process.env.REACT_APP_FileEndpoint + relativePath;
 }
+
+export function getQueryString() {
+  return decodeURI(window.location.search)
+    .replace("?", "")
+    .split("&")
+    .map((param) => param.split("="))
+    .reduce((values, [key, value]) => {
+      values[key] = value;
+      return values;
+    }, {});
+}

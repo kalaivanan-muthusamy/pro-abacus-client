@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 // import images
 import logoImg from "../../assets/images/logo.png";
-import { postRequest } from "./../../helpers/apiRequest";
+import { getErrorMsg, postRequest } from "./../../helpers/apiRequest";
 import { useRef } from "react";
 
 const Register = (props) => {
@@ -42,14 +42,17 @@ const Register = (props) => {
       if (error) {
         setLoading(false);
         setErrorMsg(
-          "Unable to register at the moment!. Kindly try again later"
+          getErrorMsg(
+            error,
+            "Unable to register at the moment!. Kindly try again later"
+          )
         );
         notificationRef?.current?.focus();
         return;
       }
       setSuccessMsg(
         <span>
-          Registration successful. Kindly proceed{" "}
+          Registration successful. Kindly verify your email and{" "}
           <Link to={`/login/${role?.toLowerCase()}`}>Click here</Link> to login
         </span>
       );

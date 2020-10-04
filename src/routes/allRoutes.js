@@ -23,6 +23,8 @@ import Levels from "../pages/Levels";
 import WCL from "../pages/WCL";
 import ACL from "../pages/ACL";
 import Profile from "../pages/Profile";
+import EmailVerification from './../pages/Authentication/EmailVerification';
+import ResetPassword from "../pages/Authentication/ResetPassword";
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -49,8 +51,10 @@ const userRoutes = [
 
 const authRoutes = [
   { path: "/logout", component: Logout },
-  { path: "/login", component: Login },
-  { path: "/forgot-password", component: ForgetPwd },
+  { path: "/login/:role", component: Login },
+  { path: "/forgot-password/:role", component: ForgetPwd },
+  { path: "/reset-password/:role/:email/:hash", component: ResetPassword },
+  { path: '/email-verify/:role/:email/:hash', component: EmailVerification},
   { path: "/register", component: Register },
 ];
 
