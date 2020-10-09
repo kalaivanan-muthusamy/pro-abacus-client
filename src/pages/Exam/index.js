@@ -83,13 +83,10 @@ function Exam(props) {
       });
       if (error) {
         // Validate if the error because pre-accessing the timed exam
-        const statusCode = error?.response?.status === 400;
+        const statusCode = error?.response?.status
         const data = error?.response?.data;
-        const isExpired = data?.isExpired;
-        console.log("statusCode", statusCode);
-        console.log(JSON.stringify(error.response));
-        if (statusCode && !isExpired) {
-          console.log("HERE");
+        const isExpired = data?.isExpired ?? true;
+        if (statusCode === 400 && !isExpired) {
           setExamTimer(data?.startsIn);
           startExamTimer(data?.startsIn);
           setLoading(false);

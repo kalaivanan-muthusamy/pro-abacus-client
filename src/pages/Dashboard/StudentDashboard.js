@@ -9,7 +9,6 @@ import { withNamespaces } from "react-i18next";
 import StudentInfo from "./StudentInfo";
 import StudentReportCharts from "./StudentReportCharts";
 import AdminNotifications from "./AdminNotifications";
-import ACLNotifications from "./ACLNotifications";
 import WCLNotifications from "./WCLNotification";
 import WCLReportTable from "./WCLReportTable";
 

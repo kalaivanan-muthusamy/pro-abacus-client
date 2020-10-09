@@ -76,13 +76,13 @@ function CompletedExamReport(props) {
                               </tr>
                               <tr>
                                 <td>Attempted Sums</td>
-                                <td>{examResult?.answers?.length}</td>
+                                <td>{examResult?.answers?.answers?.length}</td>
                               </tr>
                               <tr>
                                 <td>Correct Answers</td>
                                 <td>
                                   {
-                                    examResult?.answers?.filter(
+                                    examResult?.answers?.answers?.filter(
                                       (a) => a.isCorrectAnswer
                                     )?.length
                                   }
@@ -92,7 +92,7 @@ function CompletedExamReport(props) {
                                 <td>Incorrect Answers</td>
                                 <td>
                                   {
-                                    examResult?.answers?.filter(
+                                    examResult?.answers?.answers?.filter(
                                       (a) => !a.isCorrectAnswer
                                     )?.length
                                   }

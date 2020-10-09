@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, CardBody, Spinner } from "reactstrap";
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
 import { getRequest } from "../../helpers/apiRequest";
+import defaultUserImg from "../../assets/images/user.svg";
 
 const StudentInfo = (props) => {
-  const [studentInfo, setStudentInfo] = useState({ loading: true });
+  const [loading, setLoading] = useState(false);
+  const [studentInfo, setStudentInfo] = useState(null);
+  const [examReports, setExamReports] = useState(null);
 
   useEffect(() => {
+    getAllDetails();
     getStudentInfo();
+    getExamReports();
   }, []);
 
+  async function getAllDetails() {
+    setLoading(true);
+    await Promise.all([getStudentInfo(), getExamReports]);
+    setLoading(false);
+  }
+
   async function getStudentInfo() {
-    const { res, error } = await getRequest("student-info");
+    const { res, error } = await getRequest("exams/reports");
+    if (error) console.log("error");
+    setExamReports(res);
+  }
+
+  async function getExamReports() {
+    const { res, error } = await getRequest("students");
     if (error) console.log("error");
     setStudentInfo({ ...studentInfo, loading: false, ...res });
   }
@@ -20,68 +36,61 @@ const StudentInfo = (props) => {
     <React.Fragment>
       <Card className="overflow-hidden">
         <CardBody>
-          {studentInfo?.loading && (
-            <Spinner type="grow" className="mr-2" color="primary" />
-          )}
-          {!studentInfo?.loading && (
+          {loading && <Spinner type="grow" className="mr-2" color="primary" />}
+          {!loading && (
             <Row>
-              <Col lg="3">
-                <div className="avatar-md mb-2">
-                  <img
-                    src={avatar1}
-                    alt=""
-                    className="img-thumbnail rounded-circle"
-                  />
-                </div>
-                <h5 className="font-size-15 text-truncate">
-                  {studentInfo?.name}
-                </h5>
-                <p className="text-muted mb-1 text-truncate">
-                  {studentInfo?.abacusCenter}
-                </p>
-                <p className="text-muted mb-0 text-truncate">
-                  {studentInfo?.level}
-                </p>
+              <Col sm="12" lg="6" className="m-auto">
+                <Row className="align-items-center">
+                  <Col sm="12" md="5">
+                    <img
+                      src={studentInfo?.profileImage || defaultUserImg}
+                      alt=""
+                      className="profile-image"
+                    />
+                  </Col>
+                  <Col sm="12" md="7">
+                    <h5 className="font-size-15 text-truncate text-info">
+                      {studentInfo?.name}
+                    </h5>
+                    <p className="text-muted mb-1 text-truncate">
+                      Age: {studentInfo?.age}
+                    </p>
+                    <p className="text-muted mb-1 text-truncate">
+                      {studentInfo?.batchDetails?.name}
+                    </p>
+                    <p className="text-muted mb-0 text-truncate">
+                      {studentInfo?.level}
+                    </p>
+                  </Col>
+                </Row>
               </Col>
 
-              <Col lg="9">
-                <div className="pt-4 text-center">
+              <Col sm="12" lg="6">
+                <div className="text-center">
                   <Row>
                     <div className="pr-3">
                       <h5 className="font-size-15">
-                        {studentInfo?.weeklyAssessmentMetrics?.rank}
-                      </h5>
-                      <p className="text-muted mb-0">Rank</p>
-                    </div>
-                    <div className="pr-3">
-                      <h5 className="font-size-15">
-                        {studentInfo?.weeklyAssessmentMetrics?.participated}
+                        {examReports?.WCLExams?.participated}
                       </h5>
                       <p className="text-muted mb-0">Participated</p>
                     </div>
                     <div className="pr-3">
                       <h5 className="font-size-15">
-                        {studentInfo?.weeklyAssessmentMetrics?.totalSums}
-                      </h5>
-                      <p className="text-muted mb-0">Total Sums</p>
-                    </div>
-                    <div className="pr-3">
-                      <h5 className="font-size-15">
-                        {studentInfo?.weeklyAssessmentMetrics?.avgAccuracy}
+                        {examReports?.WCLExams?.avgAccuracy}
                       </h5>
                       <p className="text-muted mb-0">Avg. Accuracy</p>
                     </div>
                     <div className="pr-3">
                       <h5 className="font-size-15">
-                        {studentInfo?.weeklyAssessmentMetrics?.avgSpeed}
+                        {examReports?.WCLExams?.avgSpeed}
                       </h5>
                       <p className="text-muted mb-0">Avg. Speed</p>
                     </div>
-                    <div className="pr-3">
+                    <div className="">
                       <div className="avatar-sm mx-auto">
                         <span className="avatar-title rounded-circle bg-soft-primary font-size-14">
-                          {studentInfo?.weeklyAssessmentMetrics?.totalStars}
-                          <i className="mdi mdi-star text-primary"></i>
+                          {examReports?.WCLExams?.totalStars}
+                          <i class="bx bx-shield text-primary ml-1"></i>
                         </span>
                       </div>
                     </div>
@@ -90,9 +99,29 @@ const StudentInfo = (props) => {
                   <Row>
                     <div className="pr-3">
                       <h5 className="font-size-15">
-                        {studentInfo?.aclMetrics?.aclWon}
+                        {examReports?.ACLExams?.participated}
                       </h5>
-                      <p className="text-primary mb-0">ACL Won</p>
+                      <p className="text-muted mb-0">Participated</p>
+                    </div>
+                    <div className="pr-3">
+                      <h5 className="font-size-15">
+                        {examReports?.ACLExams?.avgAccuracy}
+                      </h5>
+                      <p className="text-muted mb-0">Avg. Accuracy</p>
+                    </div>
+                    <div className="pr-3">
+                      <h5 className="font-size-15">
+                        {examReports?.ACLExams?.avgSpeed}
+                      </h5>
+                      <p className="text-muted mb-0">Avg. Speed</p>
+                    </div>
+                    <div className="pr-3">
+                      <div className="avatar-sm mx-auto">
+                        <span className="avatar-title rounded-circle bg-soft-primary font-size-14">
+                          {examReports?.ACLExams?.totalStars}
+                          <i class="bx bx-trophy text-primary ml-1"></i>
+                        </span>
+                      </div>
                     </div>
                   </Row>
                 </div>
