@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, CardBody, Card, Alert, Container } from "reactstrap";
 
 // availity-reactstrap-validation
@@ -8,7 +8,11 @@ import { Link } from "react-router-dom";
 
 // import images
 import logoImg from "../../assets/images/logo.png";
-import { getErrorMsg, postRequest } from "./../../helpers/apiRequest";
+import {
+  getErrorMsg,
+  getRequest,
+  postRequest,
+} from "./../../helpers/apiRequest";
 import { useRef } from "react";
 
 const Register = (props) => {
@@ -16,7 +20,29 @@ const Register = (props) => {
   const [successMsg, setSuccessMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState("STUDENT");
+  const [levels, setLevels] = useState(null);
   const notificationRef = useRef(null);
+
+  useEffect(() => {
+    getAllLevels();
+  }, []);
+
+  async function getAllLevels() {
+    try {
+      setLoading(true);
+      const { error, res } = await getRequest("levels");
+      if (error) {
+        setLoading(false);
+        return setErrorMsg(
+          getErrorMsg(error, "Unable to get the levels for registration")
+        );
+      }
+      setLevels(res);
+    } catch (err) {
+      setErrorMsg("Unable to get the levels for registration");
+    }
+    setLoading(false);
+  }
 
   async function handleValidSubmit(event, values) {
     console.log(values);
@@ -181,6 +207,23 @@ const Register = (props) => {
                           required
                         />
                       </div>
+
+                      {role === "STUDENT" && levels?.length > 0 && (
+                        <div className="form-group">
+                          <AvField
+                            name="levelId"
+                            label="Level"
+                            className="form-control"
+                            type="select"
+                            required
+                            defaultValue={levels?.[0]?._id}
+                          >
+                            {levels?.map?.((level) => (
+                              <option value={level._id}>{level.name}</option>
+                            ))}
+                          </AvField>
+                        </div>
+                      )}
 
                       {role === "TEACHER" && (
                         <div className="form-group">

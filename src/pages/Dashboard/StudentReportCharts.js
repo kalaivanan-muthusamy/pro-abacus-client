@@ -49,12 +49,10 @@ function StudentReportCharts() {
       let correctAnswers = 0;
       let incorrectAnswers = 0;
       exams.map((exam) => {
-        const answers = exam?.answers || [];
-        answers?.map?.((answer) => {
-          if (answer.isCorrectAnswer) ++correctAnswers;
-          else ++incorrectAnswers;
-        });
+        correctAnswers += exam.correctAnswers;
+        incorrectAnswers += exam.inCorrectAnswers;
       });
+      console.log([correctAnswers, incorrectAnswers]);
       return [correctAnswers, incorrectAnswers];
     }
     return [];

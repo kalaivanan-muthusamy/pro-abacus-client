@@ -241,6 +241,7 @@ function Levels(props) {
         levelId: levels[index]._id,
         name: formInputs["name_" + index],
         duration: formInputs["duration_" + index],
+        orderValue: formInputs["orderValue_" + index],
         splitUps: JSON.stringify(updatedSplitUps),
       });
       if (error) {
@@ -333,15 +334,15 @@ function Levels(props) {
                   <Col lg="10">
                     <Card>
                       <CardBody>
-                        <AvForm
-                          className="form-horizontal"
-                          onValidSubmit={(e, v) => {
-                            onSave(e, v);
-                          }}
-                        >
-                          <TabContent activeTab={activeLevelIndex}>
-                            {levels?.map((level, index) => (
-                              <TabPane key={index} tabId={"level_" + index}>
+                        <TabContent activeTab={activeLevelIndex}>
+                          {levels?.map((level, index) => (
+                            <TabPane key={index} tabId={"level_" + index}>
+                              <AvForm
+                                className="form-horizontal"
+                                onValidSubmit={(e, v) => {
+                                  onSave(e, v);
+                                }}
+                              >
                                 <div>
                                   <FormGroup className="mb-4">
                                     <Label htmlFor="name">Level Name</Label>
@@ -352,6 +353,23 @@ function Levels(props) {
                                       type="text"
                                       value={level?.name}
                                       errorMessage="Level name is required"
+                                      className="form-control"
+                                      validate={{
+                                        required: { value: true },
+                                      }}
+                                    />
+                                  </FormGroup>
+                                  <FormGroup className="mb-4">
+                                    <Label htmlFor="orderValue">
+                                      Order Value
+                                    </Label>
+                                    <AvField
+                                      id={"orderValue_" + index}
+                                      name={"orderValue_" + index}
+                                      placeholder="Order Value"
+                                      type="text"
+                                      value={level?.orderValue}
+                                      errorMessage="Order Value is required"
                                       className="form-control"
                                       validate={{
                                         required: { value: true },
@@ -687,10 +705,10 @@ function Levels(props) {
                                     Save Changes
                                   </button>
                                 </div>
-                              </TabPane>
-                            ))}
-                          </TabContent>
-                        </AvForm>
+                              </AvForm>
+                            </TabPane>
+                          ))}
+                        </TabContent>
                       </CardBody>
                     </Card>
                   </Col>

@@ -211,6 +211,7 @@ function NewLevelModal({ onClose, batchId }) {
       const { error } = await postRequest("levels", {
         name: levelInputs.name,
         duration: levelInputs.duration,
+        orderValue: levelInputs.orderValue,
         splitUps: JSON.stringify(updatedSplitUps),
       });
       if (error) {
@@ -259,6 +260,18 @@ function NewLevelModal({ onClose, batchId }) {
               className="form-control"
               validate={{ required: { value: true } }}
               id="name"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="duration">Order Value</Label>
+            <AvField
+              name="orderValue"
+              placeholder="Order Value"
+              type="text"
+              errorMessage="Order value is required"
+              className="form-control"
+              validate={{ required: { value: true } }}
+              id="orderValue"
             />
           </FormGroup>
           <FormGroup>

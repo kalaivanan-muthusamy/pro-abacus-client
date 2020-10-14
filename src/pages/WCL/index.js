@@ -24,7 +24,9 @@ const animatedComponents = makeAnimated();
 
 function WCL(props) {
   const [loading, setLoading] = useState(false);
-  const [examDetails, setExamDetails] = useState({});
+  const [examDetails, setExamDetails] = useState({
+    examDate: new Date(),
+  });
   const [levelsOption, setLevelsOption] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const errorRef = useRef(null);
@@ -38,7 +40,7 @@ function WCL(props) {
     try {
       const { error, res } = await getRequest("levels");
       if (error) {
-        setErrorMsg(getErrorMsg(error, "Couldn't create a new batch now"));
+        setErrorMsg(getErrorMsg(error, "Couldn't get the exam levels"));
         setLoading(false);
         return;
       }
@@ -48,7 +50,7 @@ function WCL(props) {
       }));
       setLevelsOption(levelsTemp);
     } catch (err) {
-      setErrorMsg(getErrorMsg(err, "Unable to get the batches"));
+      setErrorMsg(getErrorMsg(err, "Couldn't get the exam levels"));
     }
   }
 
@@ -79,7 +81,7 @@ function WCL(props) {
     try {
       event?.preventDefault();
       setLoading(true);
-      const { res, error } = await postRequest("exams", {
+      const { error } = await postRequest("exams", {
         ...examDetails,
         levelIds: examDetails.levelIds?.map((level) => level.value).join(","),
         examDate: examDetails.examDate?.toISOString(),
@@ -222,8 +224,8 @@ function WCL(props) {
                       </div>
                     </div>
 
-                    <div className="row">
-                      <div ref={errorRef} tabIndex="-1">
+                    <div className="row mb-0">
+                      <div className="col-12" ref={errorRef} tabIndex="-1">
                         {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
                       </div>
                     </div>

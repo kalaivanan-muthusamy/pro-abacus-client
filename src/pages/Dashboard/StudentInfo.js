@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Card, CardBody, Spinner } from "reactstrap";
 import { getRequest } from "../../helpers/apiRequest";
 import defaultUserImg from "../../assets/images/user.svg";
+import { getCompleteAssetPath } from "../../helpers/common";
 
 const StudentInfo = (props) => {
   const [loading, setLoading] = useState(false);
@@ -43,7 +44,11 @@ const StudentInfo = (props) => {
                 <Row className="align-items-center">
                   <Col sm="12" md="5">
                     <img
-                      src={studentInfo?.profileImage || defaultUserImg}
+                      src={
+                        studentInfo?.profileImage
+                          ? getCompleteAssetPath(studentInfo?.profileImage)
+                          : defaultUserImg
+                      }
                       alt=""
                       className="profile-image"
                     />
@@ -59,7 +64,7 @@ const StudentInfo = (props) => {
                       {studentInfo?.batchDetails?.name}
                     </p>
                     <p className="text-muted mb-0 text-truncate">
-                      {studentInfo?.level}
+                      {studentInfo?.levelDetails?.name}
                     </p>
                   </Col>
                 </Row>

@@ -38,7 +38,7 @@ function ACL(props) {
     try {
       const { error, res } = await getRequest("levels");
       if (error) {
-        setErrorMsg(getErrorMsg(error, "Couldn't create a new batch now"));
+        setErrorMsg(getErrorMsg(error, "Couldn't get the exam levels"));
         setLoading(false);
         return;
       }
@@ -48,7 +48,7 @@ function ACL(props) {
       }));
       setLevelsOption(levelsTemp);
     } catch (err) {
-      setErrorMsg(getErrorMsg(err, "Unable to get the batches"));
+      setErrorMsg(getErrorMsg(err, "Couldn't get the exam levels"));
     }
   }
 

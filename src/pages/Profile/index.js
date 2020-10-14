@@ -10,6 +10,7 @@ import { ROLES } from "../../contants";
 
 function Profile(props) {
   const [profileDetails, setProfileDetails] = useState(null);
+  const [levels, setLevels] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [fileName, setFileName] = useState("Choose File");
@@ -19,6 +20,7 @@ function Profile(props) {
 
   useEffect(() => {
     getProfileDetails();
+    getAllLevels();
   }, []);
 
   function getPath() {
@@ -49,6 +51,23 @@ function Profile(props) {
     setLoading(false);
   }
 
+  async function getAllLevels() {
+    try {
+      setLoading(true);
+      const { error, res } = await getRequest("levels");
+      if (error) {
+        setLoading(false);
+        return setErrorMsg(
+          getErrorMsg(error, "Unable to get the levels for registration")
+        );
+      }
+      setLevels(res);
+    } catch (err) {
+      setErrorMsg("Unable to get the levels for registration");
+    }
+    setLoading(false);
+  }
+
   async function updateProfileDetails(event, formInputs) {
     try {
       setLoading(true);
@@ -56,12 +75,12 @@ function Profile(props) {
 
       formData.append("name", formInputs?.name);
       formData.append("email", formInputs?.email);
-      if (formInputs?.gender)
-        formData.append("gender", formInputs?.gender);
-      if (formInputs?.age)
-        formData.append("age", formInputs?.age);
+      if (formInputs?.gender) formData.append("gender", formInputs?.gender);
+      if (formInputs?.age) formData.append("age", formInputs?.age);
       if (formInputs?.newPassword)
         formData.append("password", formInputs?.newPassword);
+      if (formInputs?.levelId)
+        formData.append("levelId", formInputs?.levelId);
       if (role === ROLES.TEACHER)
         formData.append("centerName", formInputs?.centerName);
       profileImageRef?.current?.files?.length > 0 &&
@@ -208,6 +227,23 @@ function Profile(props) {
                           </small>
                         </div>
                       </div>
+                      {role === ROLES.STUDENT && (
+                        <React.Fragment>
+                          <AvField
+                            grid={{ xs: 10 }}
+                            defaultValue={profileDetails?.levelId}
+                            selected={profileDetails?.levelId}
+                            required
+                            type="select"
+                            name="levelId"
+                            label="Levels"
+                          >
+                            {levels?.map?.((level) => (
+                              <option value={level._id}>{level.name}</option>
+                            ))}
+                          </AvField>
+                        </React.Fragment>
+                      )}
                       <div className="form-group row">
                         <div className="col-md-10 pt-2">
                           <Button
