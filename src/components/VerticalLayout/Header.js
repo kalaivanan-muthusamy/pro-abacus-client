@@ -89,23 +89,17 @@ const Header = (props) => {
                 Join Your Class
               </Button>
             )}
-            <Link
-              to="/acl-results"
-              className="ml-2 text-muted btn btn-light font-size-12"
-            >
+            <Link to="/acl-results" className="ml-2 btn btn-light font-size-12">
               ACL Results
             </Link>
-            <Link
-              to="/wcl-results"
-              className="ml-2 text-muted btn btn-light font-size-12"
-            >
+            <Link to="/wcl-results" className="ml-2 btn btn-light font-size-12">
               WCL Results
             </Link>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             {role !== ROLES.ADMIN && (
               <Button color="warning" outline className="waves-effect">
-                Payment
+                Subscriptions
               </Button>
             )}
             <ProfileMenu />

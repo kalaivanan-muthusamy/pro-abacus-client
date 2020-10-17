@@ -15,17 +15,17 @@ import {
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { withNamespaces } from "react-i18next";
 import classnames from "classnames";
-import { EXAM_TYPES } from "./../../contants";
+import { EXAM_TYPES } from "../../contants";
 import ExamReports from "./ExamReports";
 
-function MyPerformance(props) {
+function Reports(props) {
   const [activeTab, setActiveTab] = useState("1");
 
   return (
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <Breadcrumbs title={props.t("My Performance")} />
+          <Breadcrumbs title={props.t("Reports")} />
           <Row>
             <Col sm="12">
               <Card>
@@ -127,4 +127,4 @@ function MyPerformance(props) {
   );
 }
 
-export default withNamespaces()(MyPerformance);
+export default withNamespaces()(Reports);

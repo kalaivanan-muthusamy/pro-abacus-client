@@ -9,7 +9,6 @@ import ForgetPwd from "../pages/Authentication/ForgetPassword";
 
 // Dashboard
 import Dashboard from "../pages/Dashboard/index";
-import MyPerformance from "./../pages/MyPerformance/index";
 import Practice from "../pages/Practice";
 import SelfTest from "../pages/SelfTest";
 import ACLResults from "../pages/ACLResults";
@@ -26,10 +25,11 @@ import Profile from "../pages/Profile";
 import EmailVerification from "./../pages/Authentication/EmailVerification";
 import ResetPassword from "../pages/Authentication/ResetPassword";
 import ExamReport from './../pages/Exam/ExamReport';
+import Reports from './../pages/Reports';
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
-  { path: "/my-performance", component: MyPerformance },
+  { path: "/reports", component: Reports },
   { path: "/exam/start/:examId", exact: true, component: Exam },
   { path: "/exam/report/:examId", exact: true, component: ExamReport },
   {

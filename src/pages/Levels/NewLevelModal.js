@@ -308,7 +308,7 @@ function NewLevelModal({ onClose, batchId }) {
 
                 {splitUps?.enabled?.[key] && (
                   <div className="table-responsive">
-                    <table className="table table-dark table-bordered  table-hover">
+                    <table className="table table-bordered table-hover">
                       <thead>
                         <tr>
                           <th>{category.columns[0].label}</th>

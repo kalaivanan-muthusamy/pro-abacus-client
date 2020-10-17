@@ -75,9 +75,9 @@ const SidebarContent = (props) => {
           {(role === ROLES.TEACHER || role === ROLES.STUDENT) && (
             <React.Fragment>
               <li>
-                <Link to="/my-performance" className="waves-effect">
-                  <i className="bx bx-meteor"></i>
-                  <span>{props.t("My Performance")}</span>
+                <Link to="/reports" className="waves-effect">
+                  <i className="bx bx-list-ul"></i>
+                  <span>{props.t("Reports")}</span>
                 </Link>
               </li>
               <li>
@@ -90,6 +90,12 @@ const SidebarContent = (props) => {
                 <Link to="/self-test" className="waves-effect">
                   <i className="bx bx-message-alt-check"></i>
                   <span>{props.t("Self Test")}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/notifications" className="waves-effect">
+                  <i className="bx bx-bell"></i>
+                  <span>{props.t("Notifications")}</span>
                 </Link>
               </li>
             </React.Fragment>

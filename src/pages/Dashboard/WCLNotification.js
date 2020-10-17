@@ -6,7 +6,7 @@ import { getCompleteAssetPath } from "../../helpers/common";
 
 function WCLNotifications() {
   const [loading, setLoading] = useState(false);
-  const [notification, setNotifications] = useState(false);
+  const [wclStarInfo, setWCLStarInfo] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function WCLNotifications() {
   async function getWCLStar() {
     try {
       setLoading(true);
-      const { error, res: allExams } = await getRequest(
+      const { error, res: wclStart } = await getRequest(
         "exams/notice-board/wcl-star"
       );
       if (error) {
@@ -26,7 +26,9 @@ function WCLNotifications() {
         setLoading(false);
         return;
       }
-      setNotifications(allExams);
+      if (Object.keys(wclStart).length > 0) {
+        setWCLStarInfo(wclStart);
+      }
     } catch (err) {
       console.error(err);
       setErrorMsg(getErrorMsg(err, "Couldn't get the completed exam details"));
@@ -38,18 +40,23 @@ function WCLNotifications() {
     <React.Fragment>
       <Card>
         <CardBody>
+          {loading && (
+            <div className="spinner-overlay">
+              <div className="spinner" />
+            </div>
+          )}
           <CardTitle className="pb-3">
-            WCL Star: {notification?.result?.examDetails?.name}
+            WCL Star: {wclStarInfo?.result?.examDetails?.name}
           </CardTitle>
-          {notification && (
+          {wclStarInfo && (
             <React.Fragment>
-              <div className="text-center">
+              <div className="text-center pt-4">
                 <div className="avatar-md profile-user-wid mb-2 mx-auto">
                   <img
                     src={
-                      notification?.studentDetails?.profileImage
+                      wclStarInfo?.studentDetails?.profileImage
                         ? getCompleteAssetPath(
-                            notification?.studentDetails?.profileImage
+                            wclStarInfo?.studentDetails?.profileImage
                           )
                         : defaultUserImg
                     }
@@ -58,10 +65,10 @@ function WCLNotifications() {
                   />
                 </div>
                 <h5 className="font-size-15 text-truncate">
-                  {notification?.studentDetails?.name}
+                  {wclStarInfo?.studentDetails?.name}
                 </h5>
                 <p className="text-muted mb-0 text-truncate">
-                  {notification?.studentDetails?.level}
+                  {wclStarInfo?.studentDetails?.level}
                 </p>
               </div>
               <Row className="pl-3 text-center">
@@ -71,7 +78,7 @@ function WCLNotifications() {
                       <i className="mdi mdi-circle text-secondary mr-1"></i>{" "}
                       Total Sum
                     </p>
-                    <h5>{notification?.result?.totalQuestions}</h5>
+                    <h5>{wclStarInfo?.result?.totalQuestions}</h5>
                   </div>
                 </Col>
                 <Col xs="4">
@@ -80,7 +87,7 @@ function WCLNotifications() {
                       <i className="mdi mdi-circle text-success mr-1"></i>
                       Accuracy
                     </p>
-                    <h5>{notification?.result?.accuracy}%</h5>
+                    <h5>{wclStarInfo?.result?.accuracy}%</h5>
                   </div>
                 </Col>
                 <Col xs="4">
@@ -88,13 +95,13 @@ function WCLNotifications() {
                     <p className="mb-2 text-truncate">
                       <i className="mdi mdi-circle text-info mr-1"></i>Speed
                     </p>
-                    <h5>{notification?.result?.speed}/m</h5>
+                    <h5>{wclStarInfo?.result?.speed}/m</h5>
                   </div>
                 </Col>
               </Row>
             </React.Fragment>
           )}
-          {!notification && (
+          {!wclStarInfo && (
             <div className="text-center mb-3 mt-0">
               <div>
                 <i className="bx bx-comment-error font-size-24 mb-2" />

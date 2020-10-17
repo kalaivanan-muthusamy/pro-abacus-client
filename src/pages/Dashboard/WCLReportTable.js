@@ -36,6 +36,11 @@ const WCLReportTable = (props) => {
     <React.Fragment>
       <Card>
         <CardBody>
+          {loading && (
+            <div className="spinner-overlay">
+              <div className="spinner" />
+            </div>
+          )}
           <CardTitle className="mb-4">
             WCL Report: {results?.[0]?.examDetails?.name}
           </CardTitle>
