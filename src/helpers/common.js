@@ -20,3 +20,13 @@ export function getQueryString() {
       return values;
     }, {});
 }
+
+export function getFormattedDuration(seconds) {
+  const minutes = parseInt(seconds / 60).toLocaleString("en-Us", {
+    minimumIntegerDigits: 2,
+  });
+  const remainingSeconds = parseInt(seconds % 60).toLocaleString("en-Us", {
+    minimumIntegerDigits: 2,
+  });
+  return `${minutes}:${remainingSeconds}`;
+}

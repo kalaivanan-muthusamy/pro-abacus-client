@@ -13,7 +13,7 @@ import {
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { withNamespaces } from "react-i18next";
 import { getErrorMsg } from "../../helpers/apiRequest";
-import { SPLITUP_CATEGORY } from "./../../contants";
+import { EXAM_TYPES, SPLITUP_CATEGORY } from "./../../contants";
 import { postRequest } from "./../../helpers/apiRequest";
 import { useHistory } from "react-router-dom";
 import { shuffleArrayElement } from "../../helpers/common";
@@ -83,7 +83,7 @@ function Exam(props) {
       });
       if (error) {
         // Validate if the error because pre-accessing the timed exam
-        const statusCode = error?.response?.status
+        const statusCode = error?.response?.status;
         const data = error?.response?.data;
         const isExpired = data?.isExpired ?? true;
         if (statusCode === 400 && !isExpired) {
@@ -107,7 +107,7 @@ function Exam(props) {
       setExamDetails(examDetails);
       setLoading(false);
     } catch (err) {
-      console.log("ERR", err)
+      console.log("ERR", err);
       setLoading(false);
       setPageError("Couldn't start the exam at the moment now");
     }
@@ -155,8 +155,12 @@ function Exam(props) {
       answerRef?.current?.focus();
       const updatedQuestions = [...questions];
       const question = updatedQuestions.find((q) => activeQuestionId === q._id);
-      const isCorrectAnswer = parseFloat(value) === question.answer;
-      question.isCorrectAnswer = isCorrectAnswer;
+      // TODO - Is this logic implemented in backend
+      if (EXAM_TYPES.PRACTICE === examDetails?.examType) {
+        const isCorrectAnswer = parseFloat(value) === question.answer;
+        question.isCorrectAnswer = isCorrectAnswer;
+      }
+
       question.givenAnswer = parseFloat(value);
       setQuestions([...updatedQuestions]);
       if (isLastQuestion) {
@@ -321,7 +325,7 @@ function Exam(props) {
                                   <div className="number">
                                     {getActiveQuestion()?.rowValues?.[0]}
                                   </div>
-                                  *
+                                  x
                                   <div className="number">
                                     {getActiveQuestion()?.rowValues?.[1]}
                                   </div>
@@ -426,6 +430,12 @@ function Exam(props) {
                                     }
                                     ${
                                       question.givenAnswer !== undefined
+                                        ? "answered"
+                                        : ""
+                                    }
+                                    ${
+                                      question.givenAnswer !== undefined &&
+                                      question.isCorrectAnswer !== undefined
                                         ? question.isCorrectAnswer
                                           ? "success"
                                           : "incorrect"

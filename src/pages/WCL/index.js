@@ -204,26 +204,6 @@ function WCL(props) {
                       </div>
                     </div>
 
-                    <div className="form-group row">
-                      <label
-                        htmlFor="resultDelay"
-                        className="col-md-2 col-form-label"
-                      >
-                        Delay for Result
-                      </label>
-                      <div className="col-md-10 pt-2">
-                        <AvField
-                          required="required"
-                          name="resultDelay"
-                          id="resultDelay"
-                          value={examDetails.resultDelay}
-                          type="text"
-                          onChange={onInputChange}
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-
                     <div className="row mb-0">
                       <div className="col-12" ref={errorRef} tabIndex="-1">
                         {errorMsg && <Alert color="danger">{errorMsg}</Alert>}

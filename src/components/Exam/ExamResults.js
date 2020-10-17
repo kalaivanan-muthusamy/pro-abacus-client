@@ -2,6 +2,55 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Card, CardBody, Table } from "reactstrap";
 import { withNamespaces } from "react-i18next";
 import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
+import { getFormattedDuration } from "./../../helpers/common";
+import { MDBDataTable } from "mdbreact";
+
+const columns = [
+  {
+    label: "Name",
+    field: "name",
+  },
+  {
+    label: "Total Sums",
+    field: "totalQuestions",
+  },
+  {
+    label: "Answered",
+    field: "answeredQuestions",
+  },
+  {
+    label: "Correct",
+    field: "correctAnswers",
+  },
+  {
+    label: "Incorrect",
+    field: "inCorrectAnswers",
+  },
+  {
+    label: "Score",
+    field: "scoredMarks",
+  },
+  {
+    label: "Accuracy",
+    field: "accuracy",
+  },
+  {
+    label: "Speed",
+    field: "speed",
+  },
+  {
+    label: "Duration (MM:SS)",
+    field: "timeTaken",
+  },
+  {
+    label: "Percentile",
+    field: "percentile",
+  },
+  {
+    label: "Rank",
+    field: "rank",
+  },
+];
 
 function ExamResults({ examType }) {
   const [loading, setLoading] = useState(false);
@@ -55,7 +104,16 @@ function ExamResults({ examType }) {
         setLoading(false);
         return;
       }
-      setResults(res);
+      const allResults = res?.map?.((result) => ({
+        ...result,
+        name: result?.studentDetails?.name,
+        percentile: result?.percentile ?? "N/A",
+        rank: result?.rank ?? "N/A",
+        accuracy: result?.accuracy + "%",
+        speed: result?.speed + "/minute",
+        timeTaken: getFormattedDuration(result?.timeTaken),
+      }));
+      setResults(allResults);
     } catch (err) {
       console.error(err);
       setErrorMsg(getErrorMsg(err, "Couldn't get the exam results"));
@@ -68,16 +126,6 @@ function ExamResults({ examType }) {
     const value = event.target.value;
     if (key === "limit") setSelectedLimit(value);
     if (key === "exam") setSelectedExam(value);
-  }
-
-  function getFormattedDuration(seconds) {
-    const minutes = parseInt(seconds / 60).toLocaleString("en-Us", {
-      minimumIntegerDigits: 2,
-    });
-    const remainingSeconds = parseInt(seconds % 60).toLocaleString("en-Us", {
-      minimumIntegerDigits: 2,
-    });
-    return `${minutes}:${remainingSeconds}`;
   }
 
   return (
@@ -108,7 +156,12 @@ function ExamResults({ examType }) {
                       className="custom-select custom-select-sm"
                     >
                       {exams?.map?.((exam) => (
-                        <option selected={selectedExam === exam._id ? 'selected' : null } value={exam._id}>
+                        <option
+                          selected={
+                            selectedExam === exam._id ? "selected" : null
+                          }
+                          value={exam._id}
+                        >
                           {exam.name}
                         </option>
                       ))}
@@ -134,44 +187,17 @@ function ExamResults({ examType }) {
               </Col>
             </Row>
 
-            <Table className="table-centered table-nowrap table-hover w-100">
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col" style={{ width: "70px" }}>
-                    #
-                  </th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Total Sums</th>
-                  <th scope="col">Correct</th>
-                  <th scope="col">In Correct</th>
-                  <th scope="col">Accuracy</th>
-                  <th scope="col">Speed</th>
-                  <th scope="col">Duration (MM:SS)</th>
-                  <th scope="col">Percentile</th>
-                  <th scope="col">Rank</th>
-                </tr>
-              </thead>
-              <tbody>
-                {results?.map((result, i) => (
-                  <tr key={"_user_" + i}>
-                    <td>{i + 1}</td>
-                    <td>
-                      <span className=" mb-1">
-                        {result?.studentDetails?.name}
-                      </span>
-                    </td>
-                    <td>{result.totalQuestions}</td>
-                    <td>{result.correctAnswers}</td>
-                    <td>{result.inCorrectAnswers}</td>
-                    <td>{result.accuracy}%</td>
-                    <td>{result.speed}/minute</td>
-                    <td>{getFormattedDuration(result.timeTaken)}</td>
-                    <td>{result.percentile}</td>
-                    <td>{result.rank}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+            <MDBDataTable
+              barReverse
+              responsive
+              striped
+              bordered
+              noBottomColumns
+              data={{
+                columns,
+                rows: results || [],
+              }}
+            />
           </React.Fragment>
         )}
       </CardBody>

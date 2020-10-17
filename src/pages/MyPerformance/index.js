@@ -5,7 +5,6 @@ import {
   Card,
   CardBody,
   Col,
-  CardTitle,
   Nav,
   NavItem,
   NavLink,
@@ -15,49 +14,9 @@ import {
 } from "reactstrap";
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { withNamespaces } from "react-i18next";
-import ReactApexChart from "react-apexcharts";
 import classnames from "classnames";
-import WCLPerformance from "./WCLPerformance";
-
-const series = [
-  { name: "series1", data: [31, 40, 36, 51, 49, 72, 69, 56, 68, 82, 68, 76] },
-];
-
-const options = {
-  chart: {
-    toolbar: "false",
-    dropShadow: {
-      enabled: !0,
-      color: "#000",
-      top: 18,
-      left: 7,
-      blur: 8,
-      opacity: 0.2,
-    },
-  },
-  dataLabels: {
-    enabled: !1,
-  },
-  colors: ["#556ee6"],
-  stroke: {
-    curve: "smooth",
-    width: 3,
-  },
-};
-
-const donutSeries = [56, 38, 26];
-const donutOptions = {
-  labels: ["Series A", "Series B", "Series C"],
-  colors: ["#556ee6", "#34c38f", "#f46a6a"],
-  legend: { show: !1 },
-  plotOptions: {
-    pie: {
-      donut: {
-        size: "70%",
-      },
-    },
-  },
-};
+import { EXAM_TYPES } from "./../../contants";
+import ExamReports from "./ExamReports";
 
 function MyPerformance(props) {
   const [activeTab, setActiveTab] = useState("1");
@@ -82,9 +41,7 @@ function MyPerformance(props) {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">
-                          WCL Performance
-                        </span>
+                        <span className="d-none d-sm-block">Self Test</span>
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -97,9 +54,7 @@ function MyPerformance(props) {
                           setActiveTab("2");
                         }}
                       >
-                        <span className="d-none d-sm-block">
-                          ACL Performance
-                        </span>
+                        <span className="d-none d-sm-block">Assessment</span>
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -112,9 +67,20 @@ function MyPerformance(props) {
                           setActiveTab("3");
                         }}
                       >
-                        <span className="d-none d-sm-block">
-                          Assessment Performance
-                        </span>
+                        <span className="d-none d-sm-block">WCL</span>
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: activeTab === "4",
+                        })}
+                        onClick={() => {
+                          setActiveTab("4");
+                        }}
+                      >
+                        <span className="d-none d-sm-block">ACL</span>
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -124,7 +90,7 @@ function MyPerformance(props) {
                       <Row>
                         <Col sm="12">
                           <CardText>
-                            <WCLPerformance />
+                            <ExamReports examType={EXAM_TYPES.SELF_TEST} />
                           </CardText>
                         </Col>
                       </Row>
@@ -132,21 +98,21 @@ function MyPerformance(props) {
                     <TabPane tabId="2" className="p-3">
                       <Row>
                         <Col sm="12">
-                          <WCLPerformance />
+                          <ExamReports examType={EXAM_TYPES.ASSESSMENT} />
                         </Col>
                       </Row>
                     </TabPane>
                     <TabPane tabId="3" className="p-3">
                       <Row>
                         <Col sm="12">
-                          <WCLPerformance />
+                          <ExamReports examType={EXAM_TYPES.WCL} />
                         </Col>
                       </Row>
                     </TabPane>
                     <TabPane tabId="4" className="p-3">
                       <Row>
                         <Col sm="12">
-                          <WCLPerformance />
+                          <ExamReports examType={EXAM_TYPES.ACL} />
                         </Col>
                       </Row>
                     </TabPane>

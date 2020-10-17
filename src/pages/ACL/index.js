@@ -24,7 +24,9 @@ const animatedComponents = makeAnimated();
 
 function ACL(props) {
   const [loading, setLoading] = useState(false);
-  const [examDetails, setExamDetails] = useState({});
+  const [examDetails, setExamDetails] = useState({
+    examDate: new Date(),
+  });
   const [levelsOption, setLevelsOption] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const errorRef = useRef(null);
@@ -87,7 +89,7 @@ function ACL(props) {
     try {
       event?.preventDefault();
       setLoading(true);
-      const { res, error } = await postRequest("exams", {
+      const { error } = await postRequest("exams", {
         ...examDetails,
         levelIds: examDetails.levelIds?.map((level) => level.value).join(","),
         examDate: examDetails.examDate?.toISOString(),
@@ -138,7 +140,6 @@ function ACL(props) {
                           required="required"
                           name="name"
                           id="name"
-                          //   value={examDetails.name}
                           type="text"
                           onChange={onInputChange}
                           className="form-control"
@@ -212,27 +213,7 @@ function ACL(props) {
 
                     <div className="form-group row">
                       <label
-                        htmlFor="resultDelay"
-                        className="col-md-2 col-form-label"
-                      >
-                        Delay for Result
-                      </label>
-                      <div className="col-md-10 pt-2">
-                        <AvField
-                          required="required"
-                          name="resultDelay"
-                          id="resultDelay"
-                          value={examDetails.resultDelay}
-                          type="text"
-                          onChange={onInputChange}
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group row">
-                      <label
-                        htmlFor="resultDelay"
+                        htmlFor="negativeMarks"
                         className="col-md-2 col-form-label"
                       >
                         Negative Marks
@@ -240,6 +221,7 @@ function ACL(props) {
                       <div className="col-md-10 pt-2">
                         <div className="custom-control custom-checkbox mb-3">
                           <input
+                            id="negativeMarks"
                             type="checkbox"
                             className="custom-control-input"
                             onChange={onCheckboxChange}
@@ -257,7 +239,7 @@ function ACL(props) {
 
                     <div className="form-group row">
                       <label
-                        htmlFor="resultDelay"
+                        htmlFor="skipQuestion"
                         className="col-md-2 col-form-label"
                       >
                         Skip Question Option
@@ -265,6 +247,7 @@ function ACL(props) {
                       <div className="col-md-10 pt-2">
                         <div className="custom-control custom-checkbox mb-3">
                           <input
+                            id="skipQuestion"
                             type="checkbox"
                             className="custom-control-input"
                             onChange={onCheckboxChange}
@@ -284,7 +267,7 @@ function ACL(props) {
 
                     <div className="form-group row">
                       <label
-                        htmlFor="resultDelay"
+                        htmlFor="shuffleQuestions"
                         className="col-md-2 col-form-label"
                       >
                         Shuffle Questions
@@ -292,6 +275,7 @@ function ACL(props) {
                       <div className="col-md-10 pt-2">
                         <div className="custom-control custom-checkbox mb-3">
                           <input
+                            id="shuffleQuestions"
                             type="checkbox"
                             className="custom-control-input"
                             onChange={onCheckboxChange}

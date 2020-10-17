@@ -39,28 +39,38 @@ const WCLReportTable = (props) => {
           <CardTitle className="mb-4">
             WCL Report: {results?.[0]?.examDetails?.name}
           </CardTitle>
-          <div className="table-responsive">
-            <table className="table table-centered table-nowrap mb-0">
-              <thead className="thead-light">
-                <tr>
-                  <th style={{ width: "20px" }}>#</th>
-                  <th>Name</th>
-                  <th>Percentile</th>
-                  <th>Rank</th>
-                </tr>
-              </thead>
-              <tbody>
-                {results?.map?.((result, key) => (
-                  <tr key={"_tr_" + key}>
-                    <td>{key + 1}</td>
-                    <td>{result?.studentDetails?.name}</td>
-                    <td>{result.percentile}</td>
-                    <td>{result.rank}</td>
+          {results?.length > 0 && (
+            <div className="table-responsive">
+              <table className="table table-centered table-nowrap mb-0">
+                <thead className="thead-light">
+                  <tr>
+                    <th style={{ width: "20px" }}>#</th>
+                    <th>Name</th>
+                    <th>Percentile</th>
+                    <th>Rank</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {results?.map?.((result, key) => (
+                    <tr key={"_tr_" + key}>
+                      <td>{key + 1}</td>
+                      <td>{result?.studentDetails?.name}</td>
+                      <td>{result.percentile}</td>
+                      <td>{result.rank}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {(!results || results?.length === 0) && (
+            <div className="text-center mb-3 mt-0">
+              <div>
+                <i className="bx bx-comment-error font-size-24 mb-2" />
+              </div>
+              No info available
+            </div>
+          )}
         </CardBody>
       </Card>
     </React.Fragment>

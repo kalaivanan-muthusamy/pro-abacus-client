@@ -10,7 +10,7 @@ import ACLNotifications from "./ACLNotifications";
 import { EXAM_TYPES } from "./../../contants";
 
 function AdminNotifications() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
   const [notifications, setNotifications] = useState(null);
   const [aclNotification, setACLNotification] = useState(null);

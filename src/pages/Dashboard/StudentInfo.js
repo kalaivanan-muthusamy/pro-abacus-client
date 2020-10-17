@@ -93,9 +93,9 @@ const StudentInfo = (props) => {
                     </div>
                     <div className="">
                       <div className="avatar-sm mx-auto">
-                        <span className="avatar-title rounded-circle bg-soft-primary font-size-14">
+                        <span className="avatar-title rounded-circle font-size-14">
                           {examReports?.WCLExams?.totalStars}
-                          <i class="bx bx-shield text-primary ml-1"></i>
+                          <i class="bx bx-shield ml-1"></i>
                         </span>
                       </div>
                     </div>
@@ -122,9 +122,9 @@ const StudentInfo = (props) => {
                     </div>
                     <div className="pr-3">
                       <div className="avatar-sm mx-auto">
-                        <span className="avatar-title rounded-circle bg-soft-primary font-size-14">
+                        <span className="avatar-title rounded-circle font-size-14">
                           {examReports?.ACLExams?.totalStars}
-                          <i class="bx bx-trophy text-primary ml-1"></i>
+                          <i class="bx bx-trophy ml-1"></i>
                         </span>
                       </div>
                     </div>

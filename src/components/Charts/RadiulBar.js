@@ -8,7 +8,7 @@ const RadialChart = ({ series, height, valueFormatter, labels }) => {
         startAngle: -135,
         endAngle: 135,
         offsetX: 0,
-        offsetY: -30,
+        offsetY: -35,
         dataLabels: {
           name: {
             fontSize: "15px",
@@ -18,7 +18,8 @@ const RadialChart = ({ series, height, valueFormatter, labels }) => {
           value: {
             offsetY: 10,
             fontSize: "16px",
-            color: "#FFF",
+            fontWeight: "bold",
+            color: "#aaa",
             formatter: valueFormatter,
           },
         },

@@ -42,6 +42,13 @@ const splitUpCategory = {
         minimum: 1,
         maximum: 50,
       },
+      {
+        name: "marks",
+        label: "Marks",
+        default: 1,
+        minimum: 1,
+        maximum: 50,
+      },
     ],
   },
   [SPLITUP_CATEGORY.MULTIPLICATION]: {
@@ -65,6 +72,13 @@ const splitUpCategory = {
         name: "questions",
         label: "Questions",
         default: 5,
+        minimum: 1,
+        maximum: 50,
+      },
+      {
+        name: "marks",
+        label: "Marks",
+        default: 1,
         minimum: 1,
         maximum: 50,
       },
@@ -94,6 +108,13 @@ const splitUpCategory = {
         minimum: 1,
         maximum: 50,
       },
+      {
+        name: "marks",
+        label: "Marks",
+        default: 1,
+        minimum: 1,
+        maximum: 50,
+      },
     ],
   },
 };
@@ -110,10 +131,25 @@ function ExamConfigurations({ examType }) {
         digits: 2,
         rows: 3,
         questions: 5,
+        marks: 1,
       },
     ],
-    [SPLITUP_CATEGORY.MULTIPLICATION]: [],
-    [SPLITUP_CATEGORY.DIVISION]: [],
+    [SPLITUP_CATEGORY.MULTIPLICATION]: [
+      {
+        multiplicandDigits: 2,
+        multiplierDigits: 3,
+        questions: 5,
+        marks: 1,
+      },
+    ],
+    [SPLITUP_CATEGORY.DIVISION]: [
+      {
+        dividendDigits: 2,
+        divisorDigits: 3,
+        questions: 5,
+        marks: 1,
+      },
+    ],
   });
   const [examDetails, setExamDetails] = useState({
     examDate: new Date(),
@@ -369,13 +405,16 @@ function ExamConfigurations({ examType }) {
 
                   {splitUps?.enabled?.[key] && (
                     <div className="table-responsive">
-                      <table className="table table-dark table-bordered  table-hover">
+                      <table className="table table-bordered  table-hover">
                         <thead>
                           <tr>
                             <th>{category.columns[0].label}</th>
                             <th>{category.columns[1].label}</th>
                             <th>{category.columns[2].label}</th>
-                            <th>Action</th>
+                            {examType === "ASSESSMENT" && (
+                              <th>{category.columns[3].label}</th>
+                            )}
+                            <th style={{ minWidth: "100px" }}>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -460,6 +499,34 @@ function ExamConfigurations({ examType }) {
                                     }}
                                   />
                                 </td>
+                                {examType === "ASSESSMENT" && (
+                                  <td>
+                                    <AvField
+                                      required="required"
+                                      name={
+                                        category.columns[3].name + "_" + index
+                                      }
+                                      type="text"
+                                      min={category.columns[3].minimum}
+                                      max={category.columns[3].maximum}
+                                      onChange={(e) =>
+                                        onSplitUpInputChange(e, index, key)
+                                      }
+                                      className="form-control"
+                                      value={obj?.[category.columns[3].name]}
+                                      validate={{
+                                        max: {
+                                          value: category.columns[3].maximum,
+                                          errorMessage: `Maximum value must be ${category.columns[3].maximum}`,
+                                        },
+                                        min: {
+                                          value: category.columns[3].minimum,
+                                          errorMessage: `Minimum value must be ${category.columns[3].minimum}`,
+                                        },
+                                      }}
+                                    />
+                                  </td>
+                                )}
                                 <td>
                                   <Button
                                     size="sm"
@@ -475,6 +542,7 @@ function ExamConfigurations({ examType }) {
                             <td></td>
                             <td></td>
                             <td></td>
+                            {examType === "ASSESSMENT" && <td></td>}
                             <td>
                               <Button size="sm" onClick={() => addRow(key)}>
                                 Add Row
@@ -506,6 +574,7 @@ function ExamConfigurations({ examType }) {
                 value={examDetails?.["duration"]}
                 onChange={(e) => onInputChange(e)}
                 validate={{
+                  required: true,
                   min: {
                     value: 5,
                     errorMessage: "Minimum value must be 5",

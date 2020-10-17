@@ -23,13 +23,15 @@ import Levels from "../pages/Levels";
 import WCL from "../pages/WCL";
 import ACL from "../pages/ACL";
 import Profile from "../pages/Profile";
-import EmailVerification from './../pages/Authentication/EmailVerification';
+import EmailVerification from "./../pages/Authentication/EmailVerification";
 import ResetPassword from "../pages/Authentication/ResetPassword";
+import ExamReport from './../pages/Exam/ExamReport';
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/my-performance", component: MyPerformance },
   { path: "/exam/start/:examId", exact: true, component: Exam },
+  { path: "/exam/report/:examId", exact: true, component: ExamReport },
   {
     path: "/exam/completed/:examId",
     exact: true,
@@ -54,7 +56,7 @@ const authRoutes = [
   { path: "/login/:role", component: Login },
   { path: "/forgot-password/:role", component: ForgetPwd },
   { path: "/reset-password/:role/:email/:hash", component: ResetPassword },
-  { path: '/email-verify/:role/:email/:hash', component: EmailVerification},
+  { path: "/email-verify/:role/:email/:hash", component: EmailVerification },
   { path: "/register", component: Register },
 ];
 

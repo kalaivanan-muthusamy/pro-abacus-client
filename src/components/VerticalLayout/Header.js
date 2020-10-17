@@ -50,10 +50,10 @@ const Header = (props) => {
             <div className="navbar-brand-box">
               <Link to="/" className="logo logo-dark">
                 <span className="logo-sm">
-                  <img src={logo} alt="" height="22" />
+                  {/* <img src={logo} alt="" height="22" /> */}
                 </span>
                 <span className="logo-lg">
-                  <img src={logoDark} alt="" height="17" />
+                  {/* <img src={logoDark} alt="" height="17" /> */}
                 </span>
               </Link>
 
@@ -62,7 +62,10 @@ const Header = (props) => {
                   <img src={logoLightSvg} alt="" height="22" />
                 </span>
                 <span className="logo-lg">
-                  <img src={logoLightPng} alt="" height="19" />
+                  <div className="d-inline-flex align-items-center justify-content-center mt-5">
+                    <img src={logoLightSvg} alt="" height="22" />
+                    <span className="h3 m-0 ml-2 text-white">PRO ABACUS</span>
+                  </div>
                 </span>
               </Link>
             </div>
@@ -81,16 +84,21 @@ const Header = (props) => {
               <Button
                 onClick={onJoinClassBtnClick}
                 color="light"
-                outline
                 className="waves-effect"
               >
                 Join Your Class
               </Button>
             )}
-            <Link to="/acl-results" className="pl-3 text-muted font-size-12">
+            <Link
+              to="/acl-results"
+              className="ml-2 text-muted btn btn-light font-size-12"
+            >
               ACL Results
             </Link>
-            <Link to="/wcl-results" className="pl-3 text-muted font-size-12">
+            <Link
+              to="/wcl-results"
+              className="ml-2 text-muted btn btn-light font-size-12"
+            >
               WCL Results
             </Link>
           </div>

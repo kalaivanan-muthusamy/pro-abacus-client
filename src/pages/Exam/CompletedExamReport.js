@@ -62,7 +62,7 @@ function CompletedExamReport(props) {
                       <Row>
                         <Col>
                           <h5>Summary of the Exam</h5>
-                          <table className="table table-dark table-bordered  table-hover mt-4">
+                          <table className="table table-bordered table-hover mt-4">
                             <thead>
                               <tr>
                                 <th>Summary</th>

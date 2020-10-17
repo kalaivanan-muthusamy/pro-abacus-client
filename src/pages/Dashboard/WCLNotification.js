@@ -38,58 +38,70 @@ function WCLNotifications() {
     <React.Fragment>
       <Card>
         <CardBody>
-          <CardTitle className="pb-5">
+          <CardTitle className="pb-3">
             WCL Star: {notification?.result?.examDetails?.name}
           </CardTitle>
-          <div className="text-center">
-            <div className="avatar-md profile-user-wid mb-2 mx-auto">
-              <img
-                src={
-                  notification?.studentDetails?.profileImage
-                    ? getCompleteAssetPath(
-                        notification?.studentDetails?.profileImage
-                      )
-                    : defaultUserImg
-                }
-                alt=""
-                className="img-thumbnail rounded-circle"
-              />
+          {notification && (
+            <React.Fragment>
+              <div className="text-center">
+                <div className="avatar-md profile-user-wid mb-2 mx-auto">
+                  <img
+                    src={
+                      notification?.studentDetails?.profileImage
+                        ? getCompleteAssetPath(
+                            notification?.studentDetails?.profileImage
+                          )
+                        : defaultUserImg
+                    }
+                    alt=""
+                    className="img-thumbnail rounded-circle"
+                  />
+                </div>
+                <h5 className="font-size-15 text-truncate">
+                  {notification?.studentDetails?.name}
+                </h5>
+                <p className="text-muted mb-0 text-truncate">
+                  {notification?.studentDetails?.level}
+                </p>
+              </div>
+              <Row className="pl-3 text-center">
+                <Col xs="4">
+                  <div className="mt-4">
+                    <p className="mb-2 text-truncate">
+                      <i className="mdi mdi-circle text-secondary mr-1"></i>{" "}
+                      Total Sum
+                    </p>
+                    <h5>{notification?.result?.totalQuestions}</h5>
+                  </div>
+                </Col>
+                <Col xs="4">
+                  <div className="mt-4">
+                    <p className="mb-2 text-truncate">
+                      <i className="mdi mdi-circle text-success mr-1"></i>
+                      Accuracy
+                    </p>
+                    <h5>{notification?.result?.accuracy}%</h5>
+                  </div>
+                </Col>
+                <Col xs="4">
+                  <div className="mt-4">
+                    <p className="mb-2 text-truncate">
+                      <i className="mdi mdi-circle text-info mr-1"></i>Speed
+                    </p>
+                    <h5>{notification?.result?.speed}/m</h5>
+                  </div>
+                </Col>
+              </Row>
+            </React.Fragment>
+          )}
+          {!notification && (
+            <div className="text-center mb-3 mt-0">
+              <div>
+                <i className="bx bx-comment-error font-size-24 mb-2" />
+              </div>
+              No info available
             </div>
-            <h5 className="font-size-15 text-truncate">
-              {notification?.studentDetails?.name}
-            </h5>
-            <p className="text-muted mb-0 text-truncate">
-              {notification?.studentDetails?.level}
-            </p>
-          </div>
-          <Row className="pl-3 text-center">
-            <Col xs="4">
-              <div className="mt-4">
-                <p className="mb-2 text-truncate">
-                  <i className="mdi mdi-circle text-secondary mr-1"></i> Total
-                  Sum
-                </p>
-                <h5>{notification?.result?.totalQuestions}</h5>
-              </div>
-            </Col>
-            <Col xs="4">
-              <div className="mt-4">
-                <p className="mb-2 text-truncate">
-                  <i className="mdi mdi-circle text-success mr-1"></i>
-                  Accuracy
-                </p>
-                <h5>{notification?.result?.accuracy}%</h5>
-              </div>
-            </Col>
-            <Col xs="4">
-              <div className="mt-4">
-                <p className="mb-2 text-truncate">
-                  <i className="mdi mdi-circle text-danger mr-1"></i>Speed
-                </p>
-                <h5>{notification?.result?.speed}/m</h5>
-              </div>
-            </Col>
-          </Row>
+          )}
         </CardBody>
       </Card>
     </React.Fragment>
