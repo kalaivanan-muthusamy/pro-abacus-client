@@ -3,6 +3,7 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import RadialChart from "./../../components/Charts/RadiulBar";
 import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
+import { getFormattedDuration } from './../../helpers/common';
 
 const donutOptions = {
   noData: {
@@ -151,7 +152,7 @@ function ExamStats({ name, examType = "WCL" }) {
                 <RadialChart
                   height={300}
                   labels={["Speed"]}
-                  valueFormatter={(val) => val + " / hr"}
+                  valueFormatter={(val) => val + " / min"}
                   series={[
                     selectedExam
                       ? examReports?.speed ?? 0
@@ -167,7 +168,7 @@ function ExamStats({ name, examType = "WCL" }) {
                     <i className="mdi mdi-circle text-success mr-1"></i>
                     {selectedExam ? "Accuracy" : "Avg.Accuracy"}
                   </p>
-                  <h5>{examReports?.avgAccuracy ?? examReports?.accuracy}</h5>
+                  <h5>{examReports?.avgAccuracy ?? examReports?.accuracy}%</h5>
                 </div>
               </Col>
               <Col xs="4">
@@ -176,7 +177,7 @@ function ExamStats({ name, examType = "WCL" }) {
                     <i className="mdi mdi-circle text-secondary mr-1"></i>
                     {selectedExam ? "Duration" : "Avg.Duration"}
                   </p>
-                  <h5>{examReports?.avgDuration ?? examReports?.duration}</h5>
+                  <h5>{getFormattedDuration(examReports?.avgDuration ?? examReports?.duration)}</h5>
                 </div>
               </Col>
               <Col xs="4">
@@ -185,7 +186,7 @@ function ExamStats({ name, examType = "WCL" }) {
                     <i className="mdi mdi-circle text-info mr-1"></i>
                     {selectedExam ? "Speed" : "Avg.Speed"}
                   </p>
-                  <h5>{examReports?.avgSpeed ?? examReports?.speed}</h5>
+                  <h5>{examReports?.avgSpeed ?? examReports?.speed}/minute</h5>
                 </div>
               </Col>
             </Row>

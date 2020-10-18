@@ -90,7 +90,7 @@ function GroupNotifications({ notifications, onChange = () => "" }) {
               </div>
               <div class="text-muted font-size-12 mt-2">
                 <i class="far fa-calendar-alt text-primary mr-1"></i>
-                {moment(notification?.createdAt).format("DD MMM, YYYY")}
+                {moment(notification?.createdAt).format("DD MMM, HH:mm")}
               </div>
             </td>
           </tr>

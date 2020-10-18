@@ -2,16 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-
-// Import menuDropdown
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
-
-import logo from "../../assets/images/logo.svg";
-import logoLightPng from "../../assets/images/logo-light.png";
 import logoLightSvg from "../../assets/images/logo-light.svg";
-import logoDark from "../../assets/images/logo-dark.png";
-
-//i18n
 import { withNamespaces } from "react-i18next";
 
 // Redux Store
@@ -23,6 +15,7 @@ import {
 
 import JoinClassModal from "./JoinClassModel";
 import { ROLES } from "../../contants";
+import * as moment from "moment-timezone";
 
 const Header = (props) => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -42,21 +35,55 @@ const Header = (props) => {
     setShowJoinClassModel(true);
   }
 
+  function getSubscriptionInfo() {
+    if (props?.profileDetails) {
+      const expiryAt = props?.profileDetails?.subscriptionDetails?.expiryAt;
+      if (!expiryAt)
+        return (
+          <span className="text-danger">
+            <i className="fas fa-exclamation-circle pr-1" />
+            Your don't have any subscriptions
+          </span>
+        );
+      const currentDate = moment.tz("Asia/Calcutta");
+      const days = parseInt(
+        moment.tz(expiryAt, "Asia/Calcutta").diff(currentDate, "days", true)
+      );
+      if (days < 0) {
+        return (
+          <span className="text-danger">
+            <i className="fas fa-exclamation-circle pr-1" />
+            Your plan is expired
+          </span>
+        );
+      } else if (days === 0) {
+        return (
+          <span className="text-warning">Your plan is expiring today</span>
+        );
+      } else if (days > 0 && days <= 10) {
+        return (
+          <span className="text-warning">
+            Your plan is expiring in {days} days
+          </span>
+        );
+      } else {
+        return (
+          <span className="text-muted">
+            Your plan is expiring in {days} days
+          </span>
+        );
+      }
+    }
+    return "";
+  }
+
   return (
     <React.Fragment>
+      {console.log("profileDetails", props?.profileDetails)}
       <header id="page-topbar">
         <div className="navbar-header">
           <div className="d-flex justify-content-center align-items-center">
             <div className="navbar-brand-box">
-              <Link to="/" className="logo logo-dark">
-                <span className="logo-sm">
-                  {/* <img src={logo} alt="" height="22" /> */}
-                </span>
-                <span className="logo-lg">
-                  {/* <img src={logoDark} alt="" height="17" /> */}
-                </span>
-              </Link>
-
               <Link to="/" className="logo logo-light">
                 <span className="logo-sm">
                   <img src={logoLightSvg} alt="" height="22" />
@@ -98,9 +125,16 @@ const Header = (props) => {
           </div>
           <div className="d-flex justify-content-center align-items-center">
             {role !== ROLES.ADMIN && (
-              <Button color="warning" outline className="waves-effect">
-                Subscriptions
-              </Button>
+              <React.Fragment>
+                <span className="mr-3">{getSubscriptionInfo()}</span>
+
+                <Link
+                  to="/subscriptions"
+                  className="btn btn-outline-warning waves-effect"
+                >
+                  Subscriptions
+                </Link>
+              </React.Fragment>
             )}
             <ProfileMenu />
           </div>
@@ -112,17 +146,23 @@ const Header = (props) => {
     </React.Fragment>
   );
 };
-const mapStatetoProps = (state) => {
+const mapStateToProps = (state) => {
   const {
     layoutType,
     showRightSidebar,
     leftMenu,
     leftSideBarType,
   } = state.Layout;
-  return { layoutType, showRightSidebar, leftMenu, leftSideBarType };
+  return {
+    layoutType,
+    showRightSidebar,
+    leftMenu,
+    leftSideBarType,
+    profileDetails: state.Profile.profileDetails,
+  };
 };
 
-export default connect(mapStatetoProps, {
+export default connect(mapStateToProps, {
   showRightSidebarAction,
   toggleLeftmenu,
   changeSidebarType,

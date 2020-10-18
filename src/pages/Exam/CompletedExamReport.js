@@ -4,6 +4,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { withNamespaces } from "react-i18next";
 import { Link } from "react-router-dom";
 import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
+import { EXAM_TYPES } from "./../../contants";
 
 function CompletedExamReport(props) {
   const [loading, setLoading] = useState(false);
@@ -55,6 +56,15 @@ function CompletedExamReport(props) {
                               <i className="fa text-success font-size-24 mb-4 fa-check-circle" />
                             </div>
                             You have successfully completed the Exam
+                            {[
+                              EXAM_TYPES.ACL,
+                              EXAM_TYPES.WCL,
+                              EXAM_TYPES.ASSESSMENT,
+                            ].includes(examResult?.examType) && (
+                              <small className="d-block text-muted mt-2">
+                                Detailed result will be available in ~15 minutes
+                              </small>
+                            )}
                           </div>
                         </Col>
                       </Row>

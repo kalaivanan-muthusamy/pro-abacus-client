@@ -26,6 +26,11 @@ import EmailVerification from "./../pages/Authentication/EmailVerification";
 import ResetPassword from "../pages/Authentication/ResetPassword";
 import ExamReport from './../pages/Exam/ExamReport';
 import Reports from './../pages/Reports';
+import Plans from "../pages/Plans";
+import Users from "../pages/Users";
+import Subscriptions from './../pages/Subscriptions/index';
+import BatchStudents from './../pages/Batches/Students';
+import UserDetails from './../pages/Users/UserDetails';
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -42,12 +47,17 @@ const userRoutes = [
   { path: "/assessment", component: Assessment },
   { path: "/wcl", component: WCL },
   { path: "/acl", component: ACL },
+  { path: "/batches/students/:batchId", component: BatchStudents },
   { path: "/batches", component: Batches },
   { path: "/acl-results", component: ACLResults },
   { path: "/wcl-results", component: WCLResults },
   { path: "/notifications", component: Notifications },
   { path: "/levels", component: Levels },
   { path: "/profile", component: Profile },
+  { path: "/plans", component: Plans },
+  { path: "/users/:role/:userId", component: UserDetails },
+  { path: "/users", component: Users },
+  { path: "/subscriptions", component: Subscriptions },
   { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
 ];
 

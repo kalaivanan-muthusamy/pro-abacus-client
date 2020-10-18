@@ -1,0 +1,241 @@
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Card,
+  CardBody,
+  Col,
+  Nav,
+  NavItem,
+  NavLink,
+  TabContent,
+  TabPane,
+  Table,
+  Button,
+} from "reactstrap";
+import Breadcrumbs from "../../components/Common/Breadcrumb";
+import classnames from "classnames";
+import { studentProperties, teacherProperties } from "./helpers/index";
+import { useParams } from "react-router-dom";
+import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
+import { get } from "lodash";
+import moment from "moment-timezone";
+import { MDBDataTable } from "mdbreact";
+import UpdateSubscriptionModal from "./UpdateSubscriptionModal";
+
+const columns = [
+  {
+    label: "S.No",
+    field: "sno",
+  },
+  {
+    label: "Subscription Date",
+    field: "subscriptionDate",
+  },
+  {
+    label: "Validity From",
+    field: "fromDate",
+  },
+  {
+    label: "Validity To",
+    field: "toDate",
+  },
+  {
+    label: "Plan Name",
+    field: "planName",
+  },
+  {
+    label: "Payment Status",
+    field: "paymentStatus",
+  },
+];
+
+function UserDetails() {
+  const [activeTab, setActiveTab] = useState("1");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [subscriptionHistories, setSubscriptionHistories] = useState([]);
+  const [userDetails, setUserDetails] = useState(null);
+  const [showExtendDialog, setShowExtendDialog] = useState(false);
+  const params = useParams();
+  const userProperties =
+    params?.role === "students" ? studentProperties : teacherProperties;
+
+  useEffect(() => {
+    getUserDetails();
+    getSubscriptionHistories();
+  }, []);
+
+  async function getUserDetails() {
+    setLoading(true);
+    try {
+      const { error, res } = await getRequest(
+        `${params.role}/${params?.userId}`
+      );
+      if (error) {
+        setErrorMsg(getErrorMsg(error, "Couldn't get the user details"));
+        setLoading(false);
+        return;
+      }
+      setUserDetails(res);
+    } catch (err) {
+      setErrorMsg(getErrorMsg(err, "Couldn't get the user details"));
+    }
+    setLoading(false);
+  }
+
+  async function getSubscriptionHistories() {
+    setLoading(true);
+    try {
+      const { error, res } = await getRequest(
+        "pricing-plans/subscription-history",
+        {
+          userId: params?.userId,
+        }
+      );
+      if (error) {
+        setErrorMsg(
+          getErrorMsg(error, "Couldn't get the subscription history details")
+        );
+        setLoading(false);
+        return;
+      }
+      const subscriptions = res?.map?.((subscription, index) => ({
+        ...subscription,
+        sno: index + 1,
+        subscriptionDate: moment
+          .tz(subscription?.createdAt, "Asia/Calcutta")
+          .format("DD MMM, YYYY HH:mm"),
+        fromDate: moment
+          .tz(subscription?.fromDate, "Asia/Calcutta")
+          .format("DD MMM, YYYY HH:mm"),
+        toDate: moment
+          .tz(subscription?.toDate, "Asia/Calcutta")
+          .format("DD MMM, YYYY HH:mm"),
+        planName: subscription?.pricingPlanDetails?.name,
+        paymentStatus: subscription?.transactionDetails?.paymentStatus,
+      }));
+      setSubscriptionHistories(subscriptions);
+    } catch (err) {
+      setErrorMsg(
+        getErrorMsg(err, "Couldn't get the subscription history details")
+      );
+    }
+    setLoading(false);
+  }
+
+  function changeSubscriptionExpiry() {
+    setShowExtendDialog(true);
+  }
+
+  return (
+    <React.Fragment>
+      <div className="page-content">
+        <Container fluid>
+          <Breadcrumbs title="User Details" />
+          <Row>
+            <Col sm="12">
+              <Card>
+                <CardBody>
+                  <Nav tabs className="nav-tabs-custom">
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: activeTab === "1",
+                        })}
+                        onClick={() => {
+                          setActiveTab("1");
+                        }}
+                      >
+                        <span className="d-none d-sm-block">Basic Details</span>
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        style={{ cursor: "pointer" }}
+                        className={classnames({
+                          active: activeTab === "2",
+                        })}
+                        onClick={() => {
+                          setActiveTab("2");
+                        }}
+                      >
+                        <span className="d-none d-sm-block">
+                          Subscription History
+                        </span>
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+
+                  <TabContent activeTab={activeTab}>
+                    <TabPane tabId="1" className="p-3">
+                      <Row>
+                        <Col sm="12">
+                          <Table className="table mb-0 table-bordered">
+                            <tbody>
+                              {userProperties?.map?.((property) => (
+                                <tr>
+                                  <th scope="row" style={{ width: "400px" }}>
+                                    {property.label}
+                                  </th>
+                                  <td>
+                                    {property.formatter?.(
+                                      get(userDetails, property.key)
+                                    ) ?? get(userDetails, property.key, "-")}
+                                    {/* {property.key ===
+                                      "subscriptionDetails.expiryAt" && (
+                                      <Button
+                                        onClick={changeSubscriptionExpiry}
+                                        size="sm"
+                                        className="ml-2 "
+                                      >
+                                        <i className="fa fa-edit" />
+                                      </Button>
+                                    )} */}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="2" className="p-3">
+                      <Row>
+                        <Col sm="12">
+                          <MDBDataTable
+                            hover
+                            barReverse
+                            responsive
+                            searchTop
+                            searchBottom={false}
+                            striped
+                            bordered
+                            noBottomColumns
+                            data={{
+                              columns,
+                              rows: subscriptionHistories,
+                            }}
+                          />
+                        </Col>
+                      </Row>
+                    </TabPane>
+                  </TabContent>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      {showExtendDialog && (
+        <UpdateSubscriptionModal
+          onClose={() => setShowExtendDialog(false)}
+          userDetails={userDetails}
+        />
+      )}
+    </React.Fragment>
+  );
+}
+
+export default UserDetails;

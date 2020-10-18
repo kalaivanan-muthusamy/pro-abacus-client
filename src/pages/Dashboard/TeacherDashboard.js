@@ -31,9 +31,6 @@ function TeacherDashboard(props) {
             </Col>
             <Col sm="12" xl="4">
               <AdminNotifications />
-              <ACLNotifications />
-              <WCLNotifications />
-              <WCLReportTable />
             </Col>
           </Row>
         </Container>

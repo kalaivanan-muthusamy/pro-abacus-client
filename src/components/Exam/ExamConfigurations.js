@@ -404,153 +404,166 @@ function ExamConfigurations({ examType }) {
                   </div>
 
                   {splitUps?.enabled?.[key] && (
-                    <div className="table-responsive">
-                      <table className="table table-bordered  table-hover">
-                        <thead>
-                          <tr>
-                            <th>{category.columns[0].label}</th>
-                            <th>{category.columns[1].label}</th>
-                            <th>{category.columns[2].label}</th>
-                            {examType === "ASSESSMENT" && (
-                              <th>{category.columns[3].label}</th>
-                            )}
-                            <th style={{ minWidth: "100px" }}>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {splitUps[key].map((obj, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>
-                                  <AvField
-                                    required="required"
-                                    name={
-                                      category.columns[0].name + "_" + index
-                                    }
-                                    type="text"
-                                    min={category.columns[0].minimum}
-                                    max={category.columns[0].maximum}
-                                    onChange={(e) =>
-                                      onSplitUpInputChange(e, index, key)
-                                    }
-                                    className="form-control"
-                                    value={obj?.[category.columns[0].name]}
-                                    validate={{
-                                      max: {
-                                        value: category.columns[0].maximum,
-                                        errorMessage: `Maximum value must be ${category.columns[0].maximum}`,
-                                      },
-                                      min: {
-                                        value: category.columns[0].minimum,
-                                        errorMessage: `Minimum value must be ${category.columns[0].minimum}`,
-                                      },
-                                    }}
-                                  />
-                                </td>
-                                <td>
-                                  <AvField
-                                    required="required"
-                                    name={
-                                      category.columns[1].name + "_" + index
-                                    }
-                                    type="text"
-                                    min={category.columns[1].minimum}
-                                    max={category.columns[1].maximum}
-                                    onChange={(e) =>
-                                      onSplitUpInputChange(e, index, key)
-                                    }
-                                    className="form-control"
-                                    value={obj?.[category.columns[1].name]}
-                                    validate={{
-                                      max: {
-                                        value: category.columns[1].maximum,
-                                        errorMessage: `Maximum value must be ${category.columns[1].maximum}`,
-                                      },
-                                      min: {
-                                        value: category.columns[1].minimum,
-                                        errorMessage: `Minimum value must be ${category.columns[1].minimum}`,
-                                      },
-                                    }}
-                                  />
-                                </td>
-                                <td>
-                                  <AvField
-                                    required="required"
-                                    name={
-                                      category.columns[2].name + "_" + index
-                                    }
-                                    type="text"
-                                    min={category.columns[2].minimum}
-                                    max={category.columns[2].maximum}
-                                    onChange={(e) =>
-                                      onSplitUpInputChange(e, index, key)
-                                    }
-                                    className="form-control"
-                                    value={obj?.[category.columns[2].name]}
-                                    validate={{
-                                      max: {
-                                        value: category.columns[2].maximum,
-                                        errorMessage: `Maximum value must be ${category.columns[2].maximum}`,
-                                      },
-                                      min: {
-                                        value: category.columns[2].minimum,
-                                        errorMessage: `Minimum value must be ${category.columns[2].minimum}`,
-                                      },
-                                    }}
-                                  />
-                                </td>
+                    <div className="row">
+                      <div className="col-sm-12 col-md-8">
+                        <div className="table-responsive">
+                          <table className="table table-bordered table-sm table-hover">
+                            <thead>
+                              <tr>
+                                <th>{category.columns[0].label}</th>
+                                <th>{category.columns[1].label}</th>
+                                <th>{category.columns[2].label}</th>
                                 {examType === "ASSESSMENT" && (
-                                  <td>
-                                    <AvField
-                                      required="required"
-                                      name={
-                                        category.columns[3].name + "_" + index
-                                      }
-                                      type="text"
-                                      min={category.columns[3].minimum}
-                                      max={category.columns[3].maximum}
-                                      onChange={(e) =>
-                                        onSplitUpInputChange(e, index, key)
-                                      }
-                                      className="form-control"
-                                      value={obj?.[category.columns[3].name]}
-                                      validate={{
-                                        max: {
-                                          value: category.columns[3].maximum,
-                                          errorMessage: `Maximum value must be ${category.columns[3].maximum}`,
-                                        },
-                                        min: {
-                                          value: category.columns[3].minimum,
-                                          errorMessage: `Minimum value must be ${category.columns[3].minimum}`,
-                                        },
-                                      }}
-                                    />
-                                  </td>
+                                  <th>{category.columns[3].label}</th>
                                 )}
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {splitUps[key].map((obj, index) => {
+                                return (
+                                  <tr key={index}>
+                                    <td>
+                                      <AvField
+                                        required="required"
+                                        name={
+                                          category.columns[0].name + "_" + index
+                                        }
+                                        type="text"
+                                        min={category.columns[0].minimum}
+                                        max={category.columns[0].maximum}
+                                        onChange={(e) =>
+                                          onSplitUpInputChange(e, index, key)
+                                        }
+                                        className="form-control-sm"
+                                        value={obj?.[category.columns[0].name]}
+                                        validate={{
+                                          max: {
+                                            value: category.columns[0].maximum,
+                                            errorMessage: `Maximum value must be ${category.columns[0].maximum}`,
+                                          },
+                                          min: {
+                                            value: category.columns[0].minimum,
+                                            errorMessage: `Minimum value must be ${category.columns[0].minimum}`,
+                                          },
+                                        }}
+                                      />
+                                    </td>
+                                    <td>
+                                      <AvField
+                                        required="required"
+                                        name={
+                                          category.columns[1].name + "_" + index
+                                        }
+                                        type="text"
+                                        min={category.columns[1].minimum}
+                                        max={category.columns[1].maximum}
+                                        onChange={(e) =>
+                                          onSplitUpInputChange(e, index, key)
+                                        }
+                                        className="form-control-sm"
+                                        value={obj?.[category.columns[1].name]}
+                                        validate={{
+                                          max: {
+                                            value: category.columns[1].maximum,
+                                            errorMessage: `Maximum value must be ${category.columns[1].maximum}`,
+                                          },
+                                          min: {
+                                            value: category.columns[1].minimum,
+                                            errorMessage: `Minimum value must be ${category.columns[1].minimum}`,
+                                          },
+                                        }}
+                                      />
+                                    </td>
+                                    <td>
+                                      <AvField
+                                        required="required"
+                                        name={
+                                          category.columns[2].name + "_" + index
+                                        }
+                                        type="text"
+                                        min={category.columns[2].minimum}
+                                        max={category.columns[2].maximum}
+                                        onChange={(e) =>
+                                          onSplitUpInputChange(e, index, key)
+                                        }
+                                        className="form-control-sm"
+                                        value={obj?.[category.columns[2].name]}
+                                        validate={{
+                                          max: {
+                                            value: category.columns[2].maximum,
+                                            errorMessage: `Maximum value must be ${category.columns[2].maximum}`,
+                                          },
+                                          min: {
+                                            value: category.columns[2].minimum,
+                                            errorMessage: `Minimum value must be ${category.columns[2].minimum}`,
+                                          },
+                                        }}
+                                      />
+                                    </td>
+                                    {examType === "ASSESSMENT" && (
+                                      <td>
+                                        <AvField
+                                          required="required"
+                                          name={
+                                            category.columns[3].name +
+                                            "_" +
+                                            index
+                                          }
+                                          type="text"
+                                          min={category.columns[3].minimum}
+                                          max={category.columns[3].maximum}
+                                          onChange={(e) =>
+                                            onSplitUpInputChange(e, index, key)
+                                          }
+                                          className="form-control-sm"
+                                          value={
+                                            obj?.[category.columns[3].name]
+                                          }
+                                          validate={{
+                                            max: {
+                                              value:
+                                                category.columns[3].maximum,
+                                              errorMessage: `Maximum value must be ${category.columns[3].maximum}`,
+                                            },
+                                            min: {
+                                              value:
+                                                category.columns[3].minimum,
+                                              errorMessage: `Minimum value must be ${category.columns[3].minimum}`,
+                                            },
+                                          }}
+                                        />
+                                      </td>
+                                    )}
+                                    <td>
+                                      <Button
+                                        color="danger"
+                                        size="sm"
+                                        onClick={() =>
+                                          onRemove(index, obj, key)
+                                        }
+                                      >
+                                        <i className="bx bx-trash" />
+                                      </Button>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                {examType === "ASSESSMENT" && <td></td>}
                                 <td>
-                                  <Button
-                                    size="sm"
-                                    onClick={() => onRemove(index, obj, key)}
-                                  >
-                                    Remove
+                                  <Button size="sm" onClick={() => addRow(key)}>
+                                    <i className="bx bx-plus" />
                                   </Button>
                                 </td>
                               </tr>
-                            );
-                          })}
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            {examType === "ASSESSMENT" && <td></td>}
-                            <td>
-                              <Button size="sm" onClick={() => addRow(key)}>
-                                Add Row
-                              </Button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </React.Fragment>

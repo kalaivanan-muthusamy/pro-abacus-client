@@ -71,14 +71,14 @@ function WCLNotifications() {
                   {wclStarInfo?.studentDetails?.level}
                 </p>
               </div>
-              <Row className="pl-3 text-center">
+              <Row className="text-center">
                 <Col xs="4">
                   <div className="mt-4">
                     <p className="mb-2 text-truncate">
                       <i className="mdi mdi-circle text-secondary mr-1"></i>{" "}
-                      Total Sum
+                      Attempted
                     </p>
-                    <h5>{wclStarInfo?.result?.totalQuestions}</h5>
+                    <h5>{wclStarInfo?.result?.answeredQuestions}</h5>
                   </div>
                 </Col>
                 <Col xs="4">
@@ -90,12 +90,12 @@ function WCLNotifications() {
                     <h5>{wclStarInfo?.result?.accuracy}%</h5>
                   </div>
                 </Col>
-                <Col xs="4">
+                <Col xs="4" className="p-0">
                   <div className="mt-4">
                     <p className="mb-2 text-truncate">
                       <i className="mdi mdi-circle text-info mr-1"></i>Speed
                     </p>
-                    <h5>{wclStarInfo?.result?.speed}/m</h5>
+                    <h5>{wclStarInfo?.result?.speed}/minute</h5>
                   </div>
                 </Col>
               </Row>

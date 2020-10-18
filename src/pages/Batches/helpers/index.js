@@ -20,3 +20,26 @@ export const batchColumns = [
     field: "action",
   },
 ];
+
+export const batchStudentsColumns = [
+  {
+    label: "S.No",
+    field: "sno",
+  },
+  {
+    label: "Name",
+    field: "name",
+  },
+  {
+    label: "Email",
+    field: "email",
+  },
+  {
+    label: "Level",
+    field: "level",
+  },
+  {
+    label: "Action",
+    field: "action",
+  },
+];

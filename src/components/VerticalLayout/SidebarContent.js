@@ -120,6 +120,12 @@ const SidebarContent = (props) => {
           {role === ROLES.ADMIN && (
             <React.Fragment>
               <li>
+                <Link to="/users" className="waves-effect">
+                  <i className="bx bxs-user-detail"></i>
+                  <span>{props.t("Users")}</span>
+                </Link>
+              </li>
+              <li>
                 <Link to="/levels" className="waves-effect">
                   <i className="bx bx-message-alt-detail"></i>
                   <span>{props.t("Levels")}</span>
@@ -137,6 +143,12 @@ const SidebarContent = (props) => {
                 <Link to="/acl" className="waves-effect">
                   <i className="bx bx-trophy"></i>
                   <span>{props.t("ACL")}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/plans" className="waves-effect">
+                  <i className="bx bx-money"></i>
+                  <span>{props.t("Plans")}</span>
                 </Link>
               </li>
             </React.Fragment>

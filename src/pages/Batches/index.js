@@ -9,6 +9,7 @@ import { batchColumns } from "./helpers/index";
 import { useEffect } from "react";
 import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
 import InviteToBatchModal from "./InviteToBatchModal";
+import { Link } from "react-router-dom";
 
 function Batches(props) {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -59,13 +60,12 @@ function Batches(props) {
             >
               <i class="bx bxs-edit-alt"></i>
             </a>
-            <a
-              href="#"
-              title="List Students"
+            <Link
               className="text-info mr-3 font-size-16"
+              to={`/batches/students/${batch._id}`}
             >
               <i class="bx bxs-user-detail"></i>
-            </a>
+            </Link>
             <a
               href="#"
               title="Invite Student"

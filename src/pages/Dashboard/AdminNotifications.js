@@ -138,7 +138,7 @@ function AdminNotifications() {
                 <Media>
                   <div className="mr-3">
                     <p className="font-size-12 mb-2">
-                      <b>{moment(notification.createdAt).format("MMM DD")}</b>
+                      <b>{moment(notification.createdAt).format("MMM DD, HH:mm")}</b>
                     </p>
                     <div>{notification?.message}</div>
                     {notification.type === "BATCH_JOIN_NOTIFICATION" &&

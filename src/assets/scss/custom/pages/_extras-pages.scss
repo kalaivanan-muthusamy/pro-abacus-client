@@ -1,24 +1,29 @@
-// 
+//
 // Extras pages.scss
 //
 
-
 // pricing
 
+.plan-box {
+  background: #f7f7f7;
 
-.plan-box{
-    .plan-btn{
-        position: relative;
+  &.active {
+    // background: #bbb;
+    border: 1px solid #556ee6;
+    background: #eff1ff;
+  }
+  .plan-btn {
+    position: relative;
 
-        &::before{
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: $gray-300;
-            left: 0px;
-            right: 0px;
-            top: 12px;
-        }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: $gray-300;
+      left: 0px;
+      right: 0px;
+      top: 12px;
     }
+  }
 }
