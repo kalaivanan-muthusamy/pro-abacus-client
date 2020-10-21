@@ -239,7 +239,7 @@ function ACL(props) {
 
                     <div className="form-group row">
                       <label
-                        htmlFor="skipQuestion"
+                        htmlFor="skipQuestions"
                         className="col-md-2 col-form-label"
                       >
                         Skip Question Option
@@ -247,7 +247,7 @@ function ACL(props) {
                       <div className="col-md-10 pt-2">
                         <div className="custom-control custom-checkbox mb-3">
                           <input
-                            id="skipQuestion"
+                            id="skipQuestions"
                             type="checkbox"
                             className="custom-control-input"
                             onChange={onCheckboxChange}

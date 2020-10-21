@@ -175,7 +175,7 @@ function ExamStats({ name, examType = "WCL" }) {
                 <div className="mt-4">
                   <p className="mb-2 text-truncate">
                     <i className="mdi mdi-circle text-secondary mr-1"></i>
-                    {selectedExam ? "Duration" : "Avg.Duration"}
+                    {selectedExam ? "Duration (MM:SS)" : "Avg.Duration (MM:SS)"}
                   </p>
                   <h5>{getFormattedDuration(examReports?.avgDuration ?? examReports?.duration)}</h5>
                 </div>
@@ -186,7 +186,7 @@ function ExamStats({ name, examType = "WCL" }) {
                     <i className="mdi mdi-circle text-info mr-1"></i>
                     {selectedExam ? "Speed" : "Avg.Speed"}
                   </p>
-                  <h5>{examReports?.avgSpeed ?? examReports?.speed}/minute</h5>
+                  <h5>{examReports?.avgSpeed ?? examReports?.speed} sums/minute</h5>
                 </div>
               </Col>
             </Row>

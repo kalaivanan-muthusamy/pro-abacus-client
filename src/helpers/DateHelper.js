@@ -15,14 +15,22 @@ export function getFormattedDiff({
 
   //Get hours and subtract from duration
   var hours = duration.hours();
+  hours = Number(hours).toLocaleString("en-us", { minimumIntegerDigits: 2 });
   duration.subtract(moment.duration(hours, "hours"));
 
   //Get Minutes and subtract from duration
   var minutes = duration.minutes();
+  minutes = Number(minutes).toLocaleString("en-us", {
+    minimumIntegerDigits: 2,
+  });
   duration.subtract(moment.duration(minutes, "minutes"));
 
   //Get seconds
   var seconds = duration.seconds();
+  seconds = Number(seconds).toLocaleString("en-us", {
+    minimumIntegerDigits: 2,
+  });
+
   return {
     days,
     hours,

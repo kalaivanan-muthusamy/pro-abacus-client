@@ -79,8 +79,7 @@ function Profile(props) {
       if (formInputs?.age) formData.append("age", formInputs?.age);
       if (formInputs?.newPassword)
         formData.append("password", formInputs?.newPassword);
-      if (formInputs?.levelId)
-        formData.append("levelId", formInputs?.levelId);
+      if (formInputs?.levelId) formData.append("levelId", formInputs?.levelId);
       if (role === ROLES.TEACHER)
         formData.append("centerName", formInputs?.centerName);
       profileImageRef?.current?.files?.length > 0 &&
@@ -237,6 +236,12 @@ function Profile(props) {
                             type="select"
                             name="levelId"
                             label="Levels"
+                            helpMessage={
+                              <span className="text-warning">
+                                * To upgrade to next level, you must complete 2+
+                                WCL Exams with 50+ Percentile score
+                              </span>
+                            }
                           >
                             {levels?.map?.((level) => (
                               <option value={level._id}>{level.name}</option>

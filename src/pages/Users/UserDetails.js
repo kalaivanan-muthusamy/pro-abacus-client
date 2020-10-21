@@ -45,6 +45,10 @@ const columns = [
     field: "planName",
   },
   {
+    label: "Amount",
+    field: "amount",
+  },
+  {
     label: "Payment Status",
     field: "paymentStatus",
   },
@@ -113,6 +117,7 @@ function UserDetails() {
           .tz(subscription?.toDate, "Asia/Calcutta")
           .format("DD MMM, YYYY HH:mm"),
         planName: subscription?.pricingPlanDetails?.name,
+        amount: `${subscription?.transactionDetails?.currencySymbol} ${subscription?.transactionDetails?.paymentAmount}`,
         paymentStatus: subscription?.transactionDetails?.paymentStatus,
       }));
       setSubscriptionHistories(subscriptions);

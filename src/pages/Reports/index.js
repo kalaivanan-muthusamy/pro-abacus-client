@@ -15,7 +15,7 @@ import {
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { withNamespaces } from "react-i18next";
 import classnames from "classnames";
-import { EXAM_TYPES } from "../../contants";
+import { EXAM_TYPES, ROLES } from "../../contants";
 import ExamReports from "./ExamReports";
 
 function Reports(props) {
@@ -44,45 +44,51 @@ function Reports(props) {
                         <span className="d-none d-sm-block">Self Test</span>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
-                      <NavLink
-                        style={{ cursor: "pointer" }}
-                        className={classnames({
-                          active: activeTab === "2",
-                        })}
-                        onClick={() => {
-                          setActiveTab("2");
-                        }}
-                      >
-                        <span className="d-none d-sm-block">Assessment</span>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        style={{ cursor: "pointer" }}
-                        className={classnames({
-                          active: activeTab === "3",
-                        })}
-                        onClick={() => {
-                          setActiveTab("3");
-                        }}
-                      >
-                        <span className="d-none d-sm-block">WCL</span>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        style={{ cursor: "pointer" }}
-                        className={classnames({
-                          active: activeTab === "4",
-                        })}
-                        onClick={() => {
-                          setActiveTab("4");
-                        }}
-                      >
-                        <span className="d-none d-sm-block">ACL</span>
-                      </NavLink>
-                    </NavItem>
+                    {localStorage.getItem("role") === ROLES.STUDENT && (
+                      <React.Fragment>
+                        <NavItem>
+                          <NavLink
+                            style={{ cursor: "pointer" }}
+                            className={classnames({
+                              active: activeTab === "2",
+                            })}
+                            onClick={() => {
+                              setActiveTab("2");
+                            }}
+                          >
+                            <span className="d-none d-sm-block">
+                              Assessment
+                            </span>
+                          </NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink
+                            style={{ cursor: "pointer" }}
+                            className={classnames({
+                              active: activeTab === "3",
+                            })}
+                            onClick={() => {
+                              setActiveTab("3");
+                            }}
+                          >
+                            <span className="d-none d-sm-block">WCL</span>
+                          </NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink
+                            style={{ cursor: "pointer" }}
+                            className={classnames({
+                              active: activeTab === "4",
+                            })}
+                            onClick={() => {
+                              setActiveTab("4");
+                            }}
+                          >
+                            <span className="d-none d-sm-block">ACL</span>
+                          </NavLink>
+                        </NavItem>
+                      </React.Fragment>
+                    )}
                   </Nav>
 
                   <TabContent activeTab={activeTab}>
@@ -95,27 +101,31 @@ function Reports(props) {
                         </Col>
                       </Row>
                     </TabPane>
-                    <TabPane tabId="2" className="p-3">
-                      <Row>
-                        <Col sm="12">
-                          <ExamReports examType={EXAM_TYPES.ASSESSMENT} />
-                        </Col>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="3" className="p-3">
-                      <Row>
-                        <Col sm="12">
-                          <ExamReports examType={EXAM_TYPES.WCL} />
-                        </Col>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="4" className="p-3">
-                      <Row>
-                        <Col sm="12">
-                          <ExamReports examType={EXAM_TYPES.ACL} />
-                        </Col>
-                      </Row>
-                    </TabPane>
+                    {localStorage.getItem("role") === ROLES.STUDENT && (
+                      <React.Fragment>
+                        <TabPane tabId="2" className="p-3">
+                          <Row>
+                            <Col sm="12">
+                              <ExamReports examType={EXAM_TYPES.ASSESSMENT} />
+                            </Col>
+                          </Row>
+                        </TabPane>
+                        <TabPane tabId="3" className="p-3">
+                          <Row>
+                            <Col sm="12">
+                              <ExamReports examType={EXAM_TYPES.WCL} />
+                            </Col>
+                          </Row>
+                        </TabPane>
+                        <TabPane tabId="4" className="p-3">
+                          <Row>
+                            <Col sm="12">
+                              <ExamReports examType={EXAM_TYPES.ACL} />
+                            </Col>
+                          </Row>
+                        </TabPane>
+                      </React.Fragment>
+                    )}
                   </TabContent>
                 </CardBody>
               </Card>

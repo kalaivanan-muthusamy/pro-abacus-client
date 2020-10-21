@@ -95,7 +95,7 @@ function WCLNotifications() {
                     <p className="mb-2 text-truncate">
                       <i className="mdi mdi-circle text-info mr-1"></i>Speed
                     </p>
-                    <h5>{wclStarInfo?.result?.speed}/minute</h5>
+                    <h5>{wclStarInfo?.result?.speed} sums/min</h5>
                   </div>
                 </Col>
               </Row>

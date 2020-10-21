@@ -56,13 +56,25 @@ function ExamResults({ examType }) {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [selectedExam, setSelectedExam] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState(null);
   const [selectedLimit, setSelectedLimit] = useState(20);
   const [exams, setExams] = useState(null);
   const [results, setResults] = useState(null);
+  const [levels, setLevels] = useState(null);
 
   useEffect(() => {
-    getCompletedExam();
+    if (localStorage.getItem("role") !== "STUDENT") {
+      getLevels();
+    } else {
+      getCompletedExam();
+    }
   }, []);
+
+  useEffect(() => {
+    if (selectedLevel) {
+      getCompletedExam();
+    }
+  }, [selectedLevel]);
 
   useEffect(() => {
     if (selectedExam) {
@@ -75,6 +87,7 @@ function ExamResults({ examType }) {
       setLoading(true);
       const { error, res: allExams } = await getRequest("exams/completed", {
         examType,
+        levelId: selectedLevel,
       });
       if (error) {
         setErrorMsg(
@@ -88,6 +101,24 @@ function ExamResults({ examType }) {
     } catch (err) {
       console.error(err);
       setErrorMsg(getErrorMsg(err, "Couldn't get the completed exam details"));
+    }
+    setLoading(false);
+  }
+
+  async function getLevels() {
+    try {
+      setLoading(true);
+      const { error, res } = await getRequest("levels");
+      if (error) {
+        setErrorMsg(getErrorMsg(error, "Couldn't get the levels"));
+        setLoading(false);
+        return;
+      }
+      setLevels(res);
+      if (res?.length > 0) setSelectedLevel(res[0]._id);
+    } catch (err) {
+      console.error(err);
+      setErrorMsg(getErrorMsg(err, "Couldn't get the levels"));
     }
     setLoading(false);
   }
@@ -126,6 +157,7 @@ function ExamResults({ examType }) {
     const value = event.target.value;
     if (key === "limit") setSelectedLimit(value);
     if (key === "exam") setSelectedExam(value);
+    if (key === "level") setSelectedLevel(value);
   }
 
   return (
@@ -148,6 +180,28 @@ function ExamResults({ examType }) {
           <React.Fragment>
             <Row>
               <Col>
+                {localStorage.getItem("role") !== "STUDENT" && (
+                  <div className="float-left mb-3 mr-3">
+                    <div className="input-group input-group-sm">
+                      <select
+                        name="level"
+                        onChange={onSelectChange}
+                        className="custom-select custom-select-sm"
+                      >
+                        {levels?.map?.((level) => (
+                          <option
+                            selected={
+                              selectedLevel === level._id ? "selected" : null
+                            }
+                            value={level._id}
+                          >
+                            {level.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
                 <div className="float-left mb-3 mr-3">
                   <div className="input-group input-group-sm">
                     <select
