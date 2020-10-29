@@ -20,7 +20,7 @@ const navItems = [
   { id: 1, idnm: "home", navheading: "Home" },
   { id: 2, idnm: "about", navheading: "About" },
   { id: 3, idnm: "pricing", navheading: "Pricing" },
-  { id: 3, idnm: "gallery", navheading: "Gallery" },
+  // { id: 3, idnm: "gallery", navheading: "Gallery" },
   // { id: 4, idnm: "team", navheading: "Join Us" },
   // { id: 5, idnm: "news", navheading: "Contact" },
 ];
@@ -87,14 +87,23 @@ const Navbar_Page = (props) => {
                 ))}
               </Nav>
             </ScrollspyNav>
-            <div className="ml-lg-2">
-              <Link to="/login/students" className="btn btn-primary w-xs mr-2">
-                Student Login
+            {localStorage.getItem("role") ? (
+              <Link to="/dashboard" className="btn btn-primary w-xs mr-2">
+                Dashboard
               </Link>
-              <Link to="/login/teachers" className="btn btn-primary w-xs">
-                Master Login
-              </Link>
-            </div>
+            ) : (
+              <div className="ml-lg-2">
+                <Link
+                  to="/login/students"
+                  className="btn btn-primary w-xs mr-2"
+                >
+                  Student Login
+                </Link>
+                <Link to="/login/teachers" className="btn btn-primary w-xs">
+                  Teacher Login
+                </Link>
+              </div>
+            )}
           </Collapse>
         </Container>
       </Navbar>

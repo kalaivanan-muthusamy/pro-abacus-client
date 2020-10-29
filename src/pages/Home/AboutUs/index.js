@@ -18,7 +18,6 @@ const AboutUs = (props) => {
           <Row className="align-items-center">
             <Col sm="12" lg="6">
               <div className="text-muted">
-                <h4 className="mb-3">Our Journey</h4>
                 <p>
                   ProAbacus.com was Launched in the year 2020 and its keep
                   growing in steady phase with all your support and wishes.Our
@@ -27,48 +26,68 @@ const AboutUs = (props) => {
                   anyone who is very interested in taking their Abacus skills to
                   next levels.
                 </p>
-                <Row>
-                  <Col sm="4">
-                    <Card className="border">
-                      <CardBody>
-                        <div className="mb-3">
-                          <i className="mdi mdi-check h2 text-success"></i>
-                        </div>
-                        <h5>Feature 1</h5>
-                        <p className="text-muted mb-0">
-                          At vero eos et accusamus et iusto blanditiis
-                        </p>
-                      </CardBody>
-                    </Card>
+                <Row className="mt-5">
+                  <Col className="text-left" lg="3" xs="6">
+                    <div>
+                      <h4>1,200</h4>
+                      <p>Students</p>
+                    </div>
                   </Col>
-                  <Col sm="4">
-                    <Card className="border">
-                      <CardBody>
-                        <div className="mb-3">
-                          <i className="mdi mdi-check h2 text-success"></i>
-                        </div>
-                        <h5>Feature 2</h5>
-                        <p className="text-muted mb-0">
-                          At vero eos et accusamus et iusto blanditiis
-                        </p>
-                      </CardBody>
-                    </Card>
+                  <Col className="text-left" lg="3" xs="6">
+                    <div>
+                      <h4>2,300</h4>
+                      <p>Centers</p>
+                    </div>
                   </Col>
-                  <Col sm="4">
-                    <Card className="border">
-                      <CardBody>
-                        <div className="mb-3">
-                          <i className="mdi mdi-check h2 text-success"></i>
-                        </div>
-                        <h5>Feature 3</h5>
-                        <p className="text-muted mb-0">
-                          At vero eos et accusamus et iusto blanditiis
-                        </p>
-                      </CardBody>
-                    </Card>
+                  <Col className="text-left" lg="3" xs="6">
+                    <div>
+                      <h4>50,000</h4>
+                      <p>Sums Solved</p>
+                    </div>
+                  </Col>
+                  <Col className="text-left" lg="3" xs="6">
+                    <div>
+                      <h4>1,852</h4>
+                      <p>Tests</p>
+                    </div>
                   </Col>
                 </Row>
+                <hr />
               </div>
+              <Row>
+                <Col>
+                  <div className="text-center">
+                    <span className="h4 mb-0 mr-3">Connect with Us: </span>
+                    <a
+                      className="font-size-24 pr-3 text-info"
+                      target="_blank"
+                      href="https://t.me/proabacus"
+                      data-toggle="tooltip"
+                      title="Telegram"
+                    >
+                      <i className="mdi mdi-telegram"></i>
+                    </a>
+                    <a
+                      className="font-size-24 pr-3 text-info"
+                      target="_blank"
+                      href="https://www.facebook.com/proabacusfbpage/"
+                      data-toggle="tooltip"
+                      title="Facebook"
+                    >
+                      <i className="mdi mdi-facebook"></i>
+                    </a>
+                    <a
+                      className="font-size-24 pr-3 text-info"
+                      target="_blank"
+                      href="https://youtu.be/LRll8vJJXgM"
+                      data-toggle="tooltip"
+                      title="Youtube"
+                    >
+                      <i className="mdi mdi-youtube"></i>
+                    </a>
+                  </div>
+                </Col>
+              </Row>
             </Col>
             <Col sm="12" lg="6">
               <div class="video-container">

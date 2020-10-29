@@ -32,7 +32,7 @@ function Home() {
       <HeroSection />
       <AboutUs />
       <Pricing />
-      <Gallery />
+      {/* <Gallery /> */}
       <Footer />
     </React.Fragment>
   );
