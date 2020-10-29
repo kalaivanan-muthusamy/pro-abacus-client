@@ -31,7 +31,7 @@ import Users from "../pages/Users";
 import Subscriptions from "./../pages/Subscriptions/index";
 import BatchStudents from "./../pages/Batches/Students";
 import UserDetails from "./../pages/Users/UserDetails";
-import Home from './../pages/Home/index';
+import Home from "./../pages/Home/index";
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -59,7 +59,6 @@ const userRoutes = [
   { path: "/users/:role/:userId", component: UserDetails },
   { path: "/users", component: Users },
   { path: "/subscriptions", component: Subscriptions },
-  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
 ];
 
 const authRoutes = [
@@ -69,7 +68,7 @@ const authRoutes = [
   { path: "/reset-password/:role/:email/:hash", component: ResetPassword },
   { path: "/email-verify/:role/:email/:hash", component: EmailVerification },
   { path: "/register", component: Register },
-  { path: "/", component: Home },
+  { path: "/", exact: true, component: Home },
 ];
 
 export { userRoutes, authRoutes };

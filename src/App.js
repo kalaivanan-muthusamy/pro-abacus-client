@@ -58,6 +58,7 @@ const App = (props) => {
         <Switch>
           {authRoutes.map((route, idx) => (
             <NonAuthMiddleware
+              exact={route.exact}
               path={route.path}
               layout={NonAuthLayout}
               component={route.component}
