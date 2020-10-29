@@ -24,13 +24,14 @@ import ACL from "../pages/ACL";
 import Profile from "../pages/Profile";
 import EmailVerification from "./../pages/Authentication/EmailVerification";
 import ResetPassword from "../pages/Authentication/ResetPassword";
-import ExamReport from './../pages/Exam/ExamReport';
-import Reports from './../pages/Reports';
+import ExamReport from "./../pages/Exam/ExamReport";
+import Reports from "./../pages/Reports";
 import Plans from "../pages/Plans";
 import Users from "../pages/Users";
-import Subscriptions from './../pages/Subscriptions/index';
-import BatchStudents from './../pages/Batches/Students';
-import UserDetails from './../pages/Users/UserDetails';
+import Subscriptions from "./../pages/Subscriptions/index";
+import BatchStudents from "./../pages/Batches/Students";
+import UserDetails from "./../pages/Users/UserDetails";
+import Home from './../pages/Home/index';
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -68,6 +69,7 @@ const authRoutes = [
   { path: "/reset-password/:role/:email/:hash", component: ResetPassword },
   { path: "/email-verify/:role/:email/:hash", component: EmailVerification },
   { path: "/register", component: Register },
+  { path: "/", component: Home },
 ];
 
 export { userRoutes, authRoutes };

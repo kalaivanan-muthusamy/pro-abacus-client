@@ -13,7 +13,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { loginUser, apiError } from "../../store/actions";
 
 // import images
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo-icon.png";
 import { postRequest, getErrorMsg } from "./../../helpers/apiRequest";
 
 const Login = (props) => {
