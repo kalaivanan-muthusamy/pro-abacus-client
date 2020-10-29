@@ -24,7 +24,7 @@ const AboutUs = (props) => {
                   vision is to provide a reliable and technically advanced
                   platform, delicately for the Abacus students,teachers or
                   anyone who is very interested in taking their Abacus skills to
-                  next levels.
+                  next levels
                 </p>
                 <Row className="mt-5">
                   <Col className="text-left" lg="3" xs="6">

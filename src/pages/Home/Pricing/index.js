@@ -114,9 +114,8 @@ const Pricing = (props) => {
               <div className="text-center mb-5">
                 <h4>Choose your Pricing plan</h4>
                 <p className="text-muted">
-                  To achieve this, it would be necessary to have uniform
-                  grammar, pronunciation and more common words If several
-                  languages coalesce
+                  We made our subscription plans much simpler, Please choose the
+                  one that suites your need
                 </p>
               </div>
             </Col>
@@ -124,7 +123,11 @@ const Pricing = (props) => {
 
           <Row>
             {pricingPlans?.map((pricing, index) => (
-              <CardPricing pricing={pricing} index={index} key={"_pricing_" + index} />
+              <CardPricing
+                pricing={pricing}
+                index={index}
+                key={"_pricing_" + index}
+              />
             ))}
           </Row>
         </Container>

@@ -24,11 +24,11 @@ const CardPricing = ({ index, pricing }) => {
             <div className="py-4">
               <h2>
                 <sup>
-                  <small>{pricing?.currencySymbol}</small>
+                  <small className="currency">{pricing?.currencySymbol}</small>
                 </sup>{" "}
                 {pricing?.discountedPrice}/{" "}
                 <strike className="font-size-13">
-                  <small>{pricing?.currencySymbol}</small>
+                  <small className="currency">{pricing?.currencySymbol}</small>
                   {pricing?.basicPrice}
                 </strike>
               </h2>
