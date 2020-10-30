@@ -56,8 +56,17 @@ const AboutUs = (props) => {
               </div>
               <Row>
                 <Col>
+                  <p className="text-muted">
+                    <b>Payment related queries</b>: payments@proabacus.com
+                  </p>
+                  <p className="text-muted">
+                    <b>Any other queries</b>: support@proabacus.com
+                  </p>
+                </Col>
+                <Col>
                   <div className="text-center">
-                    <span className="h4 mb-0 mr-3">Connect with Us: </span>
+                    <span className="h4 mb-0 mr-3">Connect with Us: </span>{" "}
+                    <br />
                     <a
                       className="font-size-24 pr-3 text-info"
                       target="_blank"
