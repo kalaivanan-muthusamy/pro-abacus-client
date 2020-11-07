@@ -95,7 +95,7 @@ const StudentInfo = (props) => {
                       <div className="avatar-sm mx-auto">
                         <span className="avatar-title rounded-circle font-size-14">
                           {examReports?.WCLExams?.totalStars}
-                          <i class="bx bx-shield ml-1"></i>
+                          <i className="bx bx-shield ml-1"></i>
                         </span>
                       </div>
                     </div>
@@ -124,7 +124,7 @@ const StudentInfo = (props) => {
                       <div className="avatar-sm mx-auto">
                         <span className="avatar-title rounded-circle font-size-14">
                           {examReports?.ACLExams?.totalStars}
-                          <i class="bx bx-trophy ml-1"></i>
+                          <i className="bx bx-trophy ml-1"></i>
                         </span>
                       </div>
                     </div>

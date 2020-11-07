@@ -224,11 +224,11 @@ function ACL(props) {
                             id="negativeMarks"
                             type="checkbox"
                             className="custom-control-input"
-                            onChange={onCheckboxChange}
+                            onChange={() => onCheckboxChange("negativeMarks")}
                             checked={examDetails?.negativeMarks}
                           />
                           <label
-                            onClick={() => onCheckboxChange("negativeMarks")}
+                            for="negativeMarks"
                             className="custom-control-label"
                           >
                             <span className="sr-only">Negative Marks</span>
@@ -250,11 +250,11 @@ function ACL(props) {
                             id="skipQuestions"
                             type="checkbox"
                             className="custom-control-input"
-                            onChange={onCheckboxChange}
+                            onChange={() => onCheckboxChange("skipQuestions")}
                             checked={examDetails?.skipQuestions}
                           />
                           <label
-                            onClick={() => onCheckboxChange("skipQuestions")}
+                            for="skipQuestions"
                             className="custom-control-label"
                           >
                             <span className="sr-only">
@@ -278,11 +278,13 @@ function ACL(props) {
                             id="shuffleQuestions"
                             type="checkbox"
                             className="custom-control-input"
-                            onChange={onCheckboxChange}
+                            onChange={() =>
+                              onCheckboxChange("shuffleQuestions")
+                            }
                             checked={examDetails?.shuffleQuestions}
                           />
                           <label
-                            onClick={() => onCheckboxChange("shuffleQuestions")}
+                            for="shuffleQuestions"
                             className="custom-control-label"
                           >
                             <span className="sr-only">Shuffle Questions</span>

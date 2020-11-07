@@ -19,6 +19,7 @@ import PricingCard from "./PricingCard";
 import { postRequest } from "./../../helpers/apiRequest";
 import { MDBDataTable } from "mdbreact";
 import moment from "moment-timezone";
+import SuccessModal from "./SuccessModal";
 
 const columns = [
   {
@@ -54,6 +55,7 @@ const columns = [
 function Subscriptions() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [activeTab, setActiveTab] = useState("1");
   const [subscriptionPlans, setSubscriptionPlans] = useState(null);
   const [subscriptionHistories, setSubscriptionHistories] = useState([]);
@@ -115,9 +117,9 @@ function Subscriptions() {
         amount: (
           <span>
             <span className="currency">
-              ${subscription?.transactionDetails?.currencySymbol}
+              {subscription?.transactionDetails?.currencySymbol}
             </span>{" "}
-            ${subscription?.transactionDetails?.paymentAmount}
+            {subscription?.transactionDetails?.paymentAmount}
           </span>
         ),
         paymentStatus: subscription?.transactionDetails?.paymentStatus,
@@ -146,14 +148,50 @@ function Subscriptions() {
   async function onInitiate(pricingDetails) {
     setLoading(true);
     try {
-      const { error } = await postRequest("pricing-plans/initiate-payment", {
-        pricingPlanId: pricingDetails._id,
-      });
+      const { res, error } = await postRequest(
+        "pricing-plans/initiate-payment",
+        {
+          pricingPlanId: pricingDetails._id,
+        }
+      );
       if (error) {
         setErrorMsg(getErrorMsg(error, "Couldn't initiate the payment"));
         setLoading(false);
         return;
       }
+      const options = {
+        key: process.env.RAZORPAY_KEY_ID,
+        name: "PRO ABACUS",
+        description: "Test Your Abacus Skills Online",
+        order_id: res.orderId,
+        notes: {
+          transactionId: res.transactionId,
+        },
+        handler: async (response) => {
+          try {
+            console.log("Payment Response", response);
+            const captureResponse = await postRequest(
+              "pricing-plans/complete-payment",
+              {
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
+                paymentStatus: "COMPLETED",
+                transactionId: res.transactionId,
+              }
+            );
+            console.log(captureResponse.data);
+            setShowSuccessModal(true);
+          } catch (err) {
+            console.log(err);
+          }
+        },
+        theme: {
+          color: "#556ee6",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
     } catch (err) {
       setErrorMsg(getErrorMsg(err, "Couldn't initiate the payment"));
     }
@@ -227,9 +265,8 @@ function Subscriptions() {
                               <div className="text-center mb-5 mt-3">
                                 <h4>Choose your plan</h4>
                                 <p className="text-muted">
-                                  To achieve this, it would be necessary to have
-                                  uniform grammar, pronunciation and more common
-                                  words If several languages coalesce
+                                  We made our subscription plans much simpler,
+                                  Please choose the one that suites your need
                                 </p>
                               </div>
                             </Col>
@@ -273,6 +310,7 @@ function Subscriptions() {
           </Row>
         </Container>
       </div>
+      {showSuccessModal && <SuccessModal />}
     </React.Fragment>
   );
 }

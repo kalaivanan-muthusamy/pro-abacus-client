@@ -6,6 +6,7 @@ import * as moment from "moment-timezone";
 import { getFormattedDiff } from "./../../helpers/DateHelper";
 import { postRequest } from "./../../helpers/apiRequest";
 import { EXAM_TYPES } from "./../../contants";
+import ACLRegistrationSuccessModal from "./ACLRegistrationSuccessModal";
 
 let aclTimerId;
 
@@ -15,6 +16,7 @@ function ACLNotifications({ notification }) {
   const [registeredExam, setRegisteredExam] = useState(null);
   const [ACLExamDetails, setACLExamDetails] = useState(null);
   const [isACLRegistered, setIsACLRegistered] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     getRegisteredACLExams();
@@ -97,6 +99,39 @@ function ACLNotifications({ notification }) {
         setLoading(false);
         return;
       }
+      const options = {
+        key: process.env.RAZORPAY_KEY_ID,
+        name: "PRO ABACUS",
+        description: "Test Your Abacus Skills Online",
+        order_id: res.orderId,
+        notes: {
+          transactionId: res.transactionId,
+        },
+        handler: async (response) => {
+          try {
+            console.log("Payment Response", response);
+            const captureResponse = await postRequest(
+              "pricing-plans/complete-exam-payment",
+              {
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
+                paymentStatus: "COMPLETED",
+                transactionId: res.transactionId,
+              }
+            );
+            console.log(captureResponse.data);
+            setShowSuccessModal(true);
+          } catch (err) {
+            console.log(err);
+          }
+        },
+        theme: {
+          color: "#556ee6",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
     } catch (err) {
       setErrorMsg(getErrorMsg(err, "Couldn't register now"));
     }
@@ -120,6 +155,7 @@ function ACLNotifications({ notification }) {
                 {registeredExam?.levelDetails?.name}
               </Alert>
             )}
+            {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
             <div className="text-center">
               <h4 className="text-primary mb-3" id="aclTimer">
                 {getDiff()}
@@ -160,6 +196,7 @@ function ACLNotifications({ notification }) {
           </CardBody>
         </Card>
       )}
+      {showSuccessModal && <ACLRegistrationSuccessModal />}
     </React.Fragment>
   );
 }
