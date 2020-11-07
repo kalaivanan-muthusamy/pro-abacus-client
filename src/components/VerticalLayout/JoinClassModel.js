@@ -97,7 +97,7 @@ function JoinClassModal({ onClose }) {
       <AvForm className="needs-validation">
         <div className="modal-header">
           <h5 className="modal-title mt-0" id="myModalLabel">
-            Join Your Class
+            {studentDetails?.batchId ? "Change Batch" : "Join Your Batch"}
           </h5>
           <button
             type="button"

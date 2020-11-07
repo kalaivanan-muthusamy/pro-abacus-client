@@ -113,14 +113,16 @@ const Header = (props) => {
                 color="light"
                 className="waves-effect"
               >
-                Join Your Class
+                {props?.profileDetails?.batchId
+                  ? "Change Batch"
+                  : "Join Batch"}
               </Button>
             )}
-            <Link to="/acl-results" className="ml-2 btn btn-light font-size-12">
-              ACL Results
+            <Link to="/acl-results" className="ml-2 text-primary btn btn-light font-size-12">
+              <i className="bx bx-trophy"></i> ACL Results
             </Link>
-            <Link to="/wcl-results" className="ml-2 btn btn-light font-size-12">
-              WCL Results
+            <Link to="/wcl-results" className="ml-2 text-primary btn btn-light font-size-12">
+              <i className="bx bx-shield"></i> WCL Results
             </Link>
           </div>
           <div className="d-flex justify-content-center align-items-center">

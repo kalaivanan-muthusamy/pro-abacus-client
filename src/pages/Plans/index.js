@@ -98,7 +98,9 @@ function Plans() {
                           setActiveTab("2");
                         }}
                       >
-                        <span className="d-none d-sm-block">Exam Price Plans</span>
+                        <span className="d-none d-sm-block">
+                          Exam Price Plans
+                        </span>
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -139,11 +141,15 @@ function Plans() {
                                     <td>{plan?.name}</td>
                                     <td>{plan?.validity}</td>
                                     <td>
-                                      {plan?.currencySymbol}
+                                      <span className="currency">
+                                        {plan?.currencySymbol}
+                                      </span>
                                       {plan?.basicPrice}
                                     </td>
                                     <td>
-                                      {plan?.currencySymbol}
+                                      <span className="currency">
+                                        {plan?.currencySymbol}
+                                      </span>
                                       {plan?.discountedPrice}
                                     </td>
                                     <td>
@@ -200,11 +206,15 @@ function Plans() {
                                     <td>{plan?.name}</td>
                                     <td>{plan?.examType}</td>
                                     <td>
-                                      {plan?.currencySymbol}
+                                      <span className="currency">
+                                        {plan?.currencySymbol}
+                                      </span>
                                       {plan?.basicPrice}
                                     </td>
                                     <td>
-                                      {plan?.currencySymbol}
+                                      <span className="currency">
+                                        {plan?.currencySymbol}
+                                      </span>
                                       {plan?.discountedPrice}
                                     </td>
                                     <td>

@@ -54,17 +54,22 @@ const StudentInfo = (props) => {
                     />
                   </Col>
                   <Col sm="12" md="7">
-                    <h5 className="font-size-15 text-truncate text-info">
+                    <h5 className="font-size-15 mb-0 text-truncate text-info">
                       {studentInfo?.name}
                     </h5>
-                    <p className="text-muted mb-1 text-truncate">
+                    <p className="text-muted mb-1 mt-0 text-truncate">
+                      <small>
+                        <b>{studentInfo?.levelDetails?.name}</b>
+                      </small>
+                    </p>
+                    <p className="text-muted mb-1 mt-2 text-truncate">
                       Age: {studentInfo?.age}
                     </p>
                     <p className="text-muted mb-1 text-truncate">
                       {studentInfo?.batchDetails?.name}
                     </p>
-                    <p className="text-muted mb-0 text-truncate">
-                      {studentInfo?.levelDetails?.name}
+                    <p className="text-muted mb-1 text-truncate">
+                      {studentInfo?.batchDetails?.centerName}
                     </p>
                   </Col>
                 </Row>

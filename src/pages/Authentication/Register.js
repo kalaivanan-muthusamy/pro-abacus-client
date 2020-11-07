@@ -52,6 +52,7 @@ const Register = (props) => {
       setErrorMsg(null);
       let error;
       delete values.role;
+      delete values.confirmPassword;
       if (role === "STUDENT") {
         const { error: studentRegisterErr } = await postRequest(
           "students",
@@ -85,6 +86,11 @@ const Register = (props) => {
       notificationRef?.current?.focus();
     } catch (err) {}
     setLoading(false);
+  }
+
+  function confirmPasswordValidation(value, context) {
+    if (context?.password === context?.confirmPassword) return true;
+    return "Confirm password must be same as new password";
   }
 
   return (
@@ -180,6 +186,20 @@ const Register = (props) => {
                           type="password"
                           required
                           placeholder="Enter Password"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <AvField
+                          name="confirmPassword"
+                          label="Confirm Password"
+                          type="password"
+                          validate={{
+                            required: true,
+                            myValidation: confirmPasswordValidation,
+                            match: { value: "password" },
+                          }}
+                          placeholder="Confirm Password"
                         />
                       </div>
 

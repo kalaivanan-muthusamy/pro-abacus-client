@@ -163,6 +163,7 @@ function Exam(props) {
 
       question.givenAnswer = parseFloat(value);
       setQuestions([...updatedQuestions]);
+      console.log("updateSkippedQuestionsIds", updateSkippedQuestionsIds);
       if (isLastQuestion) {
         if (updateSkippedQuestionsIds?.length > 0) {
           setActiveQuestionId(updateSkippedQuestionsIds?.[0]);
@@ -173,6 +174,8 @@ function Exam(props) {
       } else {
         jumpToNextQuestion();
       }
+    } else {
+      answerRef?.current?.focus?.();
     }
   }
 
@@ -223,7 +226,8 @@ function Exam(props) {
     return currentQuestionIndex + 1;
   }
 
-  function onFinishExam() {
+  function onFinishExam(event) {
+    event.preventDefault();
     if (answeredQuestionIds.length !== questions.length) {
       setFinishWarning(true);
     } else {
@@ -357,7 +361,7 @@ function Exam(props) {
                                 questions?.length ||
                                 answeredQuestionIds?.length ===
                                   questions?.length - 1) && (
-                                <Button onClick={onFinishExam} color="primary">
+                                <Button onClick={onSubmit} color="primary">
                                   Submit & Finish Exam
                                 </Button>
                               )}

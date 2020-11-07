@@ -308,7 +308,7 @@ function ExamConfigurations({ examType }) {
               <label htmlFor="name" className="col-md-2 col-form-label">
                 Name
               </label>
-              <div className="col-md-10 pt-2">
+              <div className="col-md-6 pt-2">
                 <AvField
                   required="required"
                   name="name"
@@ -325,7 +325,7 @@ function ExamConfigurations({ examType }) {
               <label htmlFor="description" className="col-md-2 col-form-label">
                 Description
               </label>
-              <div className="col-md-10 pt-2">
+              <div className="col-md-6 pt-2">
                 <AvField
                   required="required"
                   name="description"
@@ -342,7 +342,7 @@ function ExamConfigurations({ examType }) {
               <label htmlFor="examDate" className="col-md-2 col-form-label">
                 Assessment Date
               </label>
-              <div className="col-md-10 pt-2">
+              <div className="col-md-6 pt-2">
                 <InputGroup>
                   <DatePicker
                     showTimeSelect
@@ -360,7 +360,7 @@ function ExamConfigurations({ examType }) {
               <label htmlFor="batch" className="col-md-2 col-form-label">
                 Batch
               </label>
-              <div className="col-md-10 pt-2 templating-select  select2-container">
+              <div className="col-md-6 pt-2 templating-select  select2-container">
                 <Select
                   value={examDetails?.batch}
                   isMulti={true}
@@ -382,7 +382,7 @@ function ExamConfigurations({ examType }) {
             Splitups
           </label>
 
-          <div className="col-md-8 pt-2">
+          <div className="col-md-6 pt-2">
             {Object.keys(splitUpCategory).map((key) => {
               const category = splitUpCategory[key];
               return (
@@ -405,7 +405,7 @@ function ExamConfigurations({ examType }) {
 
                   {splitUps?.enabled?.[key] && (
                     <div className="row">
-                      <div className="col-sm-12 col-md-8">
+                      <div className="col-sm-12 col-md-12">
                         <div className="table-responsive">
                           <table className="table table-bordered table-sm table-hover">
                             <thead>
@@ -577,7 +577,8 @@ function ExamConfigurations({ examType }) {
             <label htmlFor="duration" className="col-md-2 col-form-label">
               Duration <small>(in minutes)</small>
             </label>
-            <div className="col-md-10 pt-2">
+
+            <div className="col-sm-12 col-md-6 pt-2">
               <AvField
                 className="form-control"
                 type="number"

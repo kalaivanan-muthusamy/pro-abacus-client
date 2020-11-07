@@ -90,47 +90,49 @@ const ResetPassword = (props) => {
                     {successMsg && <Alert color="success">{successMsg}</Alert>}
                     {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
                   </div>
-                  <div className="p-2">
-                    <AvForm
-                      className="form-horizontal mt-2"
-                      onValidSubmit={(e, v) => handleValidSubmit(e, v)}
-                    >
-                      <div className="form-group">
-                        <AvField
-                          name="password"
-                          label="Password"
-                          className="form-control"
-                          placeholder="Enter password"
-                          type="password"
-                          required
-                        />
-                      </div>
-                      <div className="form-group">
-                        <AvField
-                          name="confirmPassword"
-                          label="Confirm Password"
-                          className="form-control"
-                          placeholder="Enter confirm password"
-                          type="password"
-                          validate={{
-                            myValidation: confirmPasswordValidation,
-                            match: { value: "password" },
-                          }}
-                          required
-                        />
-                      </div>
-                      <Row className="form-group">
-                        <Col className="text-right">
-                          <button
-                            className="btn btn-primary w-md waves-effect waves-light"
-                            type="submit"
-                          >
-                            Reset
-                          </button>
-                        </Col>
-                      </Row>
-                    </AvForm>
-                  </div>
+                  {!successMsg && (
+                    <div className="p-2">
+                      <AvForm
+                        className="form-horizontal mt-2"
+                        onValidSubmit={(e, v) => handleValidSubmit(e, v)}
+                      >
+                        <div className="form-group">
+                          <AvField
+                            name="password"
+                            label="Password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            type="password"
+                            required
+                          />
+                        </div>
+                        <div className="form-group">
+                          <AvField
+                            name="confirmPassword"
+                            label="Confirm Password"
+                            className="form-control"
+                            placeholder="Enter confirm password"
+                            type="password"
+                            validate={{
+                              myValidation: confirmPasswordValidation,
+                              match: { value: "password" },
+                            }}
+                            required
+                          />
+                        </div>
+                        <Row className="form-group">
+                          <Col className="text-right">
+                            <button
+                              className="btn btn-primary w-md waves-effect waves-light"
+                              type="submit"
+                            >
+                              Reset
+                            </button>
+                          </Col>
+                        </Row>
+                      </AvForm>
+                    </div>
+                  )}
                 </CardBody>
               </Card>
               <div className="mt-2 text-center">

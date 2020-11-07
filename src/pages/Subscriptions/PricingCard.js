@@ -34,7 +34,6 @@ const PricingCard = ({ activeSubscription, pricing, onInitiate }) => {
               <Button
                 onClick={() => onInitiate(pricing)}
                 color="primary"
-                size="sm"
                 className="waves-effect waves-light"
               >
                 {isActivePlan ? "Renew" : "Pay Now"}

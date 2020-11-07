@@ -94,12 +94,12 @@ const Navbar_Page = (props) => {
             ) : (
               <div className="ml-lg-2">
                 <Link
-                  to="/login/students"
+                  to="/login/student"
                   className="btn btn-primary w-xs mr-2"
                 >
                   Student Login
                 </Link>
-                <Link to="/login/teachers" className="btn btn-primary w-xs">
+                <Link to="/login/teacher" className="btn btn-primary w-xs">
                   Teacher Login
                 </Link>
               </div>

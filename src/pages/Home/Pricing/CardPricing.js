@@ -4,6 +4,8 @@ import { Col, Card, CardBody, Media, Button } from "reactstrap";
 
 const pricingIcons = ["bx-walk", "bx-run", "bx-cycling", "bx-car"];
 
+const colors = ["#00A891", "#0291B8", "#D9126B", "#FFE200"];
+
 const CardPricing = ({ index, pricing }) => {
   return (
     <React.Fragment>
@@ -12,12 +14,13 @@ const CardPricing = ({ index, pricing }) => {
           <CardBody className="p-4">
             <Media>
               <Media body>
-                <h5>{pricing?.name}</h5>
+                <h4 style={{ color: colors[index] }}>{pricing?.name}</h4>
                 <p className="text-muted">for {pricing?.validity} days</p>
               </Media>
               <div className="ml-3">
                 <i
-                  className={"bx " + pricingIcons[index] + " h1 text-primary"}
+                  style={{ color: colors[index] }}
+                  className={"bx " + pricingIcons[index] + " h1"}
                 ></i>
               </div>
             </Media>
@@ -36,7 +39,8 @@ const CardPricing = ({ index, pricing }) => {
             <div className="text-center plan-btn">
               <Link
                 to="/register"
-                className="btn btn-primary btn-sm waves-effect waves-light"
+                style={{ color: "#FFF", background: colors[index] }}
+                className="btn waves-effect waves-light"
               >
                 Register
               </Link>

@@ -19,7 +19,7 @@ function SubscriptionModel({ onClose, planDetails }) {
     setLoading(true);
     try {
       const { error } = await postRequest("pricing-plans", {
-        planType: 'SUBSCRIPTION',
+        planType: "SUBSCRIPTION",
         name: planInputs.name,
         validity: planInputs.validity,
         basicPrice: planInputs.basicPrice,
@@ -113,7 +113,9 @@ function SubscriptionModel({ onClose, planDetails }) {
             />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="basicPrice">Basic Price (₹)</Label>
+            <Label htmlFor="basicPrice">
+              Basic Price (<span className="currency">₹</span>)
+            </Label>
             <AvField
               defaultValue={planDetails?.basicPrice}
               name="basicPrice"
@@ -126,7 +128,9 @@ function SubscriptionModel({ onClose, planDetails }) {
             />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="discountedPrice">Discounted Price (₹)</Label>
+            <Label htmlFor="discountedPrice">
+              Discounted Price (<span className="currency">₹</span>)
+            </Label>
             <AvField
               defaultValue={planDetails?.discountedPrice}
               name="discountedPrice"

@@ -29,7 +29,7 @@ const columns = [
     field: "sno",
   },
   {
-    label: "Subscription Date",
+    label: "Date",
     field: "subscriptionDate",
   },
   {
@@ -41,7 +41,7 @@ const columns = [
     field: "toDate",
   },
   {
-    label: "Plan Name",
+    label: "Plan",
     field: "planName",
   },
   {
@@ -49,8 +49,12 @@ const columns = [
     field: "amount",
   },
   {
-    label: "Payment Status",
+    label: "Payment",
     field: "paymentStatus",
+  },
+  {
+    label: "Payment Id",
+    field: "paymentId",
   },
 ];
 
@@ -117,8 +121,18 @@ function UserDetails() {
           .tz(subscription?.toDate, "Asia/Calcutta")
           .format("DD MMM, YYYY HH:mm"),
         planName: subscription?.pricingPlanDetails?.name,
-        amount: `${subscription?.transactionDetails?.currencySymbol} ${subscription?.transactionDetails?.paymentAmount}`,
+        amount: (
+          <span>
+            <span className="currency">
+              {subscription?.transactionDetails?.currencySymbol}
+            </span>
+            {subscription?.transactionDetails?.paymentAmount}
+          </span>
+        ),
         paymentStatus: subscription?.transactionDetails?.paymentStatus,
+        paymentId:
+          subscription?.transactionDetails?.transactionDetails
+            ?.razorpayPaymentId,
       }));
       setSubscriptionHistories(subscriptions);
     } catch (err) {
