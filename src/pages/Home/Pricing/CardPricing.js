@@ -10,7 +10,7 @@ const CardPricing = ({ index, pricing }) => {
   return (
     <React.Fragment>
       <Col xl="3" md="6">
-        <Card className="plan-box bg-white">
+        <Card className="plan-box">
           <CardBody className="p-4">
             <Media>
               <Media body>

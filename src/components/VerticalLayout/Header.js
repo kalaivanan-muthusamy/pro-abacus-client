@@ -79,7 +79,6 @@ const Header = (props) => {
 
   return (
     <React.Fragment>
-      {console.log("profileDetails", props?.profileDetails)}
       <header id="page-topbar">
         <div className="navbar-header">
           <div className="d-flex justify-content-center align-items-center">

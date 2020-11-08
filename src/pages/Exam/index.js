@@ -163,7 +163,6 @@ function Exam(props) {
 
       question.givenAnswer = parseFloat(value);
       setQuestions([...updatedQuestions]);
-      console.log("updateSkippedQuestionsIds", updateSkippedQuestionsIds);
       if (isLastQuestion) {
         if (updateSkippedQuestionsIds?.length > 0) {
           setActiveQuestionId(updateSkippedQuestionsIds?.[0]);

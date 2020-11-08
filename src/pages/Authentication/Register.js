@@ -45,7 +45,6 @@ const Register = (props) => {
   }
 
   async function handleValidSubmit(event, values) {
-    console.log(values);
     try {
       setLoading(true);
       setSuccessMsg(null);

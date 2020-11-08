@@ -109,7 +109,6 @@ function ACLNotifications({ notification }) {
         },
         handler: async (response) => {
           try {
-            console.log("Payment Response", response);
             const captureResponse = await postRequest(
               "pricing-plans/complete-exam-payment",
               {
@@ -120,7 +119,6 @@ function ACLNotifications({ notification }) {
                 transactionId: res.transactionId,
               }
             );
-            console.log(captureResponse.data);
             setShowSuccessModal(true);
           } catch (err) {
             console.log(err);

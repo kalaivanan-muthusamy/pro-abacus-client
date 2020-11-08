@@ -11,23 +11,21 @@ const StudentInfo = (props) => {
 
   useEffect(() => {
     getAllDetails();
-    getStudentInfo();
-    getExamReports();
   }, []);
 
   async function getAllDetails() {
     setLoading(true);
-    await Promise.all([getStudentInfo(), getExamReports]);
+    await Promise.all([getStudentInfo(), getExamReports()]);
     setLoading(false);
   }
 
-  async function getStudentInfo() {
+  async function getExamReports() {
     const { res, error } = await getRequest("exams/reports");
     if (error) console.log("error");
     setExamReports(res);
   }
 
-  async function getExamReports() {
+  async function getStudentInfo() {
     const { res, error } = await getRequest("students");
     if (error) console.log("error");
     setStudentInfo({ ...studentInfo, loading: false, ...res });

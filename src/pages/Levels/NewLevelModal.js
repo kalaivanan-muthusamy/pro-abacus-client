@@ -34,7 +34,7 @@ const splitUpCategory = {
         label: "Questions",
         default: 5,
         minimum: 1,
-        maximum: 50,
+        maximum: 100,
       },
       {
         name: "marks",
@@ -67,7 +67,7 @@ const splitUpCategory = {
         label: "Questions",
         default: 5,
         minimum: 1,
-        maximum: 50,
+        maximum: 100,
       },
       {
         name: "marks",
@@ -100,7 +100,7 @@ const splitUpCategory = {
         label: "Questions",
         default: 5,
         minimum: 1,
-        maximum: 50,
+        maximum: 100,
       },
       {
         name: "marks",
@@ -278,7 +278,7 @@ function NewLevelModal({ onClose, batchId }) {
             />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="duration">Order Value</Label>
+            <Label htmlFor="orderValue">Order Value</Label>
             <AvField
               name="orderValue"
               placeholder="Order Value"

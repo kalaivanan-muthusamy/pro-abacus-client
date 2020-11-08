@@ -99,12 +99,12 @@ const AboutUs = (props) => {
               </Row>
             </Col>
             <Col sm="12" lg="6">
-              <div class="video-container">
+              <div className="video-container">
                 <iframe
                   src="https://www.youtube.com/embed/LRll8vJJXgM"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </div>
             </Col>

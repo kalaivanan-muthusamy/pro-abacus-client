@@ -5,6 +5,7 @@ import AboutUs from "./AboutUs/index";
 import Pricing from "./Pricing/index";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
+import LevelDetails from "./LevelDetails/index";
 
 function Home() {
   const [imglight, setimglight] = useState(true);
@@ -31,6 +32,7 @@ function Home() {
       <Navbar navClass={navClass} imglight={imglight} />
       <HeroSection />
       <AboutUs />
+      <LevelDetails />
       <Pricing />
       {/* <Gallery /> */}
       <Footer />

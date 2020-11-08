@@ -133,7 +133,6 @@ function ExamReport() {
                                     (answer) =>
                                       answer.questionId === question._id
                                   );
-                                  console.log("answerDetails", answerDetails);
                                   return (
                                     <tr>
                                       <td className="exam-container">

@@ -14,7 +14,6 @@ export const loginUser = (user, history) => {
 };
 
 export const loginSuccess = (user) => {
-  console.log("user", user);
   return {
     type: LOGIN_SUCCESS,
     payload: user,

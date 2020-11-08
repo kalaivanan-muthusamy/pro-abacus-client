@@ -43,7 +43,6 @@ function ExamStats({ name, examType = "WCL" }) {
 
   useEffect(() => {
     if (selectedExam !== null) {
-      console.log("selectedExam", selectedExam);
       getExamReports();
     }
   }, [selectedExam]);
@@ -93,7 +92,6 @@ function ExamStats({ name, examType = "WCL" }) {
         correctAnswers += exam.correctAnswers;
         incorrectAnswers += exam.inCorrectAnswers;
       });
-      console.log([correctAnswers, incorrectAnswers]);
       return [correctAnswers, incorrectAnswers];
     } else if (typeof exams === "object") {
       return [exams.correctAnswers, exams.inCorrectAnswers];
@@ -126,8 +124,8 @@ function ExamStats({ name, examType = "WCL" }) {
                     className="custom-select custom-select-sm"
                   >
                     <option value="">All</option>
-                    {recentExams?.map?.((exam) => (
-                      <option value={exam.examDetails?._id}>
+                    {recentExams?.map?.((exam, index) => (
+                      <option key={index} value={exam.examDetails?._id}>
                         {exam.examDetails?.name}
                       </option>
                     ))}
