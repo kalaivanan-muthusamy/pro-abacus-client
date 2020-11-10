@@ -51,6 +51,15 @@ function LevelDetails() {
     }
   }
 
+  function getTotalQuestions(splitUp) {
+    const variations = Object.values(splitUp).flat(1);
+    const totalQuestions = variations.reduce(
+      (acc, cur) => acc + cur.questions,
+      0
+    );
+    return totalQuestions ?? "-";
+  }
+
   return (
     <React.Fragment>
       <section className="section pt-4" id="levelDetails">
@@ -92,6 +101,12 @@ function LevelDetails() {
                           <h5 className="mb-4">
                             <span className="text-secondary">Duration:</span>{" "}
                             <span>{level?.duration} Minutes</span>
+                          </h5>
+                          <h5 className="mb-4">
+                            <span className="text-secondary">
+                              Total Questions:
+                            </span>{" "}
+                            <span>{getTotalQuestions(level?.splitUps)}</span>
                           </h5>
                           <h5 className="mb-3 text-info">
                             Addition & Subtraction

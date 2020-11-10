@@ -4,7 +4,7 @@ import { Col, Card, CardBody, Media, Button } from "reactstrap";
 
 const pricingIcons = ["bx-walk", "bx-run", "bx-cycling", "bx-car"];
 
-const colors = ["#00A891", "#0291B8", "#D9126B", "#FFE200"];
+const colors = ["#00A891", "#0291B8", "#D9126B", "#4B3FFF"];
 
 const CardPricing = ({ index, pricing }) => {
   return (
