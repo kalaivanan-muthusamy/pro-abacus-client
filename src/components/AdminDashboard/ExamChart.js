@@ -39,7 +39,7 @@ function ExamChart({ examType, examName }) {
               <div className="spinner" />
             </div>
           )}
-          <CardTitle className="mb-4 float-left">{examName} Participants Trend</CardTitle>
+          <CardTitle className="mb-4">{examName} Participants Trend</CardTitle>
           <AreaLineChart
             labelName="Student Joined"
             data={examTrends?.values || []}
