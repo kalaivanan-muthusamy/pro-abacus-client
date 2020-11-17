@@ -19,8 +19,8 @@ import logolight from "../../../assets/images/logo-full.png";
 const navItems = [
   { id: 1, idnm: "home", navheading: "Home" },
   { id: 2, idnm: "about", navheading: "About" },
-  { id: 4, idnm: "levelDetails", navheading: "Levels" },
   { id: 3, idnm: "pricing", navheading: "Pricing" },
+  { id: 4, idnm: "levelDetails", navheading: "Levels" },
   // { id: 3, idnm: "gallery", navheading: "Gallery" },
   // { id: 4, idnm: "team", navheading: "Join Us" },
   // { id: 5, idnm: "news", navheading: "Contact" },

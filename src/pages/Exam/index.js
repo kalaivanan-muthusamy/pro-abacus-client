@@ -18,6 +18,8 @@ import { postRequest } from "./../../helpers/apiRequest";
 import { useHistory } from "react-router-dom";
 import { shuffleArrayElement } from "../../helpers/common";
 
+let intervalId;
+
 function Exam(props) {
   const [loading, setLoading] = useState(true);
   const [pageError, setPageError] = useState(null);
@@ -44,21 +46,25 @@ function Exam(props) {
     if (examDetails?.duration) {
       let timerInSeconds = examDetails?.duration * 60;
       setTimer(timerRef, timerInSeconds);
-      const interval = setInterval(() => {
-        setTimer(timerRef, timerInSeconds, interval);
+      intervalId = setInterval(() => {
+        setTimer(timerRef, timerInSeconds, intervalId);
         --timerInSeconds;
         if (timerInSeconds < 0) {
           finishExam();
         }
       }, 1000);
     }
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [examDetails]);
 
   useEffect(() => {
     setTimeStarted(new Date());
   }, [activeQuestionId]);
 
-  function setTimer(timerRef, timerInSeconds, interval) {
+  function setTimer(timerRef, timerInSeconds, intervalId) {
     let timer = timerInSeconds;
     let hours, minutes, seconds;
     hours = parseInt(timer / 3600, 10);
@@ -71,7 +77,7 @@ function Exam(props) {
       timerRef.current.innerText = hours + ":" + minutes + ":" + seconds;
     if (--timer < 0) {
       timer = timerInSeconds;
-      interval && clearInterval(interval);
+      intervalId && clearInterval(intervalId);
     }
   }
 
@@ -278,14 +284,16 @@ function Exam(props) {
                       <Row className="mb-2">
                         <Col>
                           <p className="mb-1 mt-0">
-                            Duration: <b ref={timerRef}>N/A</b>
+                            Exam ends in: <b ref={timerRef}>N/A</b>
                           </p>
                           <Badge color="dark" pill>
                             Task Completed - {getCompletedPercentage()}%
                           </Badge>
                         </Col>
                         <Col className="text-center">
-                          <p className="mb-0">{EXAM_TYPE_TEXT?.[examDetails?.examType]}</p>
+                          <p className="mb-0">
+                            {EXAM_TYPE_TEXT?.[examDetails?.examType]}
+                          </p>
                           <p className="mb-0  mt-1">
                             <b>
                               Question {getActiveQuestionNumber()}/

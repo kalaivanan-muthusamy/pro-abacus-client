@@ -81,9 +81,9 @@ const ExamReports = ({ examType }) => {
         percentile: result?.percentile ?? "N/A",
         rank: result?.rank ?? "N/A",
         accuracy: result?.accuracy + "%",
-        speed: result?.speed + "/minute",
+        speed: result?.speed + "/min",
         timeTaken: getFormattedDuration(result?.timeTaken),
-        date: moment(result?.examDetails?.examDate).format("DD-MMM-YYYY"),
+        date: moment(result?.examDetails?.examDate).format("DD-MMM-YYYY H:mm"),
         fullDetails: <Link to={`/exam/report/${result.examId}`}>View</Link>,
       }));
       setResults(allResults);
@@ -104,8 +104,6 @@ const ExamReports = ({ examType }) => {
         hover
         barReverse
         responsive
-        searchTop
-        searchBottom={false} 
         striped
         bordered
         noBottomColumns

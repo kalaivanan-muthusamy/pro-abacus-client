@@ -50,6 +50,10 @@ const columns = [
     label: "Payment Status",
     field: "paymentStatus",
   },
+  {
+    label: "Payment Id",
+    field: "paymentId",
+  },
 ];
 
 function Subscriptions() {
@@ -123,6 +127,8 @@ function Subscriptions() {
           </span>
         ),
         paymentStatus: subscription?.transactionDetails?.paymentStatus,
+        paymentId: subscription?.transactionDetails?.transactionDetails
+        ?.razorpayPaymentId,
       }));
       setActiveSubscription(getActiveSubscription(subscriptions));
       setSubscriptionHistories(subscriptions);
@@ -288,8 +294,6 @@ function Subscriptions() {
                             hover
                             barReverse
                             responsive
-                            searchTop
-                            searchBottom={false}
                             striped
                             bordered
                             noBottomColumns

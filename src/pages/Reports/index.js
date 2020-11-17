@@ -95,9 +95,7 @@ function Reports(props) {
                     <TabPane tabId="1" className="p-3">
                       <Row>
                         <Col sm="12">
-                          <CardText>
-                            <ExamReports examType={EXAM_TYPES.SELF_TEST} />
-                          </CardText>
+                          <ExamReports examType={EXAM_TYPES.SELF_TEST} />
                         </Col>
                       </Row>
                     </TabPane>

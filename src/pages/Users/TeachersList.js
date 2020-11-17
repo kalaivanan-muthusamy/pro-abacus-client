@@ -88,8 +88,6 @@ function TeachersList() {
         hover
         barReverse
         responsive
-        searchTop
-        searchBottom={false}
         striped
         bordered
         noBottomColumns

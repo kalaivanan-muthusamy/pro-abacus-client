@@ -34,7 +34,7 @@ function Home() {
       <AboutUs />
       <Pricing />
       <LevelDetails />
-      <Gallery />
+      {/* <Gallery /> */}
       <Footer />
     </React.Fragment>
   );
