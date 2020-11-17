@@ -33,6 +33,10 @@ export const studentProperties = [
     label: "Batch Name",
     key: "batchDetails.name",
   },
+  {
+    label: "Status",
+    key: "enabled",
+  },
 ];
 
 export const teacherProperties = [
@@ -63,5 +67,9 @@ export const teacherProperties = [
   {
     label: "Center Name",
     key: "centerName",
+  },
+  {
+    label: "Status",
+    key: "enabled",
   },
 ];

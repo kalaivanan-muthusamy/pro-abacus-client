@@ -17,7 +17,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 import classnames from "classnames";
 import { studentProperties, teacherProperties } from "./helpers/index";
 import { useParams } from "react-router-dom";
-import { getErrorMsg, getRequest } from "../../helpers/apiRequest";
+import { getErrorMsg, getRequest, putRequest } from "../../helpers/apiRequest";
 import { get } from "lodash";
 import moment from "moment-timezone";
 import { MDBDataTable } from "mdbreact";
@@ -147,6 +147,34 @@ function UserDetails() {
     setShowExtendDialog(true);
   }
 
+  function onSubscriptionModalClose({ refresh }) {
+    setShowExtendDialog(false);
+    if (refresh) {
+      getUserDetails();
+    }
+  }
+
+  async function onStatusChange(userDetails) {
+    setLoading(true);
+    try {
+      const path = params?.role === "students" ? "students" : "teachers";
+      const userIdKey = params?.role === "students" ? "studentId" : "teacherId";
+      const { error } = await putRequest(path, {
+        enabled: !userDetails?.enabled,
+        [userIdKey]: userDetails._id,
+      });
+      if (error) {
+        setErrorMsg(getErrorMsg(error, "Couldn't get the user details"));
+        setLoading(false);
+        return;
+      }
+      getUserDetails();
+    } catch (err) {
+      setErrorMsg(getErrorMsg(err, "Couldn't get the user details"));
+    }
+    setLoading(false);
+  }
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -202,7 +230,7 @@ function UserDetails() {
                                     {property.formatter?.(
                                       get(userDetails, property.key)
                                     ) ?? get(userDetails, property.key, "-")}
-                                    {/* {property.key ===
+                                    {property.key ===
                                       "subscriptionDetails.expiryAt" && (
                                       <Button
                                         onClick={changeSubscriptionExpiry}
@@ -211,7 +239,38 @@ function UserDetails() {
                                       >
                                         <i className="fa fa-edit" />
                                       </Button>
-                                    )} */}
+                                    )}
+                                    {property.key === "enabled" && (
+                                      <>
+                                        <span
+                                          className={
+                                            userDetails?.[property.key]
+                                              ? "text-success"
+                                              : "text-danger"
+                                          }
+                                        >
+                                          {userDetails?.[property.key]
+                                            ? "Enabled"
+                                            : "Disabled"}
+                                        </span>
+                                        <Button
+                                          onClick={() =>
+                                            onStatusChange(userDetails)
+                                          }
+                                          size="sm"
+                                          color={
+                                            userDetails?.[property.key]
+                                              ? "danger"
+                                              : "success"
+                                          }
+                                          className="ml-2"
+                                        >
+                                          {userDetails?.[property.key]
+                                            ? "Disable"
+                                            : "Enable"}
+                                        </Button>
+                                      </>
+                                    )}
                                   </td>
                                 </tr>
                               ))}
@@ -249,7 +308,8 @@ function UserDetails() {
       </div>
       {showExtendDialog && (
         <UpdateSubscriptionModal
-          onClose={() => setShowExtendDialog(false)}
+          userType={params.role}
+          onClose={onSubscriptionModalClose}
           userDetails={userDetails}
         />
       )}

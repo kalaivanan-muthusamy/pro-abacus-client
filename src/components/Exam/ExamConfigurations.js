@@ -591,7 +591,7 @@ function ExamConfigurations({ examType }) {
                   required: true,
                   min: {
                     value: 1,
-                    errorMessage: "Minimum value must be 5",
+                    errorMessage: "Minimum value must be 1",
                   },
                   max: {
                     value: 180,

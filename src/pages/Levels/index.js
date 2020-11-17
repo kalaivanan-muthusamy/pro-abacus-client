@@ -47,14 +47,14 @@ const splitUpCategory = {
         label: "Questions",
         default: 5,
         minimum: 1,
-        maximum: 50,
+        maximum: 100,
       },
       {
         name: "marks",
         label: "Marks",
         default: 1,
         minimum: 1,
-        maximum: 10,
+        maximum: 100,
       },
     ],
   },
@@ -80,14 +80,14 @@ const splitUpCategory = {
         label: "Questions",
         default: 5,
         minimum: 1,
-        maximum: 50,
+        maximum: 100,
       },
       {
         name: "marks",
         label: "Marks",
         default: 1,
         minimum: 1,
-        maximum: 10,
+        maximum: 100,
       },
     ],
   },
@@ -113,14 +113,14 @@ const splitUpCategory = {
         label: "Questions",
         default: 5,
         minimum: 1,
-        maximum: 50,
+        maximum: 100,
       },
       {
         name: "marks",
         label: "Marks",
         default: 1,
         minimum: 1,
-        maximum: 10,
+        maximum: 100,
       },
     ],
   },
@@ -387,7 +387,17 @@ function Levels(props) {
                                       errorMessage="Duration is required"
                                       className="form-control"
                                       validate={{
-                                        required: { value: true },
+                                        required: true,
+                                        min: {
+                                          value: 1,
+                                          errorMessage:
+                                            "Minimum value must be 1",
+                                        },
+                                        max: {
+                                          value: 180,
+                                          errorMessage:
+                                            "Maximum value must be 180",
+                                        },
                                       }}
                                     />
                                   </FormGroup>

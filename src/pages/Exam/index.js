@@ -13,7 +13,7 @@ import {
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import { withNamespaces } from "react-i18next";
 import { getErrorMsg } from "../../helpers/apiRequest";
-import { EXAM_TYPES, SPLITUP_CATEGORY } from "./../../contants";
+import { EXAM_TYPES, EXAM_TYPE_TEXT, SPLITUP_CATEGORY } from "./../../contants";
 import { postRequest } from "./../../helpers/apiRequest";
 import { useHistory } from "react-router-dom";
 import { shuffleArrayElement } from "../../helpers/common";
@@ -285,7 +285,7 @@ function Exam(props) {
                           </Badge>
                         </Col>
                         <Col className="text-center">
-                          <p className="mb-0">Practice Test</p>
+                          <p className="mb-0">{EXAM_TYPE_TEXT?.[examDetails?.examType]}</p>
                           <p className="mb-0  mt-1">
                             <b>
                               Question {getActiveQuestionNumber()}/

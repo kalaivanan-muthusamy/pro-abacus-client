@@ -3,16 +3,44 @@ import React, { useState } from "react";
 import { Alert, FormGroup, InputGroup, Label, Modal } from "reactstrap";
 import DatePicker from "react-datepicker";
 import moment from "moment-timezone";
+import { getErrorMsg, putRequest } from "../../helpers/apiRequest";
 
-function UpdateSubscriptionModal({ onClose, studentDetails }) {
+function UpdateSubscriptionModal({ onClose, userDetails, userType }) {
+  const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const expiryDate = moment
-    .tz(studentDetails?.subscriptionDetails?.expiryAt, "Asia/Calcutta")
-    .toDate();
+  const [expiryDate, setExpiryDate] = useState(
+    moment
+      .tz(userDetails?.subscriptionDetails?.expiryAt, "Asia/Calcutta")
+      .toDate()
+  );
 
-  function onsubmitClick() {}
+  async function onsubmitClick() {
+    setLoading(true);
+    try {
+      const path = userType === "students" ? "students" : "teachers";
+      const userIdKey = userType === "students" ? "studentId" : "teacherId";
+      const { error } = await putRequest(path, {
+        expiryAt: expiryDate.toISOString(),
+        [userIdKey]: userDetails._id,
+      });
+      if (error) {
+        setErrorMsg(getErrorMsg(error, "Couldn't get the user details"));
+        setLoading(false);
+        return;
+      }
+      onClose({ refresh: true });
+    } catch (err) {
+      setErrorMsg(getErrorMsg(err, "Couldn't get the user details"));
+    }
+    setLoading(false);
+  }
   return (
     <Modal isOpen>
+      {loading && (
+        <div className="spinner-overlay">
+          <div className="spinner" />
+        </div>
+      )}
       <AvForm onValidSubmit={onsubmitClick} className="needs-validation">
         <div className="modal-header">
           <h5 className="modal-title mt-0" id="myModalLabel">
@@ -34,7 +62,7 @@ function UpdateSubscriptionModal({ onClose, studentDetails }) {
             <InputGroup>
               <DatePicker
                 showTimeSelect
-                onChange={(value) => ""}
+                onChange={(value) => setExpiryDate(value)}
                 className="form-control"
                 minDate={new Date()}
                 selected={expiryDate}

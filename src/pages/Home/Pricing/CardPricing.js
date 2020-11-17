@@ -10,7 +10,7 @@ const CardPricing = ({ index, pricing }) => {
   return (
     <React.Fragment>
       <Col xl="3" md="6">
-        <Card className="plan-box">
+        <Card className="plan-box bg-white">
           <CardBody className="p-4">
             <Media>
               <Media body>
@@ -37,13 +37,23 @@ const CardPricing = ({ index, pricing }) => {
               </h2>
             </div>
             <div className="text-center plan-btn">
-              <Link
-                to="/register"
-                style={{ color: "#FFF", background: colors[index] }}
-                className="btn waves-effect waves-light"
-              >
-                Register
-              </Link>
+              {localStorage.getItem("role") ? (
+                <Link
+                  to="/subscriptions"
+                  style={{ color: "#FFF", background: colors[index] }}
+                  className="btn waves-effect waves-light"
+                >
+                  Subscribe
+                </Link>
+              ) : (
+                <Link
+                  to="/register"
+                  style={{ color: "#FFF", background: colors[index] }}
+                  className="btn waves-effect waves-light"
+                >
+                  Register
+                </Link>
+              )}
             </div>
           </CardBody>
         </Card>

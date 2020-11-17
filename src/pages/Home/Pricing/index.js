@@ -45,7 +45,7 @@ const Pricing = (props) => {
 
   return (
     <React.Fragment>
-      <section className="section bg-white pt-4" id="pricing">
+      <section className="section pt-4" id="pricing">
         <Container>
           <Row className="justify-content-center pt-5" id="pricing">
             <Col lg={6}>

@@ -32,6 +32,7 @@ import Subscriptions from "./../pages/Subscriptions/index";
 import BatchStudents from "./../pages/Batches/Students";
 import UserDetails from "./../pages/Users/UserDetails";
 import Home from "./../pages/Home/index";
+import SendNotifications from "../pages/Notifications/SendNotifications";
 
 const userRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -53,6 +54,7 @@ const userRoutes = [
   { path: "/acl-results", component: ACLResults },
   { path: "/wcl-results", component: WCLResults },
   { path: "/notifications", component: Notifications },
+  { path: "/send-notifications", component: SendNotifications },
   { path: "/levels", component: Levels },
   { path: "/profile", component: Profile },
   { path: "/plans", component: Plans },

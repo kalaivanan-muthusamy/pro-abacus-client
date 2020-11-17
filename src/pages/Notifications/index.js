@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   Card,
   CardBody,
-  CardText,
   Col,
   Container,
   Nav,

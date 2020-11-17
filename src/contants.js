@@ -17,3 +17,11 @@ export const EXAM_TYPES = {
   WCL: "WCL",
   ACL: "ACL",
 };
+
+export const EXAM_TYPE_TEXT = {
+  PRACTICE: "Practice Test",
+  SELF_TEST: "Self Test",
+  ASSESSMENT: "Assessment",
+  WCL: "WCL",
+  ACL: "ACL",
+};

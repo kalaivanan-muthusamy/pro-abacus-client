@@ -32,9 +32,9 @@ function Home() {
       <Navbar navClass={navClass} imglight={imglight} />
       <HeroSection />
       <AboutUs />
-      <LevelDetails />
       <Pricing />
-      {/* <Gallery /> */}
+      <LevelDetails />
+      <Gallery />
       <Footer />
     </React.Fragment>
   );

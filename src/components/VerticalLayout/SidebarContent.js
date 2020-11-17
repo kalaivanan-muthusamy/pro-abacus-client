@@ -151,6 +151,12 @@ const SidebarContent = (props) => {
                   <span>{props.t("Plans")}</span>
                 </Link>
               </li>
+              <li>
+                <Link to="/send-notifications" className="waves-effect">
+                  <i className="bx bx-bell"></i>
+                  <span>{props.t("Send Notification")}</span>
+                </Link>
+              </li>
             </React.Fragment>
           )}
         </ul>

@@ -62,13 +62,13 @@ function LevelDetails() {
 
   return (
     <React.Fragment>
-      <section className="section pt-4" id="levelDetails">
+      <section className="section bg-white-light pt-4" id="levelDetails">
         <Container>
           <Row className="">
             <Col lg="12">
               <div className="text-center mb-5">
                 <div className="small-title">Levels</div>
-                <h4>Levels for everyone</h4>
+                <h4>Level wise Syllabus</h4>
               </div>
             </Col>
           </Row>
@@ -82,7 +82,7 @@ function LevelDetails() {
                         key={index}
                         className={classnames({
                           active: activeTabIndex === "level_" + index,
-                          "p-4": true,
+                          "p-4": true
                         })}
                         onClick={() => setActiveTabIndex("level_" + index)}
                       >
@@ -98,16 +98,34 @@ function LevelDetails() {
                     <TabContent activeTab={activeTabIndex}>
                       {levels?.map((level, index) => (
                         <TabPane key={index} tabId={"level_" + index}>
-                          <h5 className="mb-4">
-                            <span className="text-secondary">Duration:</span>{" "}
-                            <span>{level?.duration} Minutes</span>
-                          </h5>
-                          <h5 className="mb-4">
-                            <span className="text-secondary">
-                              Total Questions:
-                            </span>{" "}
-                            <span>{getTotalQuestions(level?.splitUps)}</span>
-                          </h5>
+                          <Row className="mb-4">
+                            <Col>
+                              <h5 className="mb-4">
+                                <span className="text-secondary">
+                                  Duration:
+                                </span>{" "}
+                                <span>{level?.duration} Minutes</span>
+                              </h5>
+                            </Col>
+                            <Col className="text-center">
+                              <h4 className="mb-4">
+                                <span className="color-violet">
+                                  {level?.name}
+                                </span>
+                              </h4>
+                            </Col>
+                            <Col className="text-right">
+                              <h5 className="mb-4">
+                                <span className="text-secondary">
+                                  Total Questions:
+                                </span>{" "}
+                                <span>
+                                  {getTotalQuestions(level?.splitUps)}
+                                </span>
+                              </h5>
+                            </Col>
+                          </Row>
+
                           <h5 className="mb-3 text-info">
                             Addition & Subtraction
                           </h5>

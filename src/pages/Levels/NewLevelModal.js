@@ -9,7 +9,6 @@ import {
 } from "./../../helpers/apiRequest";
 import toastr from "toastr";
 import { SPLITUP_CATEGORY } from "./../../contants";
-import { classname } from "classnames";
 
 const splitUpCategory = {
   [SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION]: {
@@ -41,7 +40,7 @@ const splitUpCategory = {
         label: "Marks",
         default: 1,
         minimum: 1,
-        maximum: 10,
+        maximum: 100,
       },
     ],
   },
@@ -74,7 +73,7 @@ const splitUpCategory = {
         label: "Marks",
         default: 1,
         minimum: 1,
-        maximum: 10,
+        maximum: 100,
       },
     ],
   },
@@ -107,7 +106,7 @@ const splitUpCategory = {
         label: "Marks",
         default: 1,
         minimum: 1,
-        maximum: 10,
+        maximum: 100,
       },
     ],
   },
@@ -297,7 +296,17 @@ function NewLevelModal({ onClose, batchId }) {
               type="text"
               errorMessage="Duration is required"
               className="form-control"
-              validate={{ required: { value: true } }}
+              validate={{
+                required: true,
+                min: {
+                  value: 1,
+                  errorMessage: "Minimum value must be 1",
+                },
+                max: {
+                  value: 180,
+                  errorMessage: "Maximum value must be 180",
+                },
+              }}
               id="duration"
             />
           </FormGroup>
