@@ -12,15 +12,27 @@ const HeroSection = (props) => {
             <Col lg="6">
               <div className="text-white-50">
                 <h1 className="text-white font-weight-semibold mb-3 hero-title">
-                  Pro Abacus - Test Your Abacus Skills Online
+                  Why Do You Need Abacus?
                 </h1>
-                <p className="text-white font-size-14">
-                  Our vision is to provide a reliable and technically advanced
-                  platform, delicately for the Abacus students,teachers or
-                  anyone who is very interested in taking their Abacus skills to
-                  next levels.
+                <p className="text-white font-size-16">
+                  Advancement of science has taken Artificial intelligence to
+                  next level, but hampered our own human intelligence. Most of
+                  the time we use to pick up our mobiles for doing simple
+                  additions and multiplications. Aren’t You? . But if you ask
+                  us, Is this the only reason for Learning Abacus? Answer is
+                  “NO”.
                 </p>
-                <div className="text-white">
+                <p className="text-white font-size-16">
+                  Learning Abacus improves Concentrations, Analytical Thinking
+                  and develops self confidence among children. Also it improves
+                  your problem solving ability, thinking Speed and helps in
+                  brain developments. It Increase Memory power and visualisation
+                  skills. If you are interested in abacus and wanted a platform
+                  to practice and compete with other smart brains from all
+                  around the world, then PROABACUS.COM is right choice for you.
+                </p>
+
+                <div className="text-white font-size-16">
                   You can practice:
                   <ul>
                     <li>Addition</li>

@@ -11,7 +11,7 @@ const columns = [
     field: "date",
   },
   {
-    label: "Total Sums",
+    label: "Total",
     field: "totalQuestions",
   },
   {
@@ -37,6 +37,7 @@ const columns = [
   {
     label: "Speed",
     field: "speed",
+    width: 150
   },
   {
     label: "Duration (MM:SS)",
@@ -81,7 +82,7 @@ const ExamReports = ({ examType }) => {
         percentile: result?.percentile ?? "N/A",
         rank: result?.rank ?? "N/A",
         accuracy: result?.accuracy + "%",
-        speed: result?.speed + "/min",
+        speed: result?.speed + " sums/Min",
         timeTaken: getFormattedDuration(result?.timeTaken),
         date: moment(result?.examDetails?.examDate).format("DD-MMM-YYYY H:mm"),
         fullDetails: <Link to={`/exam/report/${result.examId}`}>View</Link>,
