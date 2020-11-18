@@ -1,0 +1,63 @@
+{
+  "ADDITION_AND_SUBTRACTION": [
+    {
+      "digits": 1,
+      "rows": 2,
+      "maxQuestions": 20
+    },
+    {
+      "digits": 1,
+      "rows": 3,
+      "maxQuestions": 40
+    },
+    {
+      "digits": 1,
+      "rows": 4,
+      "maxQuestions": 50
+    },
+    {
+      "digits": 1,
+      "rows": 5,
+      "maxQuestions": 50
+    },
+    {
+      "digits": 1,
+      "rows": 6,
+      "maxQuestions": 20
+    },
+    {
+      "digits": 1,
+      "rows": 7,
+      "maxQuestions": 8
+    },
+    {
+      "digits": 1,
+      "rows": 8,
+      "maxQuestions": 1
+    },
+    {
+      "digits": 1,
+      "rows": 9,
+      "maxQuestions": 0
+    },
+    {
+      "digits": 1,
+      "rows": 10,
+      "maxQuestions": 0
+    }
+  ],
+  "MULTIPLICATION": [
+    {
+      "multiplicandDigits": 1,
+      "multiplierDigits": 1,
+      "maxQuestions": 20
+    }
+  ],
+  "DIVISION": [
+    {
+      "dividendDigits": 1,
+      "divisorDigits": 1,
+      "maxQuestions": 5
+    }
+  ]
+}

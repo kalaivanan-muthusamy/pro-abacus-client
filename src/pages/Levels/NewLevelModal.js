@@ -9,6 +9,8 @@ import {
 } from "./../../helpers/apiRequest";
 import toastr from "toastr";
 import { SPLITUP_CATEGORY } from "./../../contants";
+import debounce from "lodash/debounce";
+import examValidations from "../../helpers/question-validation.json";
 
 const splitUpCategory = {
   [SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION]: {
@@ -241,6 +243,111 @@ function NewLevelModal({ onClose, batchId }) {
     }
   }
 
+  const questionValidation = debounce((context) => {
+    console.log(context);
+    const questions = parseInt(context.value);
+
+    const questionKeys = Object.keys(context.context).filter((key) =>
+      key.startsWith("questions_")
+    );
+    console.log("questionKeys", questionKeys);
+    let totalQuestions = 0;
+    questionKeys.map((key) => {
+      totalQuestions += parseInt(context.context[key]);
+    });
+
+    if (totalQuestions > 100)
+      context.cb("Total questions can't be more than 100");
+    if (questions > 100) context.cb("Questions can't be more than 100");
+    switch (context.category) {
+      case SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION: {
+        const validations = examValidations.ADDITION_AND_SUBTRACTION;
+        const digits = parseInt(
+          context?.context[
+            `digits_${SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION}_${context.index}`
+          ]
+        );
+        const rows = parseInt(
+          context?.context[
+            `rows_${SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION}_${context.index}`
+          ]
+        );
+        const validationObj = validations.find(
+          (v) => v.digits === digits && v.rows === rows
+        );
+        if (validationObj) {
+          context.cb(
+            validationObj.maxQuestions >= questions
+              ? true
+              : `Maximum allowed question for this combination is ${validationObj.maxQuestions}`
+          );
+        } else {
+          context.cb(true);
+        }
+        break;
+      }
+      case SPLITUP_CATEGORY.MULTIPLICATION: {
+        const validations = examValidations.MULTIPLICATION;
+        const multiplicandDigits = parseInt(
+          context?.context[
+            `multiplicandDigits_${SPLITUP_CATEGORY.MULTIPLICATION}_${context.index}`
+          ]
+        );
+        const multiplierDigits = parseInt(
+          context?.context[
+            `multiplierDigits_${SPLITUP_CATEGORY.MULTIPLICATION}_${context.index}`
+          ]
+        );
+        const validationObj = validations.find(
+          (v) =>
+            v.multiplicandDigits === multiplicandDigits &&
+            v.multiplierDigits === multiplierDigits
+        );
+        if (validationObj) {
+          context.cb(
+            validationObj.maxQuestions >= questions
+              ? true
+              : `Maximum allowed question for this combination is ${validationObj.maxQuestions}`
+          );
+        } else {
+          context.cb(true);
+        }
+        break;
+      }
+      case SPLITUP_CATEGORY.DIVISION: {
+        const validations = examValidations.DIVISION;
+        const dividendDigits = parseInt(
+          context?.context[
+            `dividendDigits_${SPLITUP_CATEGORY.DIVISION}_${context.index}`
+          ]
+        );
+        const divisorDigits = parseInt(
+          context?.context[
+            `divisorDigits_${SPLITUP_CATEGORY.DIVISION}_${context.index}`
+          ]
+        );
+        const validationObj = validations.find(
+          (v) =>
+            v.dividendDigits === dividendDigits &&
+            v.divisorDigits === divisorDigits
+        );
+        if (validationObj) {
+          context.cb(
+            validationObj.maxQuestions >= questions
+              ? true
+              : `Maximum allowed question for this combination is ${validationObj.maxQuestions}`
+          );
+        } else {
+          context.cb(true);
+        }
+        break;
+      }
+      default: {
+        context.cb(true);
+      }
+    }
+  });
+
   return (
     <Modal size="lg" isOpen>
       {loading && (
@@ -351,9 +458,7 @@ function NewLevelModal({ onClose, batchId }) {
                                   <td>
                                     <AvField
                                       required="required"
-                                      name={
-                                        category.columns[0].name + "_" + index
-                                      }
+                                      name={`${category.columns[0].name}_${key}_${index}`}
                                       type="text"
                                       min={category.columns[0].minimum}
                                       max={category.columns[0].maximum}
@@ -377,9 +482,7 @@ function NewLevelModal({ onClose, batchId }) {
                                   <td>
                                     <AvField
                                       required="required"
-                                      name={
-                                        category.columns[1].name + "_" + index
-                                      }
+                                      name={`${category.columns[1].name}_${key}_${index}`}
                                       type="text"
                                       min={category.columns[1].minimum}
                                       max={category.columns[1].maximum}
@@ -403,9 +506,7 @@ function NewLevelModal({ onClose, batchId }) {
                                   <td>
                                     <AvField
                                       required="required"
-                                      name={
-                                        category.columns[2].name + "_" + index
-                                      }
+                                      name={`${category.columns[2].name}_${key}_${index}`}
                                       type="text"
                                       min={category.columns[2].minimum}
                                       max={category.columns[2].maximum}
@@ -415,23 +516,22 @@ function NewLevelModal({ onClose, batchId }) {
                                       className="form-control-sm"
                                       value={obj?.[category.columns[2].name]}
                                       validate={{
-                                        max: {
-                                          value: category.columns[2].maximum,
-                                          errorMessage: `Maximum value must be ${category.columns[2].maximum}`,
-                                        },
-                                        min: {
-                                          value: category.columns[2].minimum,
-                                          errorMessage: `Minimum value must be ${category.columns[2].minimum}`,
-                                        },
+                                        async: (value, context, input, cb) =>
+                                          questionValidation({
+                                            index,
+                                            value,
+                                            context,
+                                            input,
+                                            cb,
+                                            category: key,
+                                          }),
                                       }}
                                     />
                                   </td>
                                   <td>
                                     <AvField
                                       required="required"
-                                      name={
-                                        category.columns[3].name + "_" + index
-                                      }
+                                      name={`${category.columns[3].name}_${key}_${index}`}
                                       type="text"
                                       min={category.columns[3].minimum}
                                       max={category.columns[3].maximum}
