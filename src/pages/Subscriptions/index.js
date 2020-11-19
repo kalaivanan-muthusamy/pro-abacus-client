@@ -127,8 +127,9 @@ function Subscriptions() {
           </span>
         ),
         paymentStatus: subscription?.transactionDetails?.paymentStatus,
-        paymentId: subscription?.transactionDetails?.transactionDetails
-        ?.razorpayPaymentId,
+        paymentId:
+          subscription?.transactionDetails?.transactionDetails
+            ?.razorpayPaymentId,
       }));
       setActiveSubscription(getActiveSubscription(subscriptions));
       setSubscriptionHistories(subscriptions);
@@ -227,9 +228,7 @@ function Subscriptions() {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">
-                          Current Subscriptions
-                        </span>
+                        <span>Current Subscriptions</span>
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -242,9 +241,7 @@ function Subscriptions() {
                           setActiveTab("2");
                         }}
                       >
-                        <span className="d-none d-sm-block">
-                          Subscription History
-                        </span>
+                        <span>Subscription History</span>
                       </NavLink>
                     </NavItem>
                   </Nav>
