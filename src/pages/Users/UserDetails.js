@@ -208,9 +208,7 @@ function UserDetails() {
                           setActiveTab("2");
                         }}
                       >
-                        <span>
-                          Subscription History
-                        </span>
+                        <span>Subscription History</span>
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -219,63 +217,65 @@ function UserDetails() {
                     <TabPane tabId="1" className="p-3">
                       <Row>
                         <Col sm="12">
-                          <Table className="table mb-0 table-responsive table-bordered">
-                            <tbody>
-                              {userProperties?.map?.((property) => (
-                                <tr>
-                                  <th scope="row" style={{ width: "400px" }}>
-                                    {property.label}
-                                  </th>
-                                  <td>
-                                    {property.formatter?.(
-                                      get(userDetails, property.key)
-                                    ) ?? get(userDetails, property.key, "-")}
-                                    {property.key ===
-                                      "subscriptionDetails.expiryAt" && (
-                                      <Button
-                                        onClick={changeSubscriptionExpiry}
-                                        size="sm"
-                                        className="ml-2 "
-                                      >
-                                        <i className="fa fa-edit" />
-                                      </Button>
-                                    )}
-                                    {property.key === "enabled" && (
-                                      <>
-                                        <span
-                                          className={
-                                            userDetails?.[property.key]
-                                              ? "text-success"
-                                              : "text-danger"
-                                          }
-                                        >
-                                          {userDetails?.[property.key]
-                                            ? "Enabled"
-                                            : "Disabled"}
-                                        </span>
+                          <div className="table-responsive">
+                            <Table className="table mb-0 table-bordered">
+                              <tbody>
+                                {userProperties?.map?.((property) => (
+                                  <tr>
+                                    <th scope="row" style={{ width: "400px" }}>
+                                      {property.label}
+                                    </th>
+                                    <td>
+                                      {property.formatter?.(
+                                        get(userDetails, property.key)
+                                      ) ?? get(userDetails, property.key, "-")}
+                                      {property.key ===
+                                        "subscriptionDetails.expiryAt" && (
                                         <Button
-                                          onClick={() =>
-                                            onStatusChange(userDetails)
-                                          }
+                                          onClick={changeSubscriptionExpiry}
                                           size="sm"
-                                          color={
-                                            userDetails?.[property.key]
-                                              ? "danger"
-                                              : "success"
-                                          }
-                                          className="ml-2"
+                                          className="ml-2 "
                                         >
-                                          {userDetails?.[property.key]
-                                            ? "Disable"
-                                            : "Enable"}
+                                          <i className="fa fa-edit" />
                                         </Button>
-                                      </>
-                                    )}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </Table>
+                                      )}
+                                      {property.key === "enabled" && (
+                                        <>
+                                          <span
+                                            className={
+                                              userDetails?.[property.key]
+                                                ? "text-success"
+                                                : "text-danger"
+                                            }
+                                          >
+                                            {userDetails?.[property.key]
+                                              ? "Enabled"
+                                              : "Disabled"}
+                                          </span>
+                                          <Button
+                                            onClick={() =>
+                                              onStatusChange(userDetails)
+                                            }
+                                            size="sm"
+                                            color={
+                                              userDetails?.[property.key]
+                                                ? "danger"
+                                                : "success"
+                                            }
+                                            className="ml-2"
+                                          >
+                                            {userDetails?.[property.key]
+                                              ? "Disable"
+                                              : "Enable"}
+                                          </Button>
+                                        </>
+                                      )}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </Table>
+                          </div>
                         </Col>
                       </Row>
                     </TabPane>

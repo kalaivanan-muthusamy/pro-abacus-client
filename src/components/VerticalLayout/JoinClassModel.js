@@ -130,30 +130,32 @@ function JoinClassModal({ onClose }) {
             {loading && "Searching ..."}
           </FormGroup>
           {batches && (
-            <table className="table table-centered table-responsive table-nowrap table-hover">
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Batch Number</th>
-                  <th>Teacher Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {batches?.map((batch, index) => (
+            <div className="table-responsive">
+              <table className="table table-centered table-nowrap table-hover">
+                <thead>
                   <tr>
-                    <td>{index + 1}</td>
-                    <td>{batch.batchNumber}</td>
-                    <td>{batch.teacherDetails?.name}</td>
-                    <td>
-                      <a href="#" onClick={() => joinBatch(batch._id)}>
-                        Join
-                      </a>
-                    </td>
+                    <th>S.No</th>
+                    <th>Batch Number</th>
+                    <th>Teacher Name</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {batches?.map((batch, index) => (
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{batch.batchNumber}</td>
+                      <td>{batch.teacherDetails?.name}</td>
+                      <td>
+                        <a href="#" onClick={() => joinBatch(batch._id)}>
+                          Join
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
           <div>{errorMsg && <Alert color="danger">{errorMsg}</Alert>}</div>
         </div>

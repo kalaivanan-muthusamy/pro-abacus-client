@@ -83,9 +83,7 @@ function Plans() {
                           setActiveTab("1");
                         }}
                       >
-                        <span>
-                          Subscription Plans
-                        </span>
+                        <span>Subscription Plans</span>
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -98,9 +96,7 @@ function Plans() {
                           setActiveTab("2");
                         }}
                       >
-                        <span>
-                          Exam Price Plans
-                        </span>
+                        <span>Exam Price Plans</span>
                       </NavLink>
                     </NavItem>
                   </Nav>
@@ -121,52 +117,56 @@ function Plans() {
                       </Row>
                       <Row>
                         <Col sm="12">
-                          <table className="table table-responsive table-bordered table-hover">
-                            <thead>
-                              <tr>
-                                <th>S.No</th>
-                                <th>Plan Name</th>
-                                <th>Validity</th>
-                                <th>Basic Price</th>
-                                <th>Discounted Price</th>
-                                <th>Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {pricingPlans
-                                ?.filter?.((p) => p.planType === "SUBSCRIPTION")
-                                .map((plan, index) => (
-                                  <tr>
-                                    <td>{index + 1}</td>
-                                    <td>{plan?.name}</td>
-                                    <td>{plan?.validity}</td>
-                                    <td>
-                                      <span className="currency">
-                                        {plan?.currencySymbol}
-                                      </span>
-                                      {plan?.basicPrice}
-                                    </td>
-                                    <td>
-                                      <span className="currency">
-                                        {plan?.currencySymbol}
-                                      </span>
-                                      {plan?.discountedPrice}
-                                    </td>
-                                    <td>
-                                      <Button
-                                        onClick={() => {
-                                          setActivePlanDetails(plan);
-                                          setShowNewPlanModel(true);
-                                        }}
-                                        size="sm"
-                                      >
-                                        Edit
-                                      </Button>
-                                    </td>
-                                  </tr>
-                                ))}
-                            </tbody>
-                          </table>
+                          <div className="table-responsive">
+                            <table className="table table-bordered table-hover">
+                              <thead>
+                                <tr>
+                                  <th>S.No</th>
+                                  <th>Plan Name</th>
+                                  <th>Validity</th>
+                                  <th>Basic Price</th>
+                                  <th>Discounted Price</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {pricingPlans
+                                  ?.filter?.(
+                                    (p) => p.planType === "SUBSCRIPTION"
+                                  )
+                                  .map((plan, index) => (
+                                    <tr>
+                                      <td>{index + 1}</td>
+                                      <td>{plan?.name}</td>
+                                      <td>{plan?.validity}</td>
+                                      <td>
+                                        <span className="currency">
+                                          {plan?.currencySymbol}
+                                        </span>
+                                        {plan?.basicPrice}
+                                      </td>
+                                      <td>
+                                        <span className="currency">
+                                          {plan?.currencySymbol}
+                                        </span>
+                                        {plan?.discountedPrice}
+                                      </td>
+                                      <td>
+                                        <Button
+                                          onClick={() => {
+                                            setActivePlanDetails(plan);
+                                            setShowNewPlanModel(true);
+                                          }}
+                                          size="sm"
+                                        >
+                                          Edit
+                                        </Button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                            </table>
+                          </div>
                         </Col>
                       </Row>
                     </TabPane>
@@ -186,52 +186,54 @@ function Plans() {
                       </Row>
                       <Row>
                         <Col sm="12">
-                          <table className="table table-responsive table-bordered table-hover">
-                            <thead>
-                              <tr>
-                                <th>S.No</th>
-                                <th>Plan Name</th>
-                                <th>Exam Type</th>
-                                <th>Basic Price</th>
-                                <th>Discounted Price</th>
-                                <th>Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {pricingPlans
-                                ?.filter?.((p) => p.planType === "EXAM_PLAN")
-                                .map((plan, index) => (
-                                  <tr>
-                                    <td>{index + 1}</td>
-                                    <td>{plan?.name}</td>
-                                    <td>{plan?.examType}</td>
-                                    <td>
-                                      <span className="currency">
-                                        {plan?.currencySymbol}
-                                      </span>
-                                      {plan?.basicPrice}
-                                    </td>
-                                    <td>
-                                      <span className="currency">
-                                        {plan?.currencySymbol}
-                                      </span>
-                                      {plan?.discountedPrice}
-                                    </td>
-                                    <td>
-                                      <Button
-                                        onClick={() => {
-                                          setActivePlanDetails(plan);
-                                          setShowExamPlanModel(true);
-                                        }}
-                                        size="sm"
-                                      >
-                                        Edit
-                                      </Button>
-                                    </td>
-                                  </tr>
-                                ))}
-                            </tbody>
-                          </table>
+                          <div className="table-responsive">
+                            <table className="table table-bordered table-hover">
+                              <thead>
+                                <tr>
+                                  <th>S.No</th>
+                                  <th>Plan Name</th>
+                                  <th>Exam Type</th>
+                                  <th>Basic Price</th>
+                                  <th>Discounted Price</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {pricingPlans
+                                  ?.filter?.((p) => p.planType === "EXAM_PLAN")
+                                  .map((plan, index) => (
+                                    <tr>
+                                      <td>{index + 1}</td>
+                                      <td>{plan?.name}</td>
+                                      <td>{plan?.examType}</td>
+                                      <td>
+                                        <span className="currency">
+                                          {plan?.currencySymbol}
+                                        </span>
+                                        {plan?.basicPrice}
+                                      </td>
+                                      <td>
+                                        <span className="currency">
+                                          {plan?.currencySymbol}
+                                        </span>
+                                        {plan?.discountedPrice}
+                                      </td>
+                                      <td>
+                                        <Button
+                                          onClick={() => {
+                                            setActivePlanDetails(plan);
+                                            setShowExamPlanModel(true);
+                                          }}
+                                          size="sm"
+                                        >
+                                          Edit
+                                        </Button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                            </table>
+                          </div>
                         </Col>
                       </Row>
                     </TabPane>

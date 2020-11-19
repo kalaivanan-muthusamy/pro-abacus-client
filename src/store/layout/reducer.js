@@ -15,7 +15,7 @@ const INIT_STATE = {
   layoutType: "vertical",
   layoutWidth: "fluid",
   leftSideBarTheme: "dark",
-  leftSideBarType: "default",
+  leftSideBarType: "condensed",
   topbarTheme: "light",
   isPreloader: false,
   showRightSidebar: false,
