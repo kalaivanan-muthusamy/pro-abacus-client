@@ -41,7 +41,7 @@ function Reports(props) {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">Self Test</span>
+                        <span>Self Test</span>
                       </NavLink>
                     </NavItem>
                     {localStorage.getItem("role") === ROLES.STUDENT && (
@@ -56,7 +56,7 @@ function Reports(props) {
                               setActiveTab("2");
                             }}
                           >
-                            <span className="d-none d-sm-block">
+                            <span>
                               Assessment
                             </span>
                           </NavLink>
@@ -71,7 +71,7 @@ function Reports(props) {
                               setActiveTab("3");
                             }}
                           >
-                            <span className="d-none d-sm-block">WCL</span>
+                            <span>WCL</span>
                           </NavLink>
                         </NavItem>
                         <NavItem>
@@ -84,7 +84,7 @@ function Reports(props) {
                               setActiveTab("4");
                             }}
                           >
-                            <span className="d-none d-sm-block">ACL</span>
+                            <span>ACL</span>
                           </NavLink>
                         </NavItem>
                       </React.Fragment>

@@ -195,7 +195,7 @@ function UserDetails() {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">Basic Details</span>
+                        <span>Basic Details</span>
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -208,7 +208,7 @@ function UserDetails() {
                           setActiveTab("2");
                         }}
                       >
-                        <span className="d-none d-sm-block">
+                        <span>
                           Subscription History
                         </span>
                       </NavLink>
@@ -219,7 +219,7 @@ function UserDetails() {
                     <TabPane tabId="1" className="p-3">
                       <Row>
                         <Col sm="12">
-                          <Table className="table mb-0 table-bordered">
+                          <Table className="table mb-0 table-responsive table-bordered">
                             <tbody>
                               {userProperties?.map?.((property) => (
                                 <tr>

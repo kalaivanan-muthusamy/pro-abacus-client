@@ -6,7 +6,7 @@ const FooterLink = (props) => {
   return (
     <React.Fragment>
       <Row className="pb-3 pt-4">
-        <Col lg="6">
+        <Col sm="12" md="6" lg="6" className="text-center text-sm-center text-md-left">
           <p className="mb-2">{new Date().getFullYear()} © Pro Abacus</p>
           <p>
             Our vision is to provide a reliable and technically advanced
@@ -14,8 +14,8 @@ const FooterLink = (props) => {
             is very interested in taking their Abacus skills to next levels.
           </p>
         </Col>
-        <Col>
-          <div className="mb-0 text-right">
+        <Col sm="12" md="6" lg="6" className="text-center text-sm-center text-md-right">
+          <div className="mb-0">
             <div className="mb-4 h4 text-white">Connect with Us</div>
             <a
               className="font-size-24 pr-3 text-info"

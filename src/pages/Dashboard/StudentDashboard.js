@@ -1,10 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-
-//Import Breadcrumb
-import Breadcrumbs from "../../components/Common/Breadcrumb";
-
-//i18n
 import { withNamespaces } from "react-i18next";
 import StudentInfo from "./StudentInfo";
 import StudentReportCharts from "./StudentReportCharts";
@@ -17,12 +12,6 @@ function StudentDashboard(props) {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          {/* Render Breadcrumb */}
-          <Breadcrumbs
-            title={props.t("Dashboard")}
-            breadcrumbItem={props.t("Dashboard")}
-          />
-
           <Row>
             <Col sm="12" xl="8">
               <StudentInfo />

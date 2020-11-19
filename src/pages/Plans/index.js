@@ -83,7 +83,7 @@ function Plans() {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">
+                        <span>
                           Subscription Plans
                         </span>
                       </NavLink>
@@ -98,7 +98,7 @@ function Plans() {
                           setActiveTab("2");
                         }}
                       >
-                        <span className="d-none d-sm-block">
+                        <span>
                           Exam Price Plans
                         </span>
                       </NavLink>
@@ -121,7 +121,7 @@ function Plans() {
                       </Row>
                       <Row>
                         <Col sm="12">
-                          <table className="table table-bordered table-hover">
+                          <table className="table table-responsive table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th>S.No</th>
@@ -186,7 +186,7 @@ function Plans() {
                       </Row>
                       <Row>
                         <Col sm="12">
-                          <table className="table table-bordered table-hover">
+                          <table className="table table-responsive table-bordered table-hover">
                             <thead>
                               <tr>
                                 <th>S.No</th>

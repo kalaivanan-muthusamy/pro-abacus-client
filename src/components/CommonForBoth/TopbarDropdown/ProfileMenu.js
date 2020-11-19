@@ -4,6 +4,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button,
 } from "reactstrap";
 
 //i18n
@@ -25,7 +26,6 @@ const ProfileMenu = (props) => {
       setUserName(localStorage.getItem("name"));
     }
   }, [props.success]);
-
 
   return (
     <React.Fragment>
@@ -61,7 +61,25 @@ const ProfileMenu = (props) => {
             {props.t("Profile")}{" "}
           </DropdownItem>
           <div className="dropdown-divider"></div>
-          <Link to="/logout" className="dropdown-item">
+
+          {localStorage.getItem("role") === "STUDENT" && (
+            <DropdownItem
+              tag="a"
+              href="#"
+              onClick={props.onJoinClassBtnClick}
+              className="dropdown-item pt-2 pb-2"
+            >
+              <i className="bx bx-credit-card-front font-size-16 align-middle mr-1"></i>
+              {props?.profileDetails?.batchId ? "Change Batch" : "Join Batch"}
+            </DropdownItem>
+          )}
+          <Link to="/acl-results" className="dropdown-item pt-2 pb-2">
+            <i className="bx bx-trophy"></i> ACL Results
+          </Link>
+          <Link to="/wcl-results" className="dropdown-item pt-2 pb-2">
+            <i className="bx bx-shield"></i> WCL Results
+          </Link>
+          <Link to="/logout" className="dropdown-item pt-2 pb-2">
             <i className="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>
             <span>{props.t("Logout")}</span>
           </Link>

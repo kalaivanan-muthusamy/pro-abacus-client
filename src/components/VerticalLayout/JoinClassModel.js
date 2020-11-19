@@ -130,7 +130,7 @@ function JoinClassModal({ onClose }) {
             {loading && "Searching ..."}
           </FormGroup>
           {batches && (
-            <table className="table table-centered table-nowrap table-hover">
+            <table className="table table-centered table-responsive table-nowrap table-hover">
               <thead>
                 <tr>
                   <th>S.No</th>

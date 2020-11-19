@@ -8,8 +8,8 @@
 }
 
 .profile-image {
-  height: 120px;
-  width: 120px;
+  width: 100%;
+  max-width: 120px;
   border-radius: 50%;
 }
 
@@ -69,4 +69,8 @@
 
 .bg-white-light {
   background-color: #f9f9f9 !important;
+}
+
+#topnav-menu-content.show {
+  padding-bottom: 20px;
 }

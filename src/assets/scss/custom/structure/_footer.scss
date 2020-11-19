@@ -8,7 +8,7 @@
     position: absolute;
     right: 0;
     color: $footer-color;
-    left: 250px;
+    left: 70px;
     height: $footer-height;
     background-color: $footer-bg;
 }
@@ -22,7 +22,7 @@
 // Enlarge menu
 .vertical-collpsed {
     .footer {
-        left: $sidebar-collapsed-width;
+        // left: $sidebar-collapsed-width;
     }
 }
 

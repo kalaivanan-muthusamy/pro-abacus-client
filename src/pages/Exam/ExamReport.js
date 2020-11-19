@@ -116,7 +116,7 @@ function ExamReport() {
                       <Row>
                         <Col>
                           <h5>Detailed Report</h5>
-                          <table className="table table-bordered table-hover mt-4">
+                          <table className="table table-bordered table-responsive table-hover mt-4">
                             <thead>
                               <tr>
                                 <th>Sum</th>

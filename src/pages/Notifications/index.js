@@ -75,7 +75,7 @@ function Notifications(props) {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">All</span>
+                        <span>All</span>
                       </NavLink>
                     </NavItem>
                     {localStorage.getItem("role") === "STUDENT" && (
@@ -89,7 +89,7 @@ function Notifications(props) {
                             setActiveTab("2");
                           }}
                         >
-                          <span className="d-none d-sm-block">
+                          <span>
                             Exam Notification
                           </span>
                         </NavLink>
@@ -105,7 +105,7 @@ function Notifications(props) {
                           setActiveTab("3");
                         }}
                       >
-                        <span className="d-none d-sm-block">
+                        <span>
                           Batch Request Notification
                         </span>
                       </NavLink>

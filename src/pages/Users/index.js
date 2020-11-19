@@ -39,7 +39,7 @@ function Users(props) {
                           setActiveTab("1");
                         }}
                       >
-                        <span className="d-none d-sm-block">Students</span>
+                        <span>Students</span>
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -52,7 +52,7 @@ function Users(props) {
                           setActiveTab("2");
                         }}
                       >
-                        <span className="d-none d-sm-block">Teachers</span>
+                        <span>Teachers</span>
                       </NavLink>
                     </NavItem>
                   </Nav>

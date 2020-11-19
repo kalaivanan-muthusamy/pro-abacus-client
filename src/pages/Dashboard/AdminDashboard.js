@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
-import Breadcrumbs from "../../components/Common/Breadcrumb";
+import { Container } from "reactstrap";
 import AdminCharts from "./AdminCharts";
 
 function AdminDashboard(props) {
@@ -8,7 +7,6 @@ function AdminDashboard(props) {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <Breadcrumbs title={"Dashboard"} breadcrumbItem={"Dashboard"} />
           <AdminCharts />
         </Container>
       </div>

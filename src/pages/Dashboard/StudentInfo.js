@@ -38,9 +38,13 @@ const StudentInfo = (props) => {
           {loading && <Spinner type="grow" className="mr-2" color="primary" />}
           {!loading && (
             <Row>
-              <Col sm="12" lg="6" className="m-auto">
+              <Col
+                sm="12"
+                lg="5"
+                className="m-auto text-center text-sm-center text-md-left text-lg-left text-xl-left pb-4 pb-sm-4 pb-md-0"
+              >
                 <Row className="align-items-center">
-                  <Col sm="12" md="5">
+                  <Col sm="12" md="6">
                     <img
                       src={
                         studentInfo?.profileImage
@@ -51,8 +55,8 @@ const StudentInfo = (props) => {
                       className="profile-image"
                     />
                   </Col>
-                  <Col sm="12" md="7">
-                    <h5 className="font-size-15 mb-0 text-truncate text-info">
+                  <Col sm="12" md="6">
+                    <h5 className="font-size-15 mb-0 text-truncate text-info pt-3 pt-sm-3 pt-md-0">
                       {studentInfo?.name}
                     </h5>
                     <p className="text-muted mb-1 mt-0 text-truncate">
@@ -73,28 +77,28 @@ const StudentInfo = (props) => {
                 </Row>
               </Col>
 
-              <Col sm="12" lg="6">
+              <Col sm="12" lg="7">
                 <div className="text-center">
                   <Row>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-3">
                       <h5 className="font-size-15">
                         {examReports?.WCLExams?.participated}
                       </h5>
                       <p className="text-muted mb-0">Participated</p>
                     </div>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-4">
                       <h5 className="font-size-15">
                         {examReports?.WCLExams?.avgAccuracy}
                       </h5>
                       <p className="text-muted mb-0">Avg. Accuracy</p>
                     </div>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-3">
                       <h5 className="font-size-15">
                         {examReports?.WCLExams?.avgSpeed}
                       </h5>
                       <p className="text-muted mb-0">Avg. Speed</p>
                     </div>
-                    <div className="">
+                    <div className="col-6 pb-2 col-sm-6 col-md-2">
                       <div className="avatar-sm mx-auto">
                         <span className="avatar-title rounded-circle font-size-14">
                           {examReports?.WCLExams?.totalStars}
@@ -105,25 +109,25 @@ const StudentInfo = (props) => {
                   </Row>
                   <hr />
                   <Row>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-3">
                       <h5 className="font-size-15">
                         {examReports?.ACLExams?.participated}
                       </h5>
                       <p className="text-muted mb-0">Participated</p>
                     </div>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-4">
                       <h5 className="font-size-15">
                         {examReports?.ACLExams?.avgAccuracy}
                       </h5>
                       <p className="text-muted mb-0">Avg. Accuracy</p>
                     </div>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-3">
                       <h5 className="font-size-15">
                         {examReports?.ACLExams?.avgSpeed}
                       </h5>
                       <p className="text-muted mb-0">Avg. Speed</p>
                     </div>
-                    <div className="pr-3">
+                    <div className="pr-3 pb-2 col-6 col-sm-6 col-md-2">
                       <div className="avatar-sm mx-auto">
                         <span className="avatar-title rounded-circle font-size-14">
                           {examReports?.ACLExams?.totalStars}

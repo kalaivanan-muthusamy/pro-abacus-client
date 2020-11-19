@@ -43,6 +43,14 @@ const Navbar_Page = (props) => {
       >
         <Container>
           <NavbarBrand className="navbar-logo" href="/">
+            {props.navClass === "" && (
+              <img
+                src={logodark}
+                alt=""
+                height="35"
+                className="logo logo-dark"
+              />
+            )}
             {props.imglight !== true ? (
               <img
                 src={logodark}
@@ -63,13 +71,13 @@ const Navbar_Page = (props) => {
           <NavbarToggler
             className="p-0"
             onClick={() => {
-              setisOpenMenu();
+              setisOpenMenu(!isOpenMenu);
             }}
           >
             <i className="fa fa-fw fa-bars"></i>
           </NavbarToggler>
 
-          <Collapse id="topnav-menu-content" isOpen={isOpenMenu} navbar>
+          <Collapse id="topnav-menu-content" class="pb-2" isOpen={isOpenMenu} navbar>
             <ScrollspyNav
               scrollTargetIds={TargetId}
               scrollDuration="1500"

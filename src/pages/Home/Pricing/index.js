@@ -69,11 +69,13 @@ const Pricing = (props) => {
             ))}
           </Row>
           <Row>
-            <p className="text-muted">
-              <b>No Refund Policy</b>: As per the nature of our business model,
-              Once the order/transaction/subscriptions is Completed, The Payment
-              amount cant be cancelled or refunded.
-            </p>
+            <Col>
+              <p className="text-muted">
+                <b>No Refund Policy</b>: As per the nature of our business
+                model, Once the order/transaction/subscriptions is Completed,
+                The Payment amount cant be cancelled or refunded.
+              </p>
+            </Col>
           </Row>
         </Container>
       </section>

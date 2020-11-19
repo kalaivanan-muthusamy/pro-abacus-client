@@ -143,8 +143,8 @@ function LevelDetails() {
                                 <tbody>
                                   {level?.splitUps[
                                     SPLITUP_CATEGORY.ADDITION_AND_SUBTRACTION
-                                  ]?.map((splitUp) => (
-                                    <tr>
+                                  ]?.map((splitUp, index) => (
+                                    <tr key={index}>
                                       <td>{splitUp.digits}</td>
                                       <td>{splitUp.rows}</td>
                                       <td>{splitUp.questions}</td>
@@ -174,8 +174,8 @@ function LevelDetails() {
                                     <tbody>
                                       {level?.splitUps[
                                         SPLITUP_CATEGORY.MULTIPLICATION
-                                      ]?.map((splitUp) => (
-                                        <tr>
+                                      ]?.map((splitUp, index) => (
+                                        <tr key={index}>
                                           <td>{splitUp.multiplicandDigits}</td>
                                           <td>{splitUp.multiplierDigits}</td>
                                           <td>{splitUp.questions}</td>
@@ -206,8 +206,8 @@ function LevelDetails() {
                                     <tbody>
                                       {level?.splitUps[
                                         SPLITUP_CATEGORY.DIVISION
-                                      ]?.map((splitUp) => (
-                                        <tr>
+                                      ]?.map((splitUp, index) => (
+                                        <tr key={index}>
                                           <td>{splitUp.dividendDigits}</td>
                                           <td>{splitUp.divisorDigits}</td>
                                           <td>{splitUp.questions}</td>

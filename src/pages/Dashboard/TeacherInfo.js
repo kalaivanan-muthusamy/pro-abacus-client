@@ -38,9 +38,13 @@ const TeacherInfo = (props) => {
           {loading && <Spinner type="grow" className="mr-2" color="primary" />}
           {!loading && (
             <Row>
-              <Col sm="12" lg="5" className="m-auto">
+              <Col
+                sm="12"
+                lg="5"
+                className="m-auto text-center text-sm-center text-md-left text-lg-left text-xl-left pb-4 pb-sm-4 pb-md-0"
+              >
                 <Row className="align-items-center">
-                  <Col sm="12" md="5">
+                  <Col sm="12" md="6">
                     <img
                       src={
                         teacherInfo?.profileImage
@@ -51,8 +55,8 @@ const TeacherInfo = (props) => {
                       className="profile-image"
                     />
                   </Col>
-                  <Col sm="12" md="7">
-                    <h5 className="font-size-15 mb-0 text-truncate text-info">
+                  <Col sm="12" md="6">
+                    <h5 className="font-size-15 mb-0 text-truncate text-info pt-3 pt-sm-3 pt-md-0">
                       {teacherInfo?.name}
                     </h5>
                     <p className="text-muted mb-1 mt-2 text-truncate">
@@ -68,41 +72,41 @@ const TeacherInfo = (props) => {
               <Col sm="12" lg="7">
                 <div className="text-center">
                   <Row>
-                    <Col className="pr-3">
+                    <Col sm="6" md="4" className="col-6 pr-3">
                       <h5 className="font-size-15">
                         {studentStats?.totalStudents}
                       </h5>
                       <p className="text-muted mb-0">Total Students</p>
                     </Col>
-                    <Col className="pr-3">
+                    <Col sm="6" md="4" className="col-6 pb-3 pr-3">
                       <h5 className="font-size-15">
                         {studentStats?.totalAssessments}
                       </h5>
                       <p className="text-muted mb-0">Assessments</p>
                     </Col>
-                    <Col className="pr-3">
+                    <Col sm="6" md="4" className="col-6 pb-3 pr-3">
                       <h5 className="font-size-15">
                         {studentStats?.WCLParticipatedStudents}
                       </h5>
                       <p className="text-muted mb-0">WCL Participated</p>
                     </Col>
-                  </Row>
-                  <hr />
-                  <Row>
-                    <Col className="pr-3">
+                    <div className="col-12 d-none d-sm-none d-md-block">
+                      <hr />
+                    </div>
+                    <Col sm="6" md="4" className="col-6 pb-3 pr-3">
                       <h5 className="font-size-15">
                         {studentStats?.ACLParticipatedStudents}
                       </h5>
                       <p className="text-muted mb-0">ACL Participated</p>
                     </Col>
-                    <Col className=" pr-3">
+                    <Col sm="6" md="4" className=" col-6 pb-3 pr-3">
                       <h5 className="text-info font-size-15">
                         <i className="bx bx-shield ml-1"></i>{" "}
                         {studentStats?.WCLWonStudents}
                       </h5>
                       <p className="mb-0">WCL Won</p>
                     </Col>
-                    <Col className="pr-3">
+                    <Col sm="6" md="4" className="col-6 pb-3 pr-3">
                       <h5 className="text-info font-size-15">
                         <i className="bx bx-trophy ml-1"></i>{" "}
                         {studentStats?.ACLWonStudents}

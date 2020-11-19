@@ -82,7 +82,7 @@ const Header = (props) => {
       <header id="page-topbar">
         <div className="navbar-header">
           <div className="d-flex justify-content-center align-items-center">
-            <div className="navbar-brand-box">
+            <div className="navbar-brand-box d-none d-sm-none d-md-block d-lg-block d-xl-block">
               <Link to="/" className="logo logo-light">
                 <span className="logo-sm">
                   <img src={logoLightSvg} alt="" height="22" />
@@ -106,38 +106,65 @@ const Header = (props) => {
             >
               <i className="fa fa-fw fa-bars"></i>
             </button>
-            {localStorage.getItem("role") === "STUDENT" && (
-              <Button
-                onClick={onJoinClassBtnClick}
-                color="light"
-                className="waves-effect"
+            <div className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+              {localStorage.getItem("role") === "STUDENT" && (
+                <Button
+                  onClick={onJoinClassBtnClick}
+                  color="light"
+                  className="waves-effect"
+                >
+                  {props?.profileDetails?.batchId
+                    ? "Change Batch"
+                    : "Join Batch"}
+                </Button>
+              )}
+              <Link
+                to="/acl-results"
+                className="ml-2 text-primary btn btn-light font-size-12"
               >
-                {props?.profileDetails?.batchId
-                  ? "Change Batch"
-                  : "Join Batch"}
-              </Button>
-            )}
-            <Link to="/acl-results" className="ml-2 text-primary btn btn-light font-size-12">
-              <i className="bx bx-trophy"></i> ACL Results
-            </Link>
-            <Link to="/wcl-results" className="ml-2 text-primary btn btn-light font-size-12">
-              <i className="bx bx-shield"></i> WCL Results
-            </Link>
+                <i className="bx bx-trophy"></i> ACL Results
+              </Link>
+              <Link
+                to="/wcl-results"
+                className="ml-2 text-primary btn btn-light font-size-12"
+              >
+                <i className="bx bx-shield"></i> WCL Results
+              </Link>
+            </div>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             {role !== ROLES.ADMIN && (
               <React.Fragment>
-                <span className="mr-3">{getSubscriptionInfo()}</span>
+                <span className="mr-3 d-none d-sm-none d-md-block">
+                  {getSubscriptionInfo()}
+                </span>
+                <small className="mr-3 d-block d-sm-block d-md-none">
+                  {getSubscriptionInfo()}
+                </small>
 
-                <Link
-                  to="/subscriptions"
-                  className="btn btn-outline-warning waves-effect"
-                >
-                  Subscriptions
-                </Link>
+                <div className="mr-3 d-none d-sm-none d-md-block">
+                  <Link
+                    to="/subscriptions"
+                    className="btn btn-outline-warning waves-effect"
+                  >
+                    Subscriptions
+                  </Link>
+                </div>
+
+                <div className="d-block d-sm-block d-md-none">
+                  <Link
+                    to="/subscriptions"
+                    className="btn btn-sm btn-outline-warning waves-effect"
+                  >
+                    Subscriptions
+                  </Link>
+                </div>
               </React.Fragment>
             )}
-            <ProfileMenu />
+            <ProfileMenu
+              profileDetails={props?.profileDetails}
+              onJoinClassBtnClick={onJoinClassBtnClick}
+            />
           </div>
         </div>
         {showJoinClassModel && (

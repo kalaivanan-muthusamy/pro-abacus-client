@@ -133,7 +133,7 @@ function Profile(props) {
                       className="needs-validation"
                     >
                       <AvField
-                        grid={{ xs: 10 }}
+                        grid={{ xs: 12, sm: 12, md: 10 }}
                         label="Name"
                         name="name"
                         type="name"
@@ -142,7 +142,7 @@ function Profile(props) {
                       />
                       {role === ROLES.TEACHER && (
                         <AvField
-                          grid={{ xs: 10 }}
+                          grid={{ xs: 12, sm: 12, md: 10 }}
                           label="Center Name"
                           name="centerName"
                           type="text"
@@ -151,7 +151,7 @@ function Profile(props) {
                         />
                       )}
                       <AvField
-                        grid={{ xs: 10 }}
+                        grid={{ xs: 12, sm: 12, md: 10 }}
                         label="Email Address"
                         name="email"
                         type="email"
@@ -161,7 +161,7 @@ function Profile(props) {
                       {role !== ROLES.ADMIN && (
                         <React.Fragment>
                           <AvField
-                            grid={{ xs: 10 }}
+                            grid={{ xs: 12, sm: 12, md: 10 }}
                             defaultValue={profileDetails?.gender}
                             selected={profileDetails?.gender}
                             required
@@ -173,7 +173,7 @@ function Profile(props) {
                             <option>Female</option>
                           </AvField>
                           <AvField
-                            grid={{ xs: 10 }}
+                            grid={{ xs: 12, sm: 12, md: 10 }}
                             label="Age"
                             name="age"
                             type="age"
@@ -183,14 +183,14 @@ function Profile(props) {
                         </React.Fragment>
                       )}
                       <AvField
-                        grid={{ xs: 10 }}
+                        grid={{ xs: 12, sm: 12, md: 10 }}
                         label="New Password"
                         name="newPassword"
                         type="password"
                         helpMessage="Leave it blank to use old password"
                       />
                       <AvField
-                        grid={{ xs: 10 }}
+                        grid={{ xs: 12, sm: 12, md: 10 }}
                         label="Confirm Password"
                         name="confirmPassword"
                         type="password"
@@ -201,10 +201,10 @@ function Profile(props) {
                         helpMessage="Leave it blank to use old password"
                       />
                       <div className="form-group row">
-                        <label for="profileImage" class="col-2 col-form-label">
+                        <label for="profileImage" class="col-12 col-sm-12 col-md-2 col-form-label">
                           Profile Image
                         </label>
-                        <div className="col-md-10">
+                        <div className="col-12 col-sm-12 col-md-10">
                           <div className="custom-file">
                             <input
                               ref={profileImageRef}
@@ -229,7 +229,7 @@ function Profile(props) {
                       {role === ROLES.STUDENT && (
                         <React.Fragment>
                           <AvField
-                            grid={{ xs: 10 }}
+                            grid={{ xs: 12, sm: 12, md: 10 }}
                             defaultValue={profileDetails?.levelId}
                             selected={profileDetails?.levelId}
                             required
