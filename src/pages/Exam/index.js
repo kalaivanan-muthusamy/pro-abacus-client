@@ -134,7 +134,7 @@ function Exam(props) {
     }
   }
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     // Update the state & submit the answer to the backend
     event.preventDefault();
     const value = answerRef?.current?.value;
@@ -144,7 +144,7 @@ function Exam(props) {
           questions.length - 1 ||
         answeredQuestionIds?.length === questions?.length - 1;
       const timeTaken = (new Date().getTime() - timeStarted.getTime()) / 1000;
-      postRequest("exams/capture", {
+      const captureAnswerReq = postRequest("exams/capture", {
         examId: examDetails._id,
         questionId: activeQuestionId,
         answer: parseInt(value),
@@ -170,6 +170,8 @@ function Exam(props) {
       question.givenAnswer = parseFloat(value);
       setQuestions([...updatedQuestions]);
       if (isLastQuestion) {
+        // Pending answer capture request must be completed before completing exam
+        await captureAnswerReq;
         if (updateSkippedQuestionsIds?.length > 0) {
           setActiveQuestionId(updateSkippedQuestionsIds?.[0]);
           setFinishWarning(true);
