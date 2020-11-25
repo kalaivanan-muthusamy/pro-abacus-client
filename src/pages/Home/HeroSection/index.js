@@ -9,7 +9,7 @@ const HeroSection = (props) => {
         <div className="bg-overlay bg-primary"></div>
         <Container>
           <Row className="align-items-center">
-            <Col lg="6">
+            <Col lg="7" md="12" sm="12">
               <div className="text-white-50">
                 <h1 className="text-white font-weight-semibold mb-3 hero-title">
                   Why Do You Need Abacus?
@@ -19,17 +19,18 @@ const HeroSection = (props) => {
                   next level, but hampered our own human intelligence. Most of
                   the time we use to pick up our mobiles for doing simple
                   additions and multiplications. Aren’t You? . But if you ask
-                  us, Is this the only reason for Learning Abacus? Answer is
+                  us, Is this the only reason for learning Abacus? Answer is
                   “NO”.
                 </p>
                 <p className="text-white font-size-16">
-                  Learning Abacus improves Concentrations, Analytical Thinking
+                  Learning Abacus improves Concentration, Analytical Thinking
                   and develops self confidence among children. Also it improves
-                  your problem solving ability, thinking Speed and helps in
-                  brain developments. It Increase Memory power and visualisation
+                  your problem solving ability, thinking speed and helps in
+                  brain development. It Increases memory power and visualisation
                   skills. If you are interested in abacus and wanted a platform
                   to practice and compete with other smart brains from all
-                  around the world, then PROABACUS.COM is right choice for you.
+                  around the world, then PROABACUS.COM is the right choice for
+                  you.
                 </p>
 
                 <div className="text-white font-size-16">
@@ -52,7 +53,7 @@ const HeroSection = (props) => {
                 </div>
               </div>
             </Col>
-            <Col lg="5" md="8" sm="10" className="ml-lg-auto">
+            <Col lg="5" md="12" sm="12" className="ml-lg-auto">
               <Card className="overflow-hidden mb-0 mt-5 mt-lg-0">
                 <CardHeader className="text-center">
                   <h5 className="mb-0">Pro Abacus - Features</h5>
@@ -86,7 +87,7 @@ const HeroSection = (props) => {
                     </li>
                     <li>
                       <span className="bx bx-check-double text-success" />
-                      Win Medals, Certificates, Gifts ,Coupons
+                      Win Medals, Certificates, Gifts, Coupons
                     </li>
                     <li>
                       <span className="bx bx-check-double text-success" />

@@ -19,12 +19,12 @@ const AboutUs = (props) => {
             <Col sm="12" lg="6">
               <div className="text-muted">
                 <p>
-                  ProAbacus.com was Launched in the year 2020 and its keep
+                  ProAbacus.com was launched in the year 2020 and its keep
                   growing in steady phase with all your support and wishes.Our
                   vision is to provide a reliable and technically advanced
-                  platform, delicately for the Abacus students,teachers or
-                  anyone who is very interested in taking their Abacus skills to
-                  next levels
+                  platform, delicately for the students, teachers or any one who
+                  is very interested in taking their Abacus skills to next
+                  levels.
                 </p>
                 <Row className="mt-5">
                   <Col className="text-left" lg="3" xs="6">

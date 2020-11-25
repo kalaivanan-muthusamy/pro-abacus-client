@@ -1,0 +1,19 @@
+<svg 
+    id="katman_1" 
+    data-name="katman 1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 1080 1080">
+    <defs>
+        <style>.cls-1{fill:#fff;}.cls-2{fill:#009587;}.cls-3{fill:#fcbf0a;}.cls-4{fill:#1bb8d0;}.cls-5{fill:#de3662;}</style>
+    </defs>
+    <rect class="cls-1" x="193.69" y="494.19" width="377.76" height="48.54" transform="translate(1019.69 614.55) rotate(135)"/>
+    <circle class="cls-1" cx="256.9" cy="644.12" r="131.84"/>
+    <circle class="cls-2" cx="256.9" cy="644.12" r="115"/>
+    <circle class="cls-1" cx="506.91" cy="394.12" r="131.84"/>
+    <circle class="cls-3" cx="506.91" cy="394.12" r="115"/>
+    <rect class="cls-1" x="509.87" y="535.95" width="377.76" height="48.54" transform="translate(1588.98 462.26) rotate(135)"/>
+    <circle class="cls-1" cx="573.09" cy="685.88" r="131.84"/>
+    <circle class="cls-4" cx="573.09" cy="685.88" r="115"/>
+    <circle class="cls-1" cx="823.1" cy="435.88" r="131.84"/>
+    <circle class="cls-5" cx="823.1" cy="435.88" r="115"/>
+</svg>

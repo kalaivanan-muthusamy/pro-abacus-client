@@ -13,7 +13,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { loginUser, apiError } from "../../store/actions";
 
 // import images
-import logo from "../../assets/images/logo-icon.png";
+import logo from "../../assets/images/pa-icon-light.png";
 import { postRequest, getErrorMsg } from "./../../helpers/apiRequest";
 
 const Login = (props) => {
@@ -63,7 +63,7 @@ const Login = (props) => {
                     <Col>
                       <div className="p-4">
                         <h5 className="">Login</h5>
-                        <p>Start mastering your skill in Abacus</p>
+                        <p>Start mastering your skills in Abacus</p>
                       </div>
                     </Col>
                   </Row>
@@ -71,7 +71,7 @@ const Login = (props) => {
                 <CardBody className="pt-0">
                   <div>
                     <div className="avatar-md profile-user-wid mb-4">
-                      <span className="avatar-title rounded-circle bg-light">
+                      <span className="avatar-title rounded-circle">
                         <img
                           src={logo}
                           alt=""

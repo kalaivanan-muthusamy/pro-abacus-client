@@ -62,7 +62,8 @@ function CompletedExamReport(props) {
                               EXAM_TYPES.ASSESSMENT,
                             ].includes(examResult?.examType) && (
                               <small className="d-block text-muted mt-2">
-                                Detailed result will be available in ~15 minutes
+                                Detailed report will be available in report
+                                section in ~15 mins
                               </small>
                             )}
                           </div>

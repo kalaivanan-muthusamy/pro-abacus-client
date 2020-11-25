@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Row, Col, Alert, Card, CardBody, Container } from "reactstrap";
 import { withRouter, Link, useParams } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/pa-icon-light.png";
 import { getErrorMsg, postRequest } from "../../helpers/apiRequest";
 
 const ForgetPasswordPage = (props) => {
@@ -62,7 +62,7 @@ const ForgetPasswordPage = (props) => {
                     <Col>
                       <div className="p-4">
                         <h5 className="">Forgot Password</h5>
-                        <p>Start mastering your skill in Abacus</p>
+                        <p>Start mastering your skills in Abacus</p>
                       </div>
                     </Col>
                   </Row>
@@ -70,7 +70,7 @@ const ForgetPasswordPage = (props) => {
                 <CardBody className="pt-0">
                   <div>
                     <div className="avatar-md profile-user-wid mb-4">
-                      <span className="avatar-title rounded-circle bg-light">
+                      <span className="avatar-title rounded-circle">
                         <img
                           src={logo}
                           alt=""

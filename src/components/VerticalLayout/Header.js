@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
-import logoLightSvg from "../../assets/images/logo-light.svg";
+import logoLightSvg from "../../assets/images/pa-icon-light.svg";
 import { withNamespaces } from "react-i18next";
 
 // Redux Store
@@ -82,14 +82,14 @@ const Header = (props) => {
       <header id="page-topbar">
         <div className="navbar-header">
           <div className="d-flex justify-content-center align-items-center">
-            <div className="navbar-brand-box d-none d-sm-none d-md-block d-lg-block d-xl-block">
+            <div className="navbar-brand-box d-none d-sm-none d-md-flex d-lg-flex d-xl-flex justify-content-center">
               <Link to="/" className="logo logo-light">
                 <span className="logo-sm">
-                  <img src={logoLightSvg} alt="" height="22" />
+                  <img src={logoLightSvg} alt="" height="35" />
                 </span>
                 <span className="logo-lg">
                   <div className="d-inline-flex align-items-center justify-content-center mt-5">
-                    <img src={logoLightSvg} alt="" height="22" />
+                    <img src={logoLightSvg} alt="" height="35" />
                     <span className="h3 m-0 ml-2 text-white">PRO ABACUS</span>
                   </div>
                 </span>

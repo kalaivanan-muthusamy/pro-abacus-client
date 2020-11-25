@@ -17,6 +17,7 @@ function Profile(props) {
   const [role] = useState(localStorage.getItem("role"));
   const errorRef = useRef();
   const profileImageRef = useRef();
+  const profileForm = useRef();
 
   useEffect(() => {
     getProfileDetails();
@@ -68,11 +69,10 @@ function Profile(props) {
     setLoading(false);
   }
 
-  async function updateProfileDetails(event, formInputs) {
+  async function updateProfileDetails(event, formInputs, ctx) {
     try {
       setLoading(true);
       const formData = new FormData();
-
       formData.append("name", formInputs?.name);
       formData.append("email", formInputs?.email);
       if (formInputs?.gender) formData.append("gender", formInputs?.gender);
@@ -92,6 +92,8 @@ function Profile(props) {
         return;
       }
       toastr.info("Profile details updated successfully");
+      profileForm.current._inputs["newPassword"].reset();
+      profileForm.current._inputs["confirmPassword"].reset();
     } catch (err) {
       errorRef?.current?.focus();
       setErrorMsg(getErrorMsg(err, "Couldn't update the profile details"));
@@ -129,6 +131,7 @@ function Profile(props) {
 
                   {profileDetails && (
                     <AvForm
+                      ref={profileForm}
                       onValidSubmit={updateProfileDetails}
                       className="needs-validation"
                     >
@@ -188,6 +191,18 @@ function Profile(props) {
                         name="newPassword"
                         type="password"
                         helpMessage="Leave it blank to use old password"
+                        validate={{
+                          minLength: {
+                            value: 5,
+                            errorMessage:
+                              "Password length must be minimum of 5 characters",
+                          },
+                          maxLength: {
+                            value: 20,
+                            errorMessage:
+                              "Password length must be maximum of 20 characters",
+                          },
+                        }}
                       />
                       <AvField
                         grid={{ xs: 12, sm: 12, md: 10 }}
@@ -195,13 +210,26 @@ function Profile(props) {
                         name="confirmPassword"
                         type="password"
                         validate={{
+                          minLength: {
+                            value: 5,
+                            errorMessage:
+                              "Password length must be minimum of 5 characters",
+                          },
+                          maxLength: {
+                            value: 20,
+                            errorMessage:
+                              "Password length must be maximum of 20 characters",
+                          },
                           myValidation: confirmPasswordValidation,
                           match: { value: "newPassword" },
                         }}
                         helpMessage="Leave it blank to use old password"
                       />
                       <div className="form-group row">
-                        <label for="profileImage" class="col-12 col-sm-12 col-md-2 col-form-label">
+                        <label
+                          for="profileImage"
+                          class="col-12 col-sm-12 col-md-2 col-form-label"
+                        >
                           Profile Image
                         </label>
                         <div className="col-12 col-sm-12 col-md-10">

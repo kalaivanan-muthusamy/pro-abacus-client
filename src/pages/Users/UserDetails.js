@@ -29,7 +29,7 @@ const columns = [
     field: "sno",
   },
   {
-    label: "Date",
+    label: "Subscription Date",
     field: "subscriptionDate",
   },
   {

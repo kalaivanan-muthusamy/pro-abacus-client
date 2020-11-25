@@ -7,7 +7,8 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Link } from "react-router-dom";
 
 // import images
-import logoImg from "../../assets/images/logo.png";
+import logoIcon from "../../assets/images/pa-icon-light.png";
+
 import {
   getErrorMsg,
   getRequest,
@@ -109,7 +110,7 @@ const Register = (props) => {
                     <Col>
                       <div className="p-4">
                         <h5 className="">Register</h5>
-                        <p>Start mastering your skill in Abacus</p>
+                        <p>Start mastering your skills in Abacus</p>
                       </div>
                     </Col>
                   </Row>
@@ -117,9 +118,9 @@ const Register = (props) => {
                 <CardBody className="pt-0">
                   <div>
                     <div className="avatar-md profile-user-wid mb-4">
-                      <span className="avatar-title rounded-circle bg-light">
+                      <span className="avatar-title rounded-circle">
                         <img
-                          src={logoImg}
+                          src={logoIcon}
                           alt=""
                           className="rounded-circle"
                           height="80"
@@ -183,7 +184,19 @@ const Register = (props) => {
                           name="password"
                           label="Password"
                           type="password"
-                          required
+                          validate={{
+                            required: true,
+                            minLength: {
+                              value: 5,
+                              errorMessage:
+                                "Password length must be minimum of 5 characters",
+                            },
+                            maxLength: {
+                              value: 20,
+                              errorMessage:
+                                "Password length must be maximum of 20 characters",
+                            },
+                          }}
                           placeholder="Enter Password"
                         />
                       </div>
@@ -195,6 +208,16 @@ const Register = (props) => {
                           type="password"
                           validate={{
                             required: true,
+                            minLength: {
+                              value: 5,
+                              errorMessage:
+                                "Password length must be minimum of 5 characters",
+                            },
+                            maxLength: {
+                              value: 20,
+                              errorMessage:
+                                "Password length must be maximum of 20 characters",
+                            },
                             myValidation: confirmPasswordValidation,
                             match: { value: "password" },
                           }}
